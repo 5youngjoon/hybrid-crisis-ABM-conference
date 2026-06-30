@@ -1,0 +1,3941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model version="NetLogo 7.0.4" snapToGrid="true">
+  <code><![CDATA[
+; ============================================================================
+; Hormuz Escalation ABM  (v1.88, Conference)
+; ============================================================================
+
+breed [state-actors state-actor]
+breed [mines mine]
+
+patches-own [
+  water?
+  lane?
+  blocked?
+  reachable?
+]
+
+state-actors-own [
+  role
+  current-action
+
+  risk-tolerance
+  electoral-proximity
+  belief-iran-bluffing
+
+  regime-stability
+  asymmetric-assets
+  economic-buffer
+  belief-us-will-invade
+
+  security-perception
+  tolerance-us-friction
+]
+
+globals [
+
+  physical-throughput
+  commercial-throughput
+  navigational-reliability
+  permission-factor
+  insurance-availability
+  operator-caution
+  port-operability
+  anchorage-risk
+  gnss-reliability
+  recovery-factor
+  strait-throughput
+  brent-crude-price
+  market-panic-index
+  military-degradation
+  us-casualties
+  regional-strike-volume
+  proxy-attack-level
+
+  ceasefire?
+  ground-war?
+  accidental-war?
+  crisis-state
+  deadline-remaining
+  equilibrium-pain-streak
+  cascade-streak
+  ceasefire-stability-streak
+  partial-closure-streak
+  selective-passage-streak
+  contested-reopening-streak
+  cumulative-oil-burden
+  low-throughput-days
+  recent-iran-escalation-streak
+  diplomatic-momentum
+  misperception-count
+  resolution-tick
+
+  military-pause?
+  economic-war-active?
+  military-state
+  economic-war-state
+  access-state
+  diplomacy-state
+  insurer-memory
+  operator-memory
+  market-memory
+  israel-incomplete-victory-aversion
+
+  last-us-action
+  last-iran-action
+  last-israel-action
+
+  us-observed-iran-action
+  iran-observed-us-action
+  israel-observed-iran-action
+  israel-observed-us-action
+
+  ticks-in-selective-passage
+  ticks-in-contested-reopening
+  ticks-in-partial-closure
+  ever-selective-passage?
+  ever-contested-reopening?
+  ever-partial-closure?
+
+  disruption-prior
+  disruption-posterior
+  awrp
+  awrp-baseline
+  awrp-peak
+
+  oil-fundamental-price
+  oil-risk-premium
+  risk-premium-peak
+
+  tick-military-pause-start
+  tick-military-pause-window-start
+  tick-military-deescalation-window-start
+  tick-awrp-recovery
+  tick-price-recovery
+
+  managed-stalemate?
+  managed-stalemate-streak
+  ever-managed-stalemate?
+
+  tau-m-rate
+
+  recent-strike-history
+  recent-major-strike-history
+  military-pause-window?
+  military-deescalation-window?
+  major-action-this-tick?
+  low-intensity-military?
+  commercial-non-normalization-score
+  ticks-in-ms-conditions
+  awrp-recovery-frac-fired?
+  price-recovery-frac-fired?
+  tick-awrp-recovery-frac
+  tick-price-recovery-frac
+
+  ticks-since-major-strike
+  price-recovery-frac-strict-fired?
+  tick-price-recovery-frac-strict
+
+  market-shock-build-up-rate
+  market-recovery-rate-current
+  risk-premium-gross-signal
+  risk-premium-reassurance-signal
+  risk-premium-target
+  risk-premium-gap
+  risk-premium-post-peak-ticks
+  risk-premium-decay-ticks
+  risk-premium-post-deescalation-ticks
+  risk-premium-post-deescalation-decay-ticks
+  price-recovery-20pct-fired?
+  tick-price-recovery-20pct
+  tick-first-managed-stalemate
+
+  diplomacy-bridge-events
+  ever-backchannel?
+  ever-ceasefire-talks?
+  ever-fragile-arrangement?
+  first-backchannel-tick
+  first-ceasefire-talks-tick
+  first-fragile-arrangement-tick
+  ticks-in-no-talks
+  ticks-in-backchannel
+  ticks-in-ceasefire-talks
+  ticks-in-fragile-arrangement
+  max-diplomatic-momentum
+]
+
+to setup
+  clear-all
+  setup-parameters
+  setup-geography
+  setup-actors
+  setup-initial-mines
+
+  set ticks-in-selective-passage 0
+  set ticks-in-contested-reopening 0
+  set ticks-in-partial-closure 0
+
+  set ever-selective-passage? false
+  set ever-contested-reopening? false
+  set ever-partial-closure? false
+
+  update-market-state
+  reset-ticks
+end
+
+to setup-parameters
+
+  set military-degradation 0.15
+  set us-casualties 0
+  set regional-strike-volume 0
+  set proxy-attack-level 0
+
+  set physical-throughput 0
+  set commercial-throughput 0.35
+  set navigational-reliability 0.45
+  set permission-factor 0.35
+  set insurance-availability 0.30
+  set operator-caution 0.75
+  set port-operability 0.70
+  set anchorage-risk 0.55
+  set gnss-reliability 0.45
+  set recovery-factor 0.45
+  set strait-throughput 0
+  set brent-crude-price 70
+  set market-panic-index 0
+
+  set ceasefire? false
+  set ground-war? false
+  set accidental-war? false
+  set crisis-state "Armed_Bargaining"
+
+  set deadline-remaining 7
+  set equilibrium-pain-streak 0
+  set cascade-streak 0
+  set ceasefire-stability-streak 0
+  set partial-closure-streak 0
+  set selective-passage-streak 0
+  set contested-reopening-streak 0
+  set cumulative-oil-burden 0
+  set low-throughput-days 0
+  set recent-iran-escalation-streak 0
+  set diplomatic-momentum 0
+  set misperception-count 0
+  set resolution-tick -1
+
+  set military-pause? false
+  set economic-war-active? true
+  set military-state "Limited_Exchange"
+  set economic-war-state "Oil_Price_Coercion"
+  set access-state "Selective_Passage"
+
+  set diplomacy-state "No_Talks"
+
+  set insurer-memory initial-insurer-memory
+  set operator-memory initial-operator-memory
+  set market-memory initial-market-memory
+  set israel-incomplete-victory-aversion initial-israel-incomplete-victory-aversion
+
+  set last-us-action "None"
+  set last-iran-action "None"
+  set last-israel-action "None"
+  set us-observed-iran-action "None"
+  set iran-observed-us-action "None"
+  set israel-observed-iran-action "None"
+  set israel-observed-us-action "None"
+
+  set disruption-prior 0.20
+  set disruption-posterior 0.55
+  set awrp-baseline 0.20
+  set awrp 0.55
+  set awrp-peak 0.55
+
+  set oil-fundamental-price 70
+  set oil-risk-premium 0
+  set risk-premium-peak 0
+
+  set tick-military-pause-start -1
+  set tick-military-pause-window-start -1
+  set tick-military-deescalation-window-start -1
+  set tick-awrp-recovery -1
+  set tick-price-recovery -1
+
+  set managed-stalemate? false
+  set managed-stalemate-streak 0
+  set ever-managed-stalemate? false
+  set tau-m-rate 1.0
+
+  set recent-strike-history (list 0 0 0)
+  set recent-major-strike-history (list 0 0 0)
+  set military-pause-window? false
+  set military-deescalation-window? false
+  set major-action-this-tick? false
+  set low-intensity-military? false
+  set commercial-non-normalization-score 0
+  set ticks-in-ms-conditions 0
+  set awrp-recovery-frac-fired? false
+  set price-recovery-frac-fired? false
+  set tick-awrp-recovery-frac -1
+  set tick-price-recovery-frac -1
+
+  set ticks-since-major-strike 0
+  set price-recovery-frac-strict-fired? false
+  set tick-price-recovery-frac-strict -1
+
+  set market-shock-build-up-rate 0.25
+  set market-recovery-rate-current 0
+  set risk-premium-gross-signal 0
+  set risk-premium-reassurance-signal 0
+  set risk-premium-target 0
+  set risk-premium-gap 0
+  set risk-premium-post-peak-ticks 0
+  set risk-premium-decay-ticks 0
+  set risk-premium-post-deescalation-ticks 0
+  set risk-premium-post-deescalation-decay-ticks 0
+  set price-recovery-20pct-fired? false
+  set tick-price-recovery-20pct -1
+  set tick-first-managed-stalemate -1
+
+  set diplomacy-bridge-events 0
+  set ever-backchannel? false
+  set ever-ceasefire-talks? false
+  set ever-fragile-arrangement? false
+  set first-backchannel-tick -1
+  set first-ceasefire-talks-tick -1
+  set first-fragile-arrangement-tick -1
+  set ticks-in-no-talks 0
+  set ticks-in-backchannel 0
+  set ticks-in-ceasefire-talks 0
+  set ticks-in-fragile-arrangement 0
+  set max-diplomatic-momentum diplomatic-momentum
+end
+
+to setup-geography
+  ask patches [
+    set water? false
+    set lane? false
+    set blocked? false
+    set reachable? false
+
+    if abs pycor <= 4 [ set water? true ]
+    if abs pycor <= 2 [ set lane? true ]
+
+    recolor-patch
+  ]
+end
+
+to recolor-patch
+  ifelse water?
+  [
+    ifelse lane?
+      [ set pcolor 87 ]
+      [ set pcolor 95 ]
+  ]
+  [ set pcolor 35 ]
+end
+
+to setup-actors
+  set-default-shape state-actors "person"
+
+  create-state-actors 1 [
+    set role "US"
+    set color blue
+    set size 2
+    setxy (min-pxcor + 3) (max-pycor - 2)
+    set label "US"
+    set label-color white
+
+    set risk-tolerance 0.33
+    set electoral-proximity 0.78
+    set belief-iran-bluffing 0.40
+
+    set regime-stability 0
+    set asymmetric-assets 0
+    set economic-buffer 0
+    set belief-us-will-invade 0
+    set security-perception 0
+    set tolerance-us-friction 0
+    set current-action "Hold"
+  ]
+
+  create-state-actors 1 [
+    set role "Iran"
+    set color red
+    set size 2
+    setxy 0 (max-pycor - 2)
+    set label "Iran"
+    set label-color white
+
+    set risk-tolerance 0
+    set electoral-proximity 0
+    set belief-iran-bluffing 0
+
+    set regime-stability initial-iran-regime-stability
+    set asymmetric-assets initial-iran-assets
+    set economic-buffer 0.35
+    set belief-us-will-invade 0.20
+
+    set security-perception 0
+    set tolerance-us-friction 0
+    set current-action "Hold"
+  ]
+
+  create-state-actors 1 [
+    set role "Israel"
+    set color yellow
+    set size 2
+    setxy (max-pxcor - 3) (max-pycor - 2)
+    set label "Israel"
+    set label-color white
+
+    set risk-tolerance 0
+    set electoral-proximity 0
+    set belief-iran-bluffing 0
+    set regime-stability 0
+    set asymmetric-assets 0
+    set economic-buffer 0
+    set belief-us-will-invade 0
+
+    set security-perception initial-israel-security-perception
+    set tolerance-us-friction initial-israel-friction
+    set current-action "Hold"
+  ]
+end
+
+to setup-initial-mines
+  set-default-shape mines "circle"
+  let open-lanes patches with [ lane? ]
+  if any? open-lanes [
+    ask n-of (min (list initial-mine-count (count open-lanes))) open-lanes [
+      sprout-mines 1 [
+        set color red + 2
+        set size 0.8
+      ]
+    ]
+  ]
+end
+
+to go
+  if ticks >= max-ticks [
+    finalize-timeout-state
+    stop
+  ]
+  if ceasefire? or ground-war? [ stop ]
+
+  observe-and-update-beliefs
+  decide-actions
+  execute-actions
+  update-market-state
+  update-clock-trackers
+  determine-crisis-state
+  update-actor-states
+  update-state-counters
+
+  set deadline-remaining max (list 0 (deadline-remaining - 1))
+  tick
+end
+
+to update-state-counters
+  if access-state = "Selective_Passage" [
+    set ticks-in-selective-passage ticks-in-selective-passage + 1
+    set ever-selective-passage? true
+  ]
+
+  if (crisis-state = "Contested_Reopening") or (access-state = "Escorted_Reopening") [
+    set ticks-in-contested-reopening ticks-in-contested-reopening + 1
+    set ever-contested-reopening? true
+  ]
+
+  if access-state = "Partial_Closure" [
+    set ticks-in-partial-closure ticks-in-partial-closure + 1
+    set ever-partial-closure? true
+  ]
+
+  set max-diplomatic-momentum (max list max-diplomatic-momentum diplomatic-momentum)
+
+  if diplomacy-state = "No_Talks" [
+    set ticks-in-no-talks (ticks-in-no-talks + 1)
+  ]
+  if diplomacy-state = "Backchannel_Bargaining" [
+    set ticks-in-backchannel (ticks-in-backchannel + 1)
+  ]
+  if diplomacy-state = "Ceasefire_Talks" [
+    set ticks-in-ceasefire-talks (ticks-in-ceasefire-talks + 1)
+  ]
+  if diplomacy-state = "Fragile_Arrangement" [
+    set ticks-in-fragile-arrangement (ticks-in-fragile-arrangement + 1)
+  ]
+
+  if member? diplomacy-state ["Backchannel_Bargaining" "Ceasefire_Talks" "Fragile_Arrangement"] [
+    set ever-backchannel? true
+    if first-backchannel-tick = -1 [ set first-backchannel-tick ticks ]
+  ]
+  if member? diplomacy-state ["Ceasefire_Talks" "Fragile_Arrangement"] [
+    set ever-ceasefire-talks? true
+    if first-ceasefire-talks-tick = -1 [ set first-ceasefire-talks-tick ticks ]
+  ]
+  if diplomacy-state = "Fragile_Arrangement" [
+    set ever-fragile-arrangement? true
+    if first-fragile-arrangement-tick = -1 [ set first-fragile-arrangement-tick ticks ]
+  ]
+
+  ifelse major-action-this-tick?
+    [ set ticks-since-major-strike 0 ]
+    [ set ticks-since-major-strike (ticks-since-major-strike + 1) ]
+end
+
+to observe-and-update-beliefs
+  set us-observed-iran-action (perceived-action last-iran-action "Iran")
+  set iran-observed-us-action (perceived-action last-us-action "US")
+  set israel-observed-iran-action (perceived-action last-iran-action "Iran")
+  set israel-observed-us-action (perceived-action last-us-action "US")
+
+  if us-observed-iran-action != last-iran-action and last-iran-action != "None" [ set misperception-count (misperception-count + 1) ]
+  if iran-observed-us-action != last-us-action and last-us-action != "None" [ set misperception-count (misperception-count + 1) ]
+  if israel-observed-iran-action != last-iran-action and last-iran-action != "None" [ set misperception-count (misperception-count + 1) ]
+  if israel-observed-us-action != last-us-action and last-us-action != "None" [ set misperception-count (misperception-count + 1) ]
+
+  if us-observed-iran-action = "Deploy_Mines" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.15 0.85) ]
+  ]
+  if us-observed-iran-action = "Selective_Passage" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.55 0.45) ]
+  ]
+  if us-observed-iran-action = "Conditional_Reopening" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.62 0.32) ]
+  ]
+  if us-observed-iran-action = "Sustain_Economic_War" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.25 0.72) ]
+  ]
+  if us-observed-iran-action = "Missile_Swarm" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.10 0.80) ]
+  ]
+  if us-observed-iran-action = "Harass_Shipping" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.18 0.78) ]
+  ]
+  if us-observed-iran-action = "Proxy_Attack" [
+    ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.20 0.75) ]
+  ]
+
+  if iran-observed-us-action = "Deploy_Carrier_Group" [
+    ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.90 0.40) ]
+  ]
+  if iran-observed-us-action = "Ground_Operation" [
+    ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.95 0.10) ]
+  ]
+  if iran-observed-us-action = "Conventional_Strike" [
+    ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.70 0.45) ]
+  ]
+  if iran-observed-us-action = "Pursue_Ceasefire" [
+    ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.15 0.60) ]
+  ]
+
+  if israel-observed-iran-action = "Missile_Swarm" [
+    ask israel-agent [ set security-perception (bound (security-perception - 0.05) 0 1) ]
+  ]
+  if israel-observed-iran-action = "Deploy_Mines" [
+    ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+  ]
+  if israel-observed-iran-action = "Selective_Passage" [
+    ask israel-agent [ set security-perception (bound (security-perception + 0.01) 0 1) ]
+  ]
+  if israel-observed-iran-action = "Conditional_Reopening" [
+    ask israel-agent [ set security-perception (bound (security-perception + 0.02) 0 1) ]
+  ]
+  if israel-observed-iran-action = "Sustain_Economic_War" [
+    ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+  ]
+  if israel-observed-iran-action = "Harass_Shipping" [
+    ask israel-agent [ set security-perception (bound (security-perception - 0.04) 0 1) ]
+  ]
+
+  if israel-observed-us-action = "Pursue_Ceasefire" [
+    ask israel-agent [
+      if security-perception < 0.40 [
+        set tolerance-us-friction (bound (tolerance-us-friction + 0.02) 0 1)
+      ]
+    ]
+  ]
+  if member? israel-observed-us-action ["Conventional_Strike" "Ground_Operation"] [
+    ask israel-agent [ set tolerance-us-friction (bound (tolerance-us-friction - 0.01) 0 1) ]
+  ]
+end
+
+to decide-actions
+  decide-us-action
+  decide-israel-action
+  decide-iran-action
+end
+
+to decide-us-action
+  let actions ["Pursue_Ceasefire" "Hold" "Deploy_Carrier_Group" "Conventional_Strike" "Ground_Operation"]
+  let best-action "Hold"
+  let best-u -999999
+
+  foreach actions [ act ->
+    let u (us-utility-of act)
+    if u > best-u [
+      set best-u u
+      set best-action act
+    ]
+  ]
+  ask us-agent [ set current-action best-action ]
+end
+
+to decide-israel-action
+  let actions ["Hold" "Conventional_Strike" "Max_Strike" "Ground_Push"]
+  let best-action "Hold"
+  let best-u -999999
+
+  foreach actions [ act ->
+    let u (israel-utility-of act)
+    if u > best-u [
+      set best-u u
+      set best-action act
+    ]
+  ]
+  ask israel-agent [ set current-action best-action ]
+end
+
+to decide-iran-action
+  let actions ["Conditional_Reopening" "Selective_Passage" "Sustain_Economic_War" "Hold" "Deploy_Mines" "Harass_Shipping" "Proxy_Attack" "Missile_Swarm"]
+  let best-action "Hold"
+  let best-u -999999
+
+  foreach actions [ act ->
+    let u (iran-utility-of act)
+    if u > best-u [
+      set best-u u
+      set best-action act
+    ]
+  ]
+  ask iran-agent [ set current-action best-action ]
+end
+
+to-report us-utility-of [act]
+  let belief [belief-iran-bluffing] of us-agent
+  let elect [electoral-proximity] of us-agent
+  let risk [risk-tolerance] of us-agent
+
+  let degradation 0
+  let casualties 0
+  let oil-impact 0
+
+  if act = "Pursue_Ceasefire" [
+    set degradation 0
+    set casualties 0
+    set oil-impact -18
+  ]
+  if act = "Hold" [
+    set degradation 0.01
+    set casualties 0.01
+    set oil-impact 3
+  ]
+  if act = "Deploy_Carrier_Group" [
+    set degradation 0.05
+    set casualties 0.02
+    set oil-impact 8
+  ]
+  if act = "Conventional_Strike" [
+    set degradation (0.18 + (belief * 0.20))
+    set casualties 0.05
+    set oil-impact 15
+  ]
+  if act = "Ground_Operation" [
+    set degradation 0.65
+    set casualties 0.55
+    set oil-impact 35
+  ]
+
+  let projected-oil (brent-crude-price + oil-impact)
+  let political-cost ((projected-oil / 100) * elect)
+
+  let alpha 0.40
+  let beta 0.60
+  let gamma 0.80
+  let delta 0.90
+
+  let u ((alpha * degradation)
+       - (beta * (projected-oil / 150))
+       - (gamma * casualties)
+       - (delta * political-cost))
+
+  if act = "Pursue_Ceasefire" [
+    if projected-oil > 110 [ set u (u + 0.25) ]
+    if belief < 0.20 [ set u (u + 0.10) ]
+    if military-degradation > 0.35 [ set u (u + 0.10) ]
+    if strait-throughput > 0.65 [ set u (u + 0.08) ]
+    if strait-throughput < 0.35 [ set u (u - 0.25) ]
+    if insurance-availability < 0.40 [ set u (u - 0.18) ]
+    if permission-factor < 0.50 [ set u (u - 0.12) ]
+    if recent-iran-escalation-streak > 0 [ set u (u - 0.12) ]
+    set u (u + (diplomatic-momentum * 0.10))
+  ]
+
+  if act = "Ground_Operation" [
+
+    if strait-throughput < 0.18 [ set u (u + 0.12) ]
+    if us-casualties > 0.20 [ set u (u + 0.10) ]
+    if deadline-remaining <= 2 and strait-throughput < 0.30 [ set u (u + 0.10) ]
+    set u (u + (risk * 0.08))
+    if military-deescalation-window? [ set u (u - 0.18) ]
+    if elect > 0.85 [ set u (u - 0.20) ]
+  ]
+
+  if act = "Deploy_Carrier_Group" [
+    if strait-throughput < 0.40 [ set u (u + 0.10) ]
+  ]
+
+  report (u + random-normal 0 decision-noise)
+end
+
+to-report iran-utility-of [act]
+  let stability [regime-stability] of iran-agent
+  let assets [asymmetric-assets] of iran-agent
+  let buffer [economic-buffer] of iran-agent
+  let invade-belief [belief-us-will-invade] of iran-agent
+
+  let regime-survival stability
+  let economic-leverage (((brent-crude-price - 70) / 100)
+                         + ((1 - insurance-availability) * 0.35)
+                         + ((1 - permission-factor) * 0.22)
+                         + (market-memory * 0.25))
+  let military-loss military-degradation
+  let sovereignty-loss 0
+  let asset-cost 0
+
+  if act = "Conditional_Reopening" [
+    set economic-leverage (economic-leverage + 0.06)
+    set sovereignty-loss 0.05
+  ]
+  if act = "Selective_Passage" [
+    set economic-leverage (economic-leverage + 0.10)
+    set sovereignty-loss 0.03
+  ]
+  if act = "Sustain_Economic_War" [
+    set economic-leverage (economic-leverage + 0.20)
+    set sovereignty-loss 0.02
+    set asset-cost 0.03
+  ]
+  if act = "Hold" [
+    set economic-leverage (economic-leverage - 0.04)
+  ]
+  if act = "Deploy_Mines" [
+    set economic-leverage (economic-leverage + 0.22)
+    set sovereignty-loss 0.05
+    set asset-cost 0.06
+  ]
+  if act = "Harass_Shipping" [
+    set economic-leverage (economic-leverage + 0.17)
+    set sovereignty-loss 0.03
+    set asset-cost 0.05
+  ]
+  if act = "Proxy_Attack" [
+    set economic-leverage (economic-leverage + 0.12)
+    set sovereignty-loss 0.06
+    set asset-cost 0.06
+  ]
+  if act = "Missile_Swarm" [
+    set economic-leverage (economic-leverage + 0.18)
+    set sovereignty-loss 0.10
+    set asset-cost 0.12
+  ]
+
+  let zeta 1.15
+  let eta 0.85
+  let theta 0.70
+  let kappa 0.95
+
+  let u ((zeta * regime-survival)
+       + (eta * economic-leverage)
+       - (theta * military-loss)
+       - (kappa * sovereignty-loss))
+
+  if stability < 0.35 [
+    let pressure ((0.35 - stability) / 0.35)
+    if member? act ["Deploy_Mines" "Harass_Shipping" "Proxy_Attack" "Missile_Swarm"] [
+      set u (u - (pressure * 0.35))
+    ]
+    if member? act ["Conditional_Reopening" "Selective_Passage"] [
+      set u (u + (pressure * 0.35))
+    ]
+  ]
+
+  if military-pause? and economic-war-active? [
+    if act = "Sustain_Economic_War" [ set u (u + 0.18) ]
+    if act = "Selective_Passage" [ set u (u + 0.08) ]
+    if act = "Hold" [ set u (u - 0.15) ]
+  ]
+
+  if act = "Conditional_Reopening" [
+    if diplomatic-momentum > 0.45 [ set u (u + 0.14) ]
+    if buffer < 0.35 [ set u (u + 0.10) ]
+    if invade-belief > 0.70 [ set u (u + 0.06) ]
+  ]
+
+  if act = "Selective_Passage" [
+    if buffer < 0.35 [ set u (u + 0.18) ]
+    if diplomatic-momentum > 0.40 [ set u (u + 0.06) ]
+  ]
+
+  if act = "Sustain_Economic_War" [
+    if market-memory > 0.40 [ set u (u + 0.12) ]
+    if brent-crude-price > 95 [ set u (u + 0.08) ]
+    if assets < 15 [ set u (u - 0.08) ]
+  ]
+
+  if act = "Deploy_Mines" [
+    if assets < 20 [ set u (u - 0.30) ]
+    if invade-belief > 0.75 [ set u (u - 0.18) ]
+  ]
+
+  if act = "Harass_Shipping" [
+    if assets < 20 [ set u (u - 0.18) ]
+    if invade-belief > 0.80 [ set u (u - 0.08) ]
+  ]
+
+  if act = "Missile_Swarm" and military-pause? [
+    set u (u - 0.20)
+  ]
+
+  report ((u - asset-cost) + random-normal 0 decision-noise)
+end
+
+to-report israel-utility-of [act]
+  let sec [security-perception] of israel-agent
+  let friction [tolerance-us-friction] of israel-agent
+  let threat (1 - sec)
+
+  let threat-reduction 0
+  let us-friction-cost 0
+  let escalation-risk 0
+
+  if act = "Hold" [
+    set threat-reduction 0.02
+    set us-friction-cost 0
+    set escalation-risk 0
+  ]
+  if act = "Conventional_Strike" [
+    set threat-reduction 0.16
+    set us-friction-cost 0.04
+    set escalation-risk 0.08
+  ]
+  if act = "Max_Strike" [
+    set threat-reduction 0.24
+    set us-friction-cost 0.10
+    set escalation-risk 0.16
+  ]
+  if act = "Ground_Push" [
+    set threat-reduction 0.40
+    set us-friction-cost 0.18
+    set escalation-risk 0.25
+  ]
+
+  let omega 0.90
+  let phi 0.55
+  let psi 0.40
+
+  let u ((omega * threat * threat-reduction)
+       - (phi * (us-friction-cost * (1 - friction)))
+       - (psi * escalation-risk))
+
+  if act = "Max_Strike" and threat > 0.60 [ set u (u + 0.20) ]
+  if act = "Ground_Push" and threat > 0.75 [ set u (u + 0.15) ]
+
+  if last-us-action = "Pursue_Ceasefire" and act = "Max_Strike" [ set u (u + 0.05) ]
+  if last-us-action = "Pursue_Ceasefire" and act = "Ground_Push" and threat > 0.70 [ set u (u + 0.10) ]
+  if military-degradation > 0.60 and act = "Hold" [ set u (u + 0.12) ]
+
+  if military-pause? and economic-war-active? [
+    if act = "Hold" [ set u (u - (0.18 * israel-incomplete-victory-aversion)) ]
+    if act = "Conventional_Strike" [ set u (u + (0.10 * israel-incomplete-victory-aversion)) ]
+    if act = "Max_Strike" [ set u (u + (0.14 * israel-incomplete-victory-aversion)) ]
+
+    if act = "Ground_Push" [ set u (u + (0.04 * israel-incomplete-victory-aversion)) ]
+  ]
+
+  if act = "Ground_Push" and diplomatic-momentum > 0.30 [
+    set u (u - 0.12)
+  ]
+
+  if access-state = "Selective_Passage" and member? act ["Conventional_Strike" "Max_Strike"] [
+    set u (u + 0.06)
+  ]
+
+  if act = "Ground_Push"
+     and military-deescalation-window?
+     and access-state = "Selective_Passage" [
+    set u (u - 0.08)
+  ]
+
+  if access-state = "Escorted_Reopening" and act = "Hold" and economic-war-active? [
+    set u (u - 0.05)
+  ]
+
+  if act = "Ground_Push" and ticks < 8 [ set u (u - 0.40) ]
+  if act = "Max_Strike" and ticks < 4 [ set u (u - 0.15) ]
+
+  report (u + random-normal 0 decision-noise)
+end
+
+to execute-actions
+  set regional-strike-volume 0
+  set proxy-attack-level 0
+
+  set last-us-action [current-action] of us-agent
+  set last-israel-action [current-action] of israel-agent
+  set last-iran-action [current-action] of iran-agent
+
+  execute-us-action last-us-action
+  execute-israel-action last-israel-action
+  execute-iran-action last-iran-action
+end
+
+to execute-us-action [act]
+  if act = "Pursue_Ceasefire" [
+    ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.005) 0 1) ]
+  ]
+
+  if act = "Deploy_Carrier_Group" [
+    ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+    set regional-strike-volume (regional-strike-volume + 1)
+    set military-degradation (bound (military-degradation + 0.03) 0 1)
+  ]
+
+  if act = "Conventional_Strike" [
+    ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+    set regional-strike-volume (regional-strike-volume + 2)
+    set military-degradation (bound (military-degradation + 0.10) 0 1)
+    set us-casualties (bound (us-casualties + 0.03) 0 1)
+    ask iran-agent [
+      set regime-stability (bound (regime-stability - 0.08) 0 1)
+      set asymmetric-assets (bound (asymmetric-assets - 8) 0 100)
+    ]
+  ]
+
+  if act = "Ground_Operation" [
+    set regional-strike-volume (regional-strike-volume + 3)
+    set military-degradation (bound (military-degradation + 0.28) 0 1)
+    set us-casualties (bound (us-casualties + 0.18) 0 1)
+    ask iran-agent [
+      set regime-stability (bound (regime-stability - 0.18) 0 1)
+      set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+    ]
+    set ground-war? true
+  ]
+end
+
+to execute-israel-action [act]
+  if act = "Conventional_Strike" [
+    set regional-strike-volume (regional-strike-volume + 1)
+    set military-degradation (bound (military-degradation + 0.08) 0 1)
+    ask iran-agent [
+      set regime-stability (bound (regime-stability - 0.05) 0 1)
+      set asymmetric-assets (bound (asymmetric-assets - 6) 0 100)
+    ]
+  ]
+
+  if act = "Max_Strike" [
+    set regional-strike-volume (regional-strike-volume + 2)
+    set military-degradation (bound (military-degradation + 0.15) 0 1)
+    ask iran-agent [
+      set regime-stability (bound (regime-stability - 0.12) 0 1)
+      set asymmetric-assets (bound (asymmetric-assets - 12) 0 100)
+    ]
+    ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.05) 0 1) ]
+  ]
+
+  if act = "Ground_Push" [
+    set regional-strike-volume (regional-strike-volume + 3)
+    set military-degradation (bound (military-degradation + 0.25) 0 1)
+    ask iran-agent [
+      set regime-stability (bound (regime-stability - 0.20) 0 1)
+      set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+    ]
+    set us-casualties (bound (us-casualties + 0.10) 0 1)
+    set ground-war? true
+
+    if last-us-action != "Ground_Operation" [
+      let miscoord-risk (0.10 + (0.30 * decision-noise) + (0.15 * observation-error-rate))
+      if member? last-us-action ["Pursue_Ceasefire" "Hold"] [ set miscoord-risk (miscoord-risk + 0.12) ]
+      if last-us-action = "Deploy_Carrier_Group" [ set miscoord-risk (miscoord-risk + 0.06) ]
+      if diplomatic-momentum > 0.40 [ set miscoord-risk (miscoord-risk - 0.12) ]
+      if [security-perception] of israel-agent < 0.30 [ set miscoord-risk (miscoord-risk + 0.06) ]
+      if (random-float 1) < (bound miscoord-risk 0.03 0.65) [ set accidental-war? true ]
+    ]
+  ]
+end
+
+to execute-iran-action [act]
+  if act = "Conditional_Reopening" [
+    if any? mines [
+      ask n-of (min (list 1 (count mines))) mines [ die ]
+    ]
+    set permission-factor (bound (permission-factor + 0.14) 0.10 0.98)
+    set insurance-availability (bound (insurance-availability + 0.05) 0.10 1)
+    set gnss-reliability (bound (gnss-reliability + 0.03) 0.15 1)
+    set operator-caution (bound (operator-caution - 0.04) 0 1)
+    set insurer-memory (bound (insurer-memory - 0.03) 0 1)
+    set market-memory (bound (market-memory - 0.03) 0 1)
+    ask iran-agent [
+      set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+    ]
+  ]
+
+  if act = "Selective_Passage" [
+    if any? mines [
+      ask n-of (min (list 2 (count mines))) mines [ die ]
+    ]
+    set permission-factor (bound (permission-factor + 0.08) 0.10 0.97)
+    set insurance-availability (bound (insurance-availability + 0.02) 0.10 1)
+    set operator-caution (bound (operator-caution - 0.02) 0 1)
+    ask iran-agent [
+      set economic-buffer (bound (economic-buffer + 0.02) 0 1)
+    ]
+  ]
+
+  if act = "Sustain_Economic_War" [
+    set permission-factor (bound (permission-factor - 0.04) 0.10 0.97)
+    set insurance-availability (bound (insurance-availability - 0.03) 0.10 1)
+    set operator-caution (bound (operator-caution + 0.08) 0 1)
+    set insurer-memory (bound (insurer-memory + 0.06) 0 1)
+    set operator-memory (bound (operator-memory + 0.05) 0 1)
+    set market-memory (bound (market-memory + 0.08) 0 1)
+    ask iran-agent [
+      set asymmetric-assets (bound (asymmetric-assets - 2) 0 100)
+      set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+    ]
+  ]
+
+  if act = "Deploy_Mines" [
+    ask iran-agent [
+      let n (min (list mine-batch-size (round (asymmetric-assets / 4))))
+      if n > 0 [
+        let open-patches patches with [ lane? and not any? mines-here ]
+        if any? open-patches [
+          let actual-n (min (list n (count open-patches)))
+          ask n-of actual-n open-patches [
+            sprout-mines 1 [
+              set color red + 2
+              set size 0.8
+            ]
+          ]
+          set asymmetric-assets (bound (asymmetric-assets - (actual-n * 1.5)) 0 100)
+        ]
+      ]
+    ]
+    set permission-factor (bound (permission-factor - 0.15) 0.10 0.95)
+    set market-memory (bound (market-memory + 0.10) 0 1)
+  ]
+
+  if act = "Harass_Shipping" [
+    set proxy-attack-level (proxy-attack-level + 1)
+    set us-casualties (bound (us-casualties + 0.02) 0 1)
+    set anchorage-risk (bound (anchorage-risk + 0.08) 0 1)
+    set market-memory (bound (market-memory + 0.07) 0 1)
+    ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 5) 0 100) ]
+    set permission-factor (bound (permission-factor - 0.12) 0.10 0.95)
+  ]
+
+  if act = "Proxy_Attack" [
+    set proxy-attack-level (proxy-attack-level + 1)
+    set us-casualties (bound (us-casualties + 0.04) 0 1)
+    set anchorage-risk (bound (anchorage-risk + 0.05) 0 1)
+    set market-memory (bound (market-memory + 0.05) 0 1)
+    ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 4) 0 100) ]
+    set permission-factor (bound (permission-factor - 0.08) 0.10 0.95)
+  ]
+
+  if act = "Missile_Swarm" [
+    set proxy-attack-level (proxy-attack-level + 2)
+    set us-casualties (bound (us-casualties + 0.06) 0 1)
+    set anchorage-risk (bound (anchorage-risk + 0.10) 0 1)
+    set market-memory (bound (market-memory + 0.08) 0 1)
+    ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 7) 0 100) ]
+    ask israel-agent [ set security-perception (bound (security-perception - 0.08) 0 1) ]
+    set permission-factor (bound (permission-factor - 0.10) 0.10 0.95)
+  ]
+end
+
+to update-market-state
+  update-physical-throughput
+  update-permission-factor
+  update-gnss-reliability
+  update-port-operability
+  update-commercial-insurer
+  update-memory-stocks
+  update-insurance-market
+  update-commercial-throughput
+  update-recovery-factor
+
+  set navigational-reliability
+    (bound ((0.55 * gnss-reliability) + (0.45 * port-operability)) 0.15 1)
+
+  let access-climate
+    (bound ((0.38 * commercial-throughput)
+      + (0.25 * navigational-reliability)
+      + (0.22 * permission-factor)
+      + (0.15 * (1 - market-memory))) 0.10 1)
+
+  set strait-throughput
+    (bound (physical-throughput
+      * access-climate
+      * (0.62 + (0.38 * recovery-factor))) 0.02 1)
+
+  set market-panic-index
+    (bound ((1 - strait-throughput)
+      + ((1 - insurance-availability) * 0.30)
+      + ((1 - gnss-reliability) * 0.16)
+      + (regional-strike-volume * 0.14)
+      + (proxy-attack-level * 0.10)
+      + (market-memory * 0.22)) 0 1.8)
+
+  let previous-oil-risk-premium oil-risk-premium
+  let previous-risk-premium-peak risk-premium-peak
+  let stable-access-for-market? (member? access-state ["Selective_Passage" "Escorted_Reopening" "Open_Passage"]
+                                 and strait-throughput > 0.45
+                                 and permission-factor > 0.40)
+  let habituation-term (min list 20 (ticks-since-major-strike * 0.4))
+
+  set risk-premium-gross-signal (((1 - strait-throughput) * 22)
+                                 + (market-panic-index * 20)
+                                 + (market-memory * 8))
+
+  set risk-premium-reassurance-signal ((recovery-factor * 9)
+                                       + (diplomatic-momentum * 10)
+                                       + (ifelse-value (not major-strike-this-tick?) [10] [0])
+                                       + (ifelse-value (strait-throughput > 0.55) [12] [0])
+                                       + (ifelse-value stable-access-for-market? [8] [0])
+                                       + habituation-term)
+  set risk-premium-target (max list 0 (risk-premium-gross-signal - risk-premium-reassurance-signal))
+  set risk-premium-gap (risk-premium-target - oil-risk-premium)
+  set market-recovery-rate-current (min list 0.80 (0.20 * tau-k-rate))
+
+  ifelse risk-premium-gap > 0
+  [
+
+    set oil-risk-premium (oil-risk-premium + (market-shock-build-up-rate * risk-premium-gap))
+  ]
+  [
+
+    set oil-risk-premium (oil-risk-premium + (market-recovery-rate-current * risk-premium-gap))
+  ]
+  set oil-risk-premium (bound oil-risk-premium 0 120)
+
+  if oil-risk-premium > risk-premium-peak [ set risk-premium-peak oil-risk-premium ]
+
+  if previous-risk-premium-peak >= 25 [
+    set risk-premium-post-peak-ticks (risk-premium-post-peak-ticks + 1)
+    if oil-risk-premium < previous-oil-risk-premium [
+      set risk-premium-decay-ticks (risk-premium-decay-ticks + 1)
+    ]
+  ]
+  if tick-military-deescalation-window-start != -1 [
+    set risk-premium-post-deescalation-ticks (risk-premium-post-deescalation-ticks + 1)
+    if oil-risk-premium < previous-oil-risk-premium [
+      set risk-premium-post-deescalation-decay-ticks (risk-premium-post-deescalation-decay-ticks + 1)
+    ]
+  ]
+
+  set brent-crude-price (oil-fundamental-price + oil-risk-premium)
+
+  if brent-crude-price > 70 [
+    set cumulative-oil-burden (cumulative-oil-burden + (brent-crude-price - 70))
+  ]
+
+  if strait-throughput < 0.35 [
+    set low-throughput-days (low-throughput-days + 1)
+  ]
+
+  recolor-lanes
+end
+
+to update-physical-throughput
+  ask patches with [ lane? ] [
+    set blocked? any? mines-here
+    set reachable? false
+  ]
+
+  let frontier patches with [ lane? and pxcor = min-pxcor and not blocked? ]
+  ask frontier [ set reachable? true ]
+
+  while [ any? frontier ] [
+    let new-frontier patches with [ lane? and not blocked? and not reachable? and any? neighbors4 with [ reachable? ] ]
+    ask new-frontier [ set reachable? true ]
+    set frontier new-frontier
+  ]
+
+  ifelse any? patches with [ lane? and pxcor = max-pxcor and reachable? ]
+  [
+    let reachable-share ((count patches with [ lane? and reachable? ]) / (count patches with [ lane? ]))
+    let mine-density ((count mines) / max (list 1 (count patches with [ lane? ])))
+    set physical-throughput (bound (reachable-share * (1 - (mine-density * 1.4))) 0.05 1)
+  ]
+  [
+    set physical-throughput 0.05
+  ]
+end
+
+to update-permission-factor
+  if last-iran-action = "Conditional_Reopening" [
+    set permission-factor (bound (permission-factor + 0.02 + (diplomatic-momentum * 0.01)) 0.10 0.98)
+  ]
+  if last-iran-action = "Selective_Passage" [
+    set permission-factor (bound (permission-factor + 0.010 + (diplomatic-momentum * 0.008)) 0.10 0.97)
+  ]
+  if last-iran-action = "Hold" [
+    set permission-factor (bound (permission-factor + 0.004 + (diplomatic-momentum * 0.004) - (regional-strike-volume * 0.003)) 0.10 0.97)
+  ]
+  if last-iran-action = "Sustain_Economic_War" [
+    set permission-factor (bound (permission-factor - 0.020) 0.10 0.97)
+  ]
+  if last-iran-action = "Deploy_Mines" [
+    set permission-factor (bound (permission-factor - 0.05) 0.10 0.97)
+  ]
+  if last-iran-action = "Harass_Shipping" [
+    set permission-factor (bound (permission-factor - 0.035) 0.10 0.97)
+  ]
+  if member? last-iran-action ["Proxy_Attack" "Missile_Swarm"] [
+    set permission-factor (bound (permission-factor - 0.025) 0.10 0.97)
+  ]
+end
+
+to update-gnss-reliability
+  let gnss-shock ((proxy-attack-level * 0.05) + (regional-strike-volume * 0.04) + (anchorage-risk * 0.03) + (operator-memory * 0.03))
+  let repair-boost ((recovery-factor * 0.030) + (permission-factor * 0.012) + (diplomatic-momentum * 0.020))
+  if last-iran-action = "Conditional_Reopening" [ set repair-boost (repair-boost + 0.02) ]
+  set gnss-reliability (bound (gnss-reliability - gnss-shock + repair-boost) 0.15 1)
+end
+
+to update-port-operability
+  let port-shock ((regional-strike-volume * 0.08) + (proxy-attack-level * 0.05) + ((1 - gnss-reliability) * 0.05))
+  set anchorage-risk (bound (anchorage-risk + port-shock - (recovery-factor * 0.04)) 0 1)
+  set port-operability (bound (1 - anchorage-risk - (regional-strike-volume * 0.03)) 0.15 1)
+end
+
+to update-memory-stocks
+  let threat ((regional-strike-volume * 0.10)
+              + (proxy-attack-level * 0.07)
+              + ((1 - permission-factor) * 0.16)
+              + ((1 - gnss-reliability) * 0.08)
+              + ((1 - insurance-availability) * 0.06)
+              + ((1 - port-operability) * 0.05))
+  if last-iran-action = "Sustain_Economic_War" [ set threat (threat + 0.08) ]
+  if last-iran-action = "Deploy_Mines" [ set threat (threat + 0.06) ]
+
+  let stable-access? (member? access-state ["Selective_Passage" "Escorted_Reopening" "Open_Passage"]
+                      and permission-factor > 0.40
+                      and strait-throughput > 0.30)
+  let reassurance ((recovery-factor * 0.07) + (diplomatic-momentum * 0.06))
+  if member? last-iran-action ["Conditional_Reopening" "Selective_Passage"] [ set reassurance (reassurance + 0.06) ]
+  if not major-strike-this-tick? [ set reassurance (reassurance + 0.06) ]
+  if stable-access? [ set reassurance (reassurance + 0.07) ]
+  if military-deescalation-window? = true [ set reassurance (reassurance + 0.05) ]
+
+  set insurer-memory (bound (insurer-memory + (threat * 0.10 * tau-c-rate) - (reassurance * 0.18 * tau-c-rate)) 0 1)
+  set operator-memory (bound (operator-memory + (threat * 0.08 * tau-c-rate) - (reassurance * 0.20 * tau-c-rate)) 0 1)
+  set market-memory (bound (market-memory + (threat * 0.08 * tau-k-rate)
+                            + (max list 0 ((brent-crude-price - 85) / 100) * 0.035)
+                            - (reassurance * 0.16 * tau-k-rate)) 0 1)
+end
+
+to update-insurance-market
+  let threat-score (((1 - permission-factor) * 0.18)
+                    + ((1 - gnss-reliability) * 0.10)
+                    + (regional-strike-volume * 0.05)
+                    + (proxy-attack-level * 0.05)
+                    + ((1 - port-operability) * 0.05)
+                    + (insurer-memory * 0.08)
+                    + (market-memory * 0.04))
+
+  let stable-access? (member? access-state ["Selective_Passage" "Escorted_Reopening" "Open_Passage"]
+                      and permission-factor > 0.40
+                      and strait-throughput > 0.30)
+  let reassurance-bonus ((recovery-factor * 0.04)
+                         + (diplomatic-momentum * 0.04)
+                         + (ifelse-value (member? last-iran-action ["Conditional_Reopening" "Selective_Passage"]) [0.05] [0])
+                         + (ifelse-value stable-access? [0.05] [0])
+                         + (ifelse-value (military-deescalation-window? = true) [0.04] [0])
+                         + (ifelse-value (insurance-availability > 0.35) [0.025] [0]))
+
+  set operator-caution
+    (bound (operator-caution
+            + (awrp * 0.035)
+            + (threat-score * 0.09 * tau-c-rate)
+            + (operator-memory * 0.035)
+            - (recovery-factor * 0.14 * tau-c-rate)
+            - (diplomatic-momentum * 0.06 * tau-c-rate)
+            - (reassurance-bonus * 1.30 * tau-c-rate)) 0 1)
+  set insurance-availability
+    (bound (insurance-availability
+            - (awrp * 0.035)
+            - (threat-score * 0.020 * tau-c-rate)
+            - (insurer-memory * 0.020)
+            + (reassurance-bonus * 1.45 * tau-c-rate)) 0.10 1)
+end
+
+to update-commercial-throughput
+  set commercial-throughput
+    (bound ((0.28 * insurance-availability)
+      + (0.27 * permission-factor)
+      + (0.18 * port-operability)
+      + (0.10 * gnss-reliability)
+      + (0.09 * (1 - operator-caution))
+      + (0.08 * (1 - market-memory))) 0.08 1)
+end
+
+to update-recovery-factor
+  if member? last-iran-action ["Deploy_Mines" "Harass_Shipping" "Proxy_Attack" "Missile_Swarm"] [
+    set recent-iran-escalation-streak (recent-iran-escalation-streak + 1)
+    set recovery-factor (bound (recovery-factor - 0.10) 0 1)
+  ]
+
+  if last-iran-action = "Sustain_Economic_War" [
+    set recent-iran-escalation-streak (recent-iran-escalation-streak + 1)
+    set recovery-factor (bound (recovery-factor - 0.05) 0 1)
+  ]
+
+  if member? last-iran-action ["Conditional_Reopening" "Selective_Passage" "Hold" "None"] [
+    set recent-iran-escalation-streak max (list 0 (recent-iran-escalation-streak - 1))
+  ]
+
+  if member? last-iran-action ["Conditional_Reopening" "Selective_Passage"] and regional-strike-volume = 0 and proxy-attack-level = 0 [
+    set recovery-factor (bound (recovery-factor + 0.03) 0 1)
+  ]
+
+  if military-pause? and regional-strike-volume = 0 and proxy-attack-level = 0 and insurance-availability > 0.45 [
+    set recovery-factor (bound (recovery-factor + 0.02) 0 1)
+  ]
+
+  if insurance-availability < 0.35 or gnss-reliability < 0.40 [
+    set recovery-factor (bound (recovery-factor - 0.02) 0 1)
+  ]
+
+  if member? last-us-action ["Conventional_Strike" "Ground_Operation"] [
+    set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+  ]
+
+  if member? last-israel-action ["Max_Strike" "Ground_Push"] [
+    set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+  ]
+end
+
+to recolor-lanes
+  ask patches with [ lane? ] [
+    ifelse blocked?
+      [ set pcolor 15 ]
+      [
+        ifelse reachable?
+          [ set pcolor 87 ]
+          [ set pcolor 97 ]
+      ]
+  ]
+  ask patches with [ water? and not lane? ] [ set pcolor 95 ]
+  ask patches with [ not water? ] [ set pcolor 35 ]
+end
+
+to update-actor-states
+  ask us-agent [
+    set electoral-proximity (bound (electoral-proximity + 0.003) 0 1)
+  ]
+
+  ask iran-agent [
+
+    let buffer-drain (((1 - strait-throughput) * 0.012) + (regional-strike-volume * 0.005))
+    let oil-rent-gain 0
+    if brent-crude-price > 90 [
+      set oil-rent-gain (((brent-crude-price - 90) / 100) * 0.04)
+    ]
+    if military-pause? and economic-war-active? [
+      set oil-rent-gain (oil-rent-gain + 0.006)
+    ]
+    if permission-factor > 0.55 [
+      set oil-rent-gain (oil-rent-gain + 0.004)
+    ]
+
+    set economic-buffer (bound (economic-buffer - buffer-drain + oil-rent-gain) 0 1)
+
+    let stability-drain ((regional-strike-volume * 0.010) + ((1 - economic-buffer) * 0.008))
+    let stability-gain (proxy-attack-level * 0.004)
+    if brent-crude-price > 95 and military-pause? [
+      set stability-gain (stability-gain + 0.010)
+    ]
+    if regional-strike-volume = 0 and permission-factor > 0.45 [
+      set stability-gain (stability-gain + 0.005)
+    ]
+
+    set regime-stability (bound (regime-stability - stability-drain + stability-gain) 0 1)
+  ]
+
+  ask israel-agent [
+    let d 0
+    if member? israel-observed-iran-action ["Harass_Shipping" "Proxy_Attack" "Missile_Swarm" "Deploy_Mines" "Sustain_Economic_War"] [ set d (d - 0.06) ]
+    if military-degradation > 0.45 [ set d (d + 0.04) ]
+    if strait-throughput > 0.45 and permission-factor > 0.55 [ set d (d + 0.02) ]
+    if military-pause? and economic-war-active? [ set d (d - 0.03) ]
+    set security-perception (bound (security-perception + d) 0 1)
+
+    if israel-observed-us-action = "Pursue_Ceasefire" and member? last-israel-action ["Max_Strike" "Ground_Push"] [
+      set tolerance-us-friction (bound (tolerance-us-friction - 0.03) 0 1)
+    ]
+  ]
+end
+
+to determine-crisis-state
+  let previous-state crisis-state
+
+  if ground-war? [
+    set military-pause? false
+    set military-state "Ground_War"
+    set access-state (ifelse-value (strait-throughput < 0.35) ["Partial_Closure"] ["Selective_Passage"])
+    set diplomacy-state "No_Talks"
+    set economic-war-active? true
+    set economic-war-state "War_Driven_Oil_Shock"
+
+    ifelse accidental-war?
+      [ set crisis-state "Accidental_War" ]
+      [ set crisis-state "Ground_War" ]
+    set resolution-tick ticks
+    stop
+  ]
+
+  let deescalatory? (last-us-action = "Pursue_Ceasefire"
+                     and not member? last-israel-action ["Conventional_Strike" "Max_Strike" "Ground_Push"]
+                     and not member? last-iran-action ["Missile_Swarm" "Proxy_Attack"])
+
+  if deescalatory? [
+    set diplomatic-momentum (bound (diplomatic-momentum + (0.04 * tau-d-rate)) 0 1)
+  ]
+  if not deescalatory? [
+    set diplomatic-momentum (bound (diplomatic-momentum - (0.03 * tau-d-rate)) 0 1)
+  ]
+
+  set major-action-this-tick? major-strike-this-tick?
+  set low-intensity-military? false
+
+  let any-strike-action-this-tick? (member? last-us-action ["Conventional_Strike" "Ground_Operation"]
+                                    or member? last-israel-action ["Conventional_Strike" "Max_Strike" "Ground_Push"]
+                                    or member? last-iran-action ["Missile_Swarm" "Proxy_Attack" "Harass_Shipping" "Deploy_Mines"])
+
+  set military-pause? false
+  if not any-strike-action-this-tick?
+     and (regional-strike-volume <= 0.5)
+     and (proxy-attack-level <= 0.5) [
+    set military-pause? true
+    set military-state "Military_Pause"
+  ]
+  if (not military-pause?) and (not major-action-this-tick?) [
+    set military-state "Limited_Exchange"
+  ]
+  if major-action-this-tick? [
+    set military-state "Active_Military_War"
+    set military-pause? false
+  ]
+  set low-intensity-military? (member? military-state ["Military_Pause" "Limited_Exchange"])
+
+  let strike-this-tick? any-strike-action-this-tick?
+  let major-strike-this-tick major-action-this-tick?
+
+  set recent-strike-history (lput (ifelse-value strike-this-tick? [1] [0]) recent-strike-history)
+  if length recent-strike-history > 3 [
+    set recent-strike-history (but-first recent-strike-history)
+  ]
+  set military-pause-window? ((sum recent-strike-history) = 0)
+  if military-pause-window? and tick-military-pause-window-start = -1 [
+    set tick-military-pause-window-start ticks
+  ]
+
+  set recent-major-strike-history (lput (ifelse-value major-strike-this-tick [1] [0]) recent-major-strike-history)
+  if length recent-major-strike-history > 3 [
+    set recent-major-strike-history (but-first recent-major-strike-history)
+  ]
+  set military-deescalation-window? (((sum recent-major-strike-history) = 0) and low-intensity-military?)
+  if military-deescalation-window? and tick-military-deescalation-window-start = -1 [
+    set tick-military-deescalation-window-start ticks
+  ]
+
+  if (strait-throughput > 0.82) and (insurance-availability > 0.78) and (permission-factor > 0.82) [
+    set access-state "Open_Passage"
+  ]
+  if (strait-throughput > 0.58) and (insurance-availability > 0.52) and (permission-factor > 0.60) and access-state != "Open_Passage" [
+    set access-state "Escorted_Reopening"
+  ]
+  if (permission-factor > 0.38) and (strait-throughput > 0.18) and not member? access-state ["Open_Passage" "Escorted_Reopening"] [
+    set access-state "Selective_Passage"
+  ]
+  if not ((strait-throughput > 0.18) and (permission-factor > 0.38)) [
+    set access-state "Partial_Closure"
+  ]
+
+  if (military-deescalation-window?
+      and member? access-state ["Selective_Passage" "Escorted_Reopening"]
+      and not major-strike-this-tick?) [
+    set diplomatic-momentum (bound (diplomatic-momentum + (0.015 * tau-d-rate)) 0 1)
+  ]
+
+  if (diplomacy-state = "No_Talks"
+      and military-deescalation-window?
+      and member? access-state ["Selective_Passage" "Escorted_Reopening"]
+      and insurance-availability > 0.40) [
+    if random-float 1 < diplomacy-bridge-prob [
+      set diplomatic-momentum (max list diplomatic-momentum 0.30)
+      set diplomacy-bridge-events (diplomacy-bridge-events + 1)
+    ]
+  ]
+
+  if diplomatic-momentum > 0.70 [
+    set diplomacy-state "Fragile_Arrangement"
+  ]
+  if diplomatic-momentum > 0.45 and diplomatic-momentum <= 0.70 [
+    set diplomacy-state "Ceasefire_Talks"
+  ]
+  if diplomatic-momentum > 0.20 and diplomatic-momentum <= 0.45 [
+    set diplomacy-state "Backchannel_Bargaining"
+  ]
+  if diplomatic-momentum <= 0.20 [
+    set diplomacy-state "No_Talks"
+  ]
+
+  set economic-war-active? ((brent-crude-price > 90)
+                            or (insurance-availability < 0.75)
+                            or (permission-factor < 0.88)
+                            or (market-memory > 0.25)
+                            or member? last-iran-action ["Sustain_Economic_War" "Deploy_Mines" "Harass_Shipping" "Selective_Passage"])
+
+  if not economic-war-active? [
+    set economic-war-state "No_Economic_War"
+  ]
+  if economic-war-active? [
+    if member? last-iran-action ["Sustain_Economic_War" "Deploy_Mines" "Harass_Shipping"] or (market-memory > 0.45) [
+      set economic-war-state "Prolonged_Economic_War"
+    ]
+    if (economic-war-state != "Prolonged_Economic_War") and ((brent-crude-price > 100) or (insurance-availability < 0.55)) [
+      set economic-war-state "Oil_Price_Coercion"
+    ]
+    if not member? economic-war-state ["Prolonged_Economic_War" "Oil_Price_Coercion"] [
+      set economic-war-state "Selective_Economic_Pressure"
+    ]
+  ]
+
+  let ceasefire-ready? (military-pause?
+                        and not economic-war-active?
+                        and (access-state = "Open_Passage")
+                        and (diplomacy-state = "Fragile_Arrangement")
+                        and ([security-perception] of israel-agent > 0.66)
+                        and ([regime-stability] of iran-agent > 0.25)
+                        and (regional-strike-volume = 0)
+                        and (proxy-attack-level = 0))
+
+  if ceasefire-ready? [
+    set ceasefire-stability-streak (ceasefire-stability-streak + 1)
+  ]
+  if not ceasefire-ready? [
+    set ceasefire-stability-streak 0
+  ]
+
+  if ceasefire-stability-streak >= 7 [
+    set ceasefire? true
+    set crisis-state "Ceasefire"
+    set resolution-tick ticks
+    stop
+  ]
+
+  if (strait-throughput < 0.15) and (us-casualties > 0.12) and not ceasefire? [
+    set cascade-streak (cascade-streak + 1)
+  ]
+  if not ((strait-throughput < 0.15) and (us-casualties > 0.12) and not ceasefire?) [
+    set cascade-streak 0
+  ]
+
+  if cascade-streak >= 2 [
+    set crisis-state "Escalation_Cascade"
+    set resolution-tick ticks
+    stop
+  ]
+
+  let next-state "Armed_Bargaining"
+
+  if access-state = "Partial_Closure" [
+    set next-state "Partial_Closure"
+  ]
+
+  if (next-state = "Armed_Bargaining") and (access-state = "Selective_Passage") [
+    set next-state "Selective_Passage"
+  ]
+
+  if (next-state = "Armed_Bargaining") and (access-state = "Escorted_Reopening")
+     and member? diplomacy-state ["Ceasefire_Talks" "Fragile_Arrangement"] [
+    set next-state "Contested_Reopening"
+  ]
+
+  if (next-state = "Armed_Bargaining") and military-pause? and economic-war-active?
+     and member? access-state ["Selective_Passage" "Escorted_Reopening" "Partial_Closure"]
+     and (diplomatic-momentum > 0.30) [
+    set next-state "Military_Pause_Economic_War"
+  ]
+
+  let awrp-half-recovery-threshold (awrp-baseline + (0.50 * (awrp-peak - awrp-baseline)))
+  let commercial-score 0
+  if awrp > awrp-half-recovery-threshold [ set commercial-score (commercial-score + 1) ]
+  if insurance-availability < 0.50 [ set commercial-score (commercial-score + 1) ]
+  if operator-caution > 0.65 [ set commercial-score (commercial-score + 1) ]
+  if strait-throughput < 0.65 [ set commercial-score (commercial-score + 1) ]
+  set commercial-non-normalization-score commercial-score
+
+  let commercial-non-normalized? (commercial-score >= 2)
+  let market-still-elevated? (oil-risk-premium > 10)
+
+  let stalemate-conditions (military-deescalation-window?
+                            and commercial-non-normalized?
+                            and market-still-elevated?
+                            and member? access-state ["Selective_Passage" "Escorted_Reopening" "Partial_Closure" "Contested_Reopening"]
+                            and not ceasefire?)
+
+  ifelse stalemate-conditions
+    [ set managed-stalemate-streak (managed-stalemate-streak + 1)
+      set ticks-in-ms-conditions (ticks-in-ms-conditions + 1) ]
+    [ set managed-stalemate-streak 0 ]
+
+  set managed-stalemate? (managed-stalemate-streak >= 2)
+  if managed-stalemate? [
+    set ever-managed-stalemate? true
+    if tick-first-managed-stalemate = -1 [ set tick-first-managed-stalemate ticks ]
+  ]
+
+  if managed-stalemate? and member? next-state [
+    "Military_Pause_Economic_War"
+    "Selective_Passage"
+    "Partial_Closure"
+    "Contested_Reopening"
+  ] [
+    set next-state "Managed_Stalemate"
+  ]
+
+  set crisis-state next-state
+
+  ifelse crisis-state = "Partial_Closure"
+    [ set partial-closure-streak (partial-closure-streak + 1) ]
+    [ set partial-closure-streak 0 ]
+
+  ifelse crisis-state = "Selective_Passage"
+    [ set selective-passage-streak (selective-passage-streak + 1) ]
+    [ set selective-passage-streak 0 ]
+
+  ifelse crisis-state = "Contested_Reopening"
+    [ set contested-reopening-streak (contested-reopening-streak + 1) ]
+    [ set contested-reopening-streak 0 ]
+
+  if crisis-state != previous-state and resolution-tick = -1 [
+    set resolution-tick ticks
+  ]
+end
+
+to finalize-timeout-state
+
+  if crisis-state = "Armed_Bargaining" [
+    set crisis-state "Bargaining_Timeout"
+  ]
+  set resolution-tick ticks
+end
+
+to update-commercial-insurer
+
+  let raw-evidence ((regional-strike-volume * 0.18)
+                    + (proxy-attack-level * 0.12)
+                    + ((count mines) * 0.025)
+                    + ((1 - permission-factor) * 0.30)
+                    + ((1 - gnss-reliability) * 0.10)
+                    + ((1 - port-operability) * 0.08))
+
+  let routine-flow (regional-strike-volume + (proxy-attack-level * 0.7))
+  let selectivity-discount 0
+  if selective-targeting-recognition > 0 and routine-flow > 0 [
+    let saturation (routine-flow / (routine-flow + 2))
+    set selectivity-discount (selective-targeting-recognition * 0.45 * saturation)
+  ]
+  let discounted-evidence (raw-evidence * (1 - selectivity-discount))
+
+  let target-posterior (bound (discounted-evidence / 1.6) 0 0.95)
+
+  let kappa-C (0.18 * tau-c-rate)
+  set disruption-posterior (disruption-posterior + kappa-C * (target-posterior - disruption-posterior))
+
+  if (regional-strike-volume = 0) and (proxy-attack-level = 0)
+     and not member? last-iran-action ["Sustain_Economic_War" "Deploy_Mines"] [
+    let kappa-recovery (0.06 * tau-c-rate)
+    set disruption-posterior (disruption-posterior + kappa-recovery * (disruption-prior - disruption-posterior))
+  ]
+
+  set awrp (bound (awrp-baseline + disruption-posterior * 0.85) 0 1)
+  if awrp > awrp-peak [ set awrp-peak awrp ]
+end
+
+to update-clock-trackers
+
+  if military-pause? and tick-military-pause-start = -1 [
+    set tick-military-pause-start ticks
+  ]
+
+  if (awrp-peak >= 0.55) and (awrp < 0.40) and (tick-awrp-recovery = -1) [
+    set tick-awrp-recovery ticks
+  ]
+
+  if (risk-premium-peak >= 25) and (oil-risk-premium < 10) and (tick-price-recovery = -1) [
+    set tick-price-recovery ticks
+  ]
+
+  let awrp-half-recovery-threshold (awrp-baseline + (0.50 * (awrp-peak - awrp-baseline)))
+  if (not awrp-recovery-frac-fired?)
+     and (awrp-peak >= 0.55)
+     and (awrp <= awrp-half-recovery-threshold) [
+    set tick-awrp-recovery-frac ticks
+    set awrp-recovery-frac-fired? true
+  ]
+  if (not price-recovery-frac-fired?)
+     and (risk-premium-peak >= 25)
+     and (oil-risk-premium <= (0.30 * risk-premium-peak)) [
+    set tick-price-recovery-frac ticks
+    set price-recovery-frac-fired? true
+  ]
+
+  if (not price-recovery-frac-strict-fired?)
+     and (risk-premium-peak >= 25)
+     and (oil-risk-premium <= (0.50 * risk-premium-peak)) [
+    set tick-price-recovery-frac-strict ticks
+    set price-recovery-frac-strict-fired? true
+  ]
+
+  if (not price-recovery-20pct-fired?)
+     and (risk-premium-peak >= 25)
+     and (oil-risk-premium <= (0.80 * risk-premium-peak)) [
+    set tick-price-recovery-20pct ticks
+    set price-recovery-20pct-fired? true
+  ]
+end
+
+to-report perceived-action [actual-action target-role]
+  if actual-action = "None" [ report actual-action ]
+  if random-float 1 >= observation-error-rate [ report actual-action ]
+
+  let alternatives remove actual-action (action-set-of target-role)
+  if empty? alternatives [ report actual-action ]
+  report one-of alternatives
+end
+
+to-report action-set-of [role-name]
+  if role-name = "US" [ report ["Pursue_Ceasefire" "Hold" "Deploy_Carrier_Group" "Conventional_Strike" "Ground_Operation"] ]
+  if role-name = "Iran" [ report ["Conditional_Reopening" "Selective_Passage" "Sustain_Economic_War" "Hold" "Deploy_Mines" "Harass_Shipping" "Proxy_Attack" "Missile_Swarm"] ]
+  if role-name = "Israel" [ report ["Hold" "Conventional_Strike" "Max_Strike" "Ground_Push"] ]
+  report []
+end
+
+to-report bayes-update [prior p-e-given-h p-e-given-not-h]
+  let numerator (p-e-given-h * prior)
+  let denominator (numerator + (p-e-given-not-h * (1 - prior)))
+  if denominator = 0 [ report prior ]
+  report (numerator / denominator)
+end
+
+to-report bound [x lo hi]
+  report max (list lo (min (list hi x)))
+end
+
+to-report us-agent
+  report one-of state-actors with [ role = "US" ]
+end
+
+to-report iran-agent
+  report one-of state-actors with [ role = "Iran" ]
+end
+
+to-report israel-agent
+  report one-of state-actors with [ role = "Israel" ]
+end
+
+to-report outcome-partial-closure
+  report ifelse-value (crisis-state = "Partial_Closure") [1] [0]
+end
+
+to-report outcome-selective-passage
+  report ifelse-value (crisis-state = "Selective_Passage") [1] [0]
+end
+
+to-report outcome-contested-reopening
+  report ifelse-value (crisis-state = "Contested_Reopening") [1] [0]
+end
+
+to-report outcome-armed-bargaining
+  report ifelse-value (crisis-state = "Armed_Bargaining") [1] [0]
+end
+to-report outcome-military-pause-economic-war
+  report ifelse-value (crisis-state = "Military_Pause_Economic_War") [1] [0]
+end
+
+to-report current-crisis-fit
+  let target-throughput 0.40
+  let target-price 102
+  let target-insurance 0.55
+  let target-gnss 0.55
+  let target-permission 0.60
+  let target-diplomacy 0.50
+
+  let gap 0
+  set gap (gap + (abs (strait-throughput - target-throughput) * 28))
+  set gap (gap + (abs (brent-crude-price - target-price) * 0.38))
+  set gap (gap + (abs (insurance-availability - target-insurance) * 16))
+  set gap (gap + (abs (gnss-reliability - target-gnss) * 14))
+  set gap (gap + (abs (permission-factor - target-permission) * 14))
+  set gap (gap + (abs (diplomatic-momentum - target-diplomacy) * 10))
+
+  if military-state = "Military_Pause" and economic-war-active? [ set gap (gap - 10) ]
+  if crisis-state = "Military_Pause_Economic_War" [ set gap (gap - 16) ]
+  if economic-war-state = "Prolonged_Economic_War" [ set gap (gap - 8) ]
+  if access-state = "Selective_Passage" [ set gap (gap - 8) ]
+  if access-state = "Partial_Closure" [ set gap (gap - 6) ]
+  if crisis-state = "Contested_Reopening" [ set gap (gap - 10) ]
+  if crisis-state = "Ceasefire" [ set gap (gap + 6) ]
+  if crisis-state = "Accidental_War" [ set gap (gap + 10) ]
+  if crisis-state = "Ground_War" [ set gap (gap + 14) ]
+  if crisis-state = "Escalation_Cascade" [ set gap (gap + 12) ]
+
+  report (- gap)
+end
+
+to-report calibration-score
+
+  let score current-crisis-fit
+
+  if crisis-state = "Military_Pause_Economic_War" [ set score (score + 10) ]
+  if crisis-state = "Contested_Reopening" [ set score (score + 8) ]
+  if crisis-state = "Selective_Passage" [ set score (score + 5) ]
+  if crisis-state = "Partial_Closure" [ set score (score + 2) ]
+  if crisis-state = "Ceasefire" [ set score (score - 2) ]
+  if crisis-state = "Accidental_War" [ set score (score - 8) ]
+  if crisis-state = "Ground_War" [ set score (score - 18) ]
+  if crisis-state = "Escalation_Cascade" [ set score (score - 10) ]
+
+  if military-state = "Military_Pause" and economic-war-active? [ set score (score + 6) ]
+  if economic-war-state = "Prolonged_Economic_War" [ set score (score + 4) ]
+  if access-state = "Selective_Passage" [ set score (score + 4) ]
+
+  set score (score + (10 * contested-reopening-share))
+  set score (score + (7 * selective-passage-share))
+  set score (score + (3 * partial-closure-share))
+
+  if ever-contested-reopening? [ set score (score + 2) ]
+  if ever-selective-passage? [ set score (score + 1.5) ]
+
+  report score
+end
+
+to-report throughput
+  report strait-throughput
+end
+
+to-report effective-throughput
+  report strait-throughput
+end
+
+to-report insurance
+  report insurance-availability
+end
+
+to-report regional-strikes
+  report regional-strike-volume
+end
+
+to-report proxy-attacks
+  report proxy-attack-level
+end
+to-report military-layer
+  report military-state
+end
+
+to-report economic-war-layer
+  report economic-war-state
+end
+
+to-report access-layer
+  report access-state
+end
+
+to-report diplomacy-layer
+  report diplomacy-state
+end
+
+to-report ever-backchannel
+  report ifelse-value ever-backchannel? [1] [0]
+end
+
+to-report ever-ceasefire-talks
+  report ifelse-value ever-ceasefire-talks? [1] [0]
+end
+
+to-report ever-fragile-arrangement
+  report ifelse-value ever-fragile-arrangement? [1] [0]
+end
+
+to-report diplomacy-bridge-count
+  report diplomacy-bridge-events
+end
+
+to-report first-backchannel-tick-report
+  report first-backchannel-tick
+end
+
+to-report first-ceasefire-talks-tick-report
+  report first-ceasefire-talks-tick
+end
+
+to-report first-fragile-arrangement-tick-report
+  report first-fragile-arrangement-tick
+end
+
+to-report no-talks-share
+  report (ticks-in-no-talks / max (list 1 ticks))
+end
+
+to-report backchannel-share
+  report (ticks-in-backchannel / max (list 1 ticks))
+end
+
+to-report ceasefire-talks-share
+  report (ticks-in-ceasefire-talks / max (list 1 ticks))
+end
+
+to-report fragile-arrangement-share
+  report (ticks-in-fragile-arrangement / max (list 1 ticks))
+end
+
+to-report diplomatic-activation-share
+  report ((ticks-in-backchannel + ticks-in-ceasefire-talks + ticks-in-fragile-arrangement) / max (list 1 ticks))
+end
+
+to-report max-diplomatic-momentum-report
+  report max-diplomatic-momentum
+end
+
+to-report strategic-regime
+  report (word military-state " | " economic-war-state " | " access-state " | " diplomacy-state)
+end
+
+to-report outcome-ceasefire
+  report ifelse-value (crisis-state = "Ceasefire") [1] [0]
+end
+
+to-report outcome-ground-war
+  report ifelse-value (crisis-state = "Ground_War") [1] [0]
+end
+
+to-report outcome-accidental-war
+  report ifelse-value (crisis-state = "Accidental_War") [1] [0]
+end
+
+to-report outcome-severe-escalation
+  report ifelse-value (member? crisis-state ["Ground_War" "Accidental_War" "Escalation_Cascade"]) [1] [0]
+end
+
+to-report outcome-equilibrium-of-pain
+  report ifelse-value (crisis-state = "Equilibrium_of_Pain") [1] [0]
+end
+
+to-report outcome-escalation-cascade
+  report ifelse-value (crisis-state = "Escalation_Cascade") [1] [0]
+end
+
+to-report outcome-bargaining-timeout
+  report ifelse-value (crisis-state = "Bargaining_Timeout") [1] [0]
+end
+
+to-report ever-selective-passage
+  report ifelse-value ever-selective-passage? [1] [0]
+end
+
+to-report ever-contested-reopening
+  report ifelse-value ever-contested-reopening? [1] [0]
+end
+
+to-report ever-partial-closure
+  report ifelse-value ever-partial-closure? [1] [0]
+end
+
+to-report selective-passage-share
+  report ticks-in-selective-passage / max list 1 ticks
+end
+
+to-report contested-reopening-share
+  report ticks-in-contested-reopening / max list 1 ticks
+end
+
+to-report partial-closure-share
+  report ticks-in-partial-closure / max list 1 ticks
+end
+
+to-report awrp-current
+  report awrp
+end
+
+to-report awrp-peak-value
+  report awrp-peak
+end
+
+to-report disruption-belief
+  report disruption-posterior
+end
+
+to-report risk-premium
+  report oil-risk-premium
+end
+
+to-report risk-premium-peak-value
+  report risk-premium-peak
+end
+
+to-report tau-c-over-tau-m
+  if tau-c-rate <= 0 [ report 999 ]
+  report (tau-m-rate / tau-c-rate)
+end
+
+to-report tau-k-over-tau-m
+  if tau-k-rate <= 0 [ report 999 ]
+  report (tau-m-rate / tau-k-rate)
+end
+
+to-report tau-d-over-tau-m
+  if tau-d-rate <= 0 [ report 999 ]
+  report (tau-m-rate / tau-d-rate)
+end
+
+to-report awrp-recovery-lag
+  if tick-military-pause-start = -1 [ report -1 ]
+  if tick-awrp-recovery = -1 [ report -1 ]
+  report (tick-awrp-recovery - tick-military-pause-start)
+end
+
+to-report price-recovery-lag
+  if tick-military-pause-start = -1 [ report -1 ]
+  if tick-price-recovery = -1 [ report -1 ]
+  report (tick-price-recovery - tick-military-pause-start)
+end
+
+to-report outcome-managed-stalemate
+  report ifelse-value (crisis-state = "Managed_Stalemate") [1] [0]
+end
+
+to-report ever-managed-stalemate
+
+  report ifelse-value ever-managed-stalemate? [1] [0]
+end
+
+to-report insurance-floor-hit
+  report ifelse-value (insurance-availability <= 0.11) [1] [0]
+end
+
+to-report operator-caution-ceiling-hit
+  report ifelse-value (operator-caution >= 0.99) [1] [0]
+end
+
+to-report awrp-ceiling-hit
+  report ifelse-value (awrp >= 0.95) [1] [0]
+end
+
+to-report risk-premium-high-hit
+
+  report ifelse-value (oil-risk-premium >= 50) [1] [0]
+end
+
+to-report tau-c-leads-tau-m?
+  if tick-awrp-recovery = -1 [ report false ]
+  if tick-military-pause-start = -1 [ report false ]
+  report (tick-awrp-recovery < tick-military-pause-start)
+end
+
+to-report outcome-tau-c-leads
+  report ifelse-value tau-c-leads-tau-m? [1] [0]
+end
+
+to-report major-strike-this-tick?
+
+  report (member? last-us-action ["Conventional_Strike" "Ground_Operation"]
+          or member? last-israel-action ["Conventional_Strike" "Max_Strike" "Ground_Push"]
+          or member? last-iran-action ["Missile_Swarm"])
+end
+
+to-report major-action-this-tick-flag
+  report ifelse-value (major-action-this-tick? = true) [1] [0]
+end
+
+to-report low-intensity-military-flag
+  report ifelse-value (low-intensity-military? = true) [1] [0]
+end
+
+to-report military-pause-window-flag
+  report ifelse-value military-pause-window? [1] [0]
+end
+
+to-report ms-share
+  if ticks <= 0 [ report 0 ]
+  report (ticks-in-ms-conditions / ticks)
+end
+
+to-report ms-condition-this-tick
+
+  let deescalated? (military-deescalation-window? = true)
+  let c (deescalated?
+         and (commercial-non-normalization-score >= 2)
+         and (oil-risk-premium > 10)
+         and member? access-state ["Selective_Passage" "Escorted_Reopening" "Partial_Closure" "Contested_Reopening"]
+         and not ceasefire?)
+  report ifelse-value c [1] [0]
+end
+
+to-report military-deescalation-window-flag
+  report ifelse-value (military-deescalation-window? = true) [1] [0]
+end
+
+to-report awrp-recovery-lag-frac
+  if tick-military-pause-start = -1 [ report -1 ]
+  if tick-awrp-recovery-frac = -1 [ report -1 ]
+  report (tick-awrp-recovery-frac - tick-military-pause-start)
+end
+
+to-report price-recovery-lag-frac
+  if tick-military-pause-start = -1 [ report -1 ]
+  if tick-price-recovery-frac = -1 [ report -1 ]
+  report (tick-price-recovery-frac - tick-military-pause-start)
+end
+
+to-report tau-c-leads-tau-m-frac?
+  if tick-awrp-recovery-frac = -1 [ report false ]
+  if tick-military-pause-start = -1 [ report false ]
+  report (tick-awrp-recovery-frac < tick-military-pause-start)
+end
+
+to-report outcome-tau-c-leads-frac
+  report ifelse-value tau-c-leads-tau-m-frac? [1] [0]
+end
+
+to-report awrp-recovery-lag-frac-window
+  if tick-military-pause-window-start = -1 [ report -1 ]
+  if tick-awrp-recovery-frac = -1 [ report -1 ]
+  report (tick-awrp-recovery-frac - tick-military-pause-window-start)
+end
+
+to-report price-recovery-lag-frac-window
+  if tick-military-pause-window-start = -1 [ report -1 ]
+  if tick-price-recovery-frac = -1 [ report -1 ]
+  report (tick-price-recovery-frac - tick-military-pause-window-start)
+end
+
+to-report tau-c-leads-tau-m-frac-window?
+  if tick-awrp-recovery-frac = -1 [ report false ]
+  if tick-military-pause-window-start = -1 [ report false ]
+  report (tick-awrp-recovery-frac < tick-military-pause-window-start)
+end
+
+to-report outcome-tau-c-leads-frac-window
+  report ifelse-value tau-c-leads-tau-m-frac-window? [1] [0]
+end
+
+to-report awrp-recovery-lag-frac-deescalation
+  if tick-military-deescalation-window-start = -1 [ report -1 ]
+  if tick-awrp-recovery-frac = -1 [ report -1 ]
+  report (tick-awrp-recovery-frac - tick-military-deescalation-window-start)
+end
+
+to-report price-recovery-lag-frac-deescalation
+  if tick-military-deescalation-window-start = -1 [ report -1 ]
+  if tick-price-recovery-frac = -1 [ report -1 ]
+  report (tick-price-recovery-frac - tick-military-deescalation-window-start)
+end
+
+to-report tau-c-leads-tau-m-frac-deescalation?
+  if tick-awrp-recovery-frac = -1 [ report false ]
+  if tick-military-deescalation-window-start = -1 [ report false ]
+  report (tick-awrp-recovery-frac < tick-military-deescalation-window-start)
+end
+
+to-report outcome-tau-c-leads-frac-deescalation
+  report ifelse-value tau-c-leads-tau-m-frac-deescalation? [1] [0]
+end
+
+to-report awrp-frac-recovery-threshold
+  report (awrp-baseline + (0.50 * (awrp-peak - awrp-baseline)))
+end
+
+to-report ticks-since-major-strike-flag
+  report ticks-since-major-strike
+end
+
+to-report price-recovery-lag-frac-strict
+  if tick-military-deescalation-window-start = -1 [ report -1 ]
+  if tick-price-recovery-frac-strict = -1 [ report -1 ]
+  report (tick-price-recovery-frac-strict - tick-military-deescalation-window-start)
+end
+
+to-report price-recovery-strict-fired
+  report ifelse-value price-recovery-frac-strict-fired? [1] [0]
+end
+
+to-report price-recovery-fired
+  report ifelse-value price-recovery-frac-fired? [1] [0]
+end
+
+to-report price-recovery-20pct-fired
+  report ifelse-value price-recovery-20pct-fired? [1] [0]
+end
+
+to-report price-recovery-lag-20pct-deescalation
+  if tick-military-deescalation-window-start = -1 [ report -1 ]
+  if tick-price-recovery-20pct = -1 [ report -1 ]
+  report (tick-price-recovery-20pct - tick-military-deescalation-window-start)
+end
+
+to-report risk-premium-decay-share
+  if risk-premium-post-peak-ticks <= 0 [ report 0 ]
+  report (risk-premium-decay-ticks / risk-premium-post-peak-ticks)
+end
+
+to-report risk-premium-post-deescalation-decay-share
+  if risk-premium-post-deescalation-ticks <= 0 [ report 0 ]
+  report (risk-premium-post-deescalation-decay-ticks / risk-premium-post-deescalation-ticks)
+end
+
+to-report risk-premium-normalized-recovery
+  if risk-premium-peak <= 0 [ report 0 ]
+  report (bound ((risk-premium-peak - oil-risk-premium) / risk-premium-peak) 0 1)
+end
+
+to-report ms-duration
+  report ticks-in-ms-conditions
+end
+
+to-report first-managed-stalemate-tick
+  report tick-first-managed-stalemate
+end
+]]></code>
+  <widgets>
+    <view x="1245" wrappingAllowedX="true" y="75" frameRate="30.0" minPycor="-16" height="434" showTickCounter="true" patchSize="13.0" fontSize="10" wrappingAllowedY="true" width="434" tickCounterLabel="ticks" maxPycor="16" updateMode="0" maxPxcor="16" minPxcor="-16"></view>
+    <monitor x="790" precision="2" y="80" height="44" fontSize="10" display="throughput" width="170" sizeVersion="0">throughput</monitor>
+    <monitor x="430" precision="0" y="80" height="44" fontSize="10" display="crisis-state" width="170" sizeVersion="0">crisis-state</monitor>
+    <monitor x="610" precision="0" y="80" height="44" fontSize="10" display="mine-count" width="170" sizeVersion="0">count mines</monitor>
+    <monitor x="430" precision="2" y="140" height="44" fontSize="10" display="brent-crude-price" width="170" sizeVersion="0">brent-crude-price</monitor>
+    <monitor x="610" precision="2" y="140" height="44" fontSize="10" display="military-degradation" width="170" sizeVersion="0">military-degradation</monitor>
+    <monitor x="790" precision="2" y="140" height="44" fontSize="10" display="us-casualties" width="170" sizeVersion="0">us-casualties</monitor>
+    <monitor x="430" precision="3" y="200" height="44" fontSize="10" display="US belief Iran bluffing" width="170" sizeVersion="0">[belief-iran-bluffing] of us-agent</monitor>
+    <monitor x="610" precision="3" y="200" height="44" fontSize="10" display="Iran belief US invade" width="170" sizeVersion="0">[belief-us-will-invade] of iran-agent</monitor>
+    <monitor x="790" precision="3" y="200" height="44" fontSize="10" display="Iran regime stability" width="170" sizeVersion="0">[regime-stability] of iran-agent</monitor>
+    <monitor x="430" precision="1" y="260" height="44" fontSize="10" display="Iran assets" width="170" sizeVersion="0">[asymmetric-assets] of iran-agent</monitor>
+    <monitor x="610" precision="3" y="260" height="44" fontSize="10" display="Iran economic buffer" width="170" sizeVersion="0">[economic-buffer] of iran-agent</monitor>
+    <monitor x="790" precision="3" y="260" height="44" fontSize="10" display="Israel security" width="170" sizeVersion="0">[security-perception] of israel-agent</monitor>
+    <monitor x="430" precision="3" y="320" height="44" fontSize="10" display="Israel friction" width="170" sizeVersion="0">[tolerance-us-friction] of israel-agent</monitor>
+    <monitor x="610" precision="0" y="320" height="44" fontSize="10" display="last-us-action" width="170" sizeVersion="0">last-us-action</monitor>
+    <monitor x="790" precision="0" y="320" height="44" fontSize="10" display="last-iran-action" width="170" sizeVersion="0">last-iran-action</monitor>
+    <monitor x="430" precision="0" y="380" height="44" fontSize="10" display="last-israel-action" width="170" sizeVersion="0">last-israel-action</monitor>
+    <note x="610" y="374" backgroundDark="0" fontSize="12" width="350" markdown="false" height="24" textColorDark="-1" textColorLight="-16777216" backgroundLight="0">Crisis mechanics monitors</note>
+    <monitor x="610" precision="2" y="410" height="44" fontSize="10" display="physical-throughput" width="170" sizeVersion="0">physical-throughput</monitor>
+    <monitor x="790" precision="2" y="410" height="44" fontSize="10" display="commercial-throughput" width="170" sizeVersion="0">commercial-throughput</monitor>
+    <monitor x="610" precision="2" y="470" height="44" fontSize="10" display="permission-factor" width="170" sizeVersion="0">permission-factor</monitor>
+    <monitor x="790" precision="2" y="470" height="44" fontSize="10" display="gnss-reliability" width="170" sizeVersion="0">gnss-reliability</monitor>
+    <monitor x="610" precision="0" y="530" height="44" fontSize="10" display="regional-strikes" width="170" sizeVersion="0">regional-strikes</monitor>
+    <monitor x="790" precision="0" y="530" height="44" fontSize="10" display="proxy-attacks" width="170" sizeVersion="0">proxy-attacks</monitor>
+    <monitor x="610" precision="2" y="590" height="44" fontSize="10" display="operator-caution" width="170" sizeVersion="0">operator-caution</monitor>
+    <monitor x="790" precision="2" y="590" height="44" fontSize="10" display="anchorage-risk" width="170" sizeVersion="0">anchorage-risk</monitor>
+    <monitor x="790" precision="2" y="650" height="44" fontSize="10" display="current-crisis-fit" width="170" sizeVersion="0">current-crisis-fit</monitor>
+    <monitor x="430" precision="2" y="435" height="44" fontSize="10" display="effective-throughput" width="170" sizeVersion="0">effective-throughput</monitor>
+    <monitor x="430" precision="2" y="615" height="44" fontSize="10" display="port-operability" width="170" sizeVersion="0">port-operability</monitor>
+    <monitor x="430" precision="2" y="555" height="44" fontSize="10" display="diplomatic-momentum" width="170" sizeVersion="0">diplomatic-momentum</monitor>
+    <monitor x="430" precision="2" y="495" height="44" fontSize="10" display="insurance" width="170" sizeVersion="0">insurance</monitor>
+    <slider x="100" step="0.01" y="145" max="0.20" display="decision-noise" height="33" min="0" direction="Horizontal" default="0.04" variable="decision-noise" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.01" y="595" max="0.25" display="observation-error-rate" height="33" min="0" direction="Horizontal" default="0.09" variable="observation-error-rate" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.01" y="545" max="1" display="initial-israel-friction" height="33" min="0" direction="Horizontal" default="0.75" variable="initial-israel-friction" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.01" y="495" max="1" display="initial-israel-security-perception" height="33" min="0" direction="Horizontal" default="0.26" variable="initial-israel-security-perception" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="1" y="445" max="150" display="initial-iran-assets" height="33" min="0" direction="Horizontal" default="40.0" variable="initial-iran-assets" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.01" y="395" max="1" display="initial-iran-regime-stability" height="33" min="0" direction="Horizontal" default="0.33" variable="initial-iran-regime-stability" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="10" y="345" max="200" display="max-ticks" height="33" min="20" direction="Horizontal" default="120.0" variable="max-ticks" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="1" y="245" max="12" display="mine-batch-size" height="33" min="1" direction="Horizontal" default="6.0" variable="mine-batch-size" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="1" y="195" max="20" display="initial-mine-count" height="33" min="0" direction="Horizontal" default="11.0" variable="initial-mine-count" width="300" sizeVersion="0"></slider>
+    <button x="315" y="90" height="33" disableUntilTicks="false" forever="true" kind="Observer" display="go" width="100" sizeVersion="0">go</button>
+    <button x="205" y="90" height="33" disableUntilTicks="false" forever="false" kind="Observer" display="go once" width="100" sizeVersion="0">go</button>
+    <button x="95" y="90" height="33" disableUntilTicks="false" forever="false" kind="Observer" display="setup" width="100" sizeVersion="0">setup</button>
+    <note x="65" y="15" backgroundDark="0" fontSize="15" width="340" markdown="false" height="51" textColorDark="-1" textColorLight="-16777216" backgroundLight="0">Hormuz Escalation v1.88_YJ
+(Conference version)</note>
+    <note x="980" y="80" backgroundDark="0" fontSize="12" width="250" markdown="false" height="24" textColorDark="-1" textColorLight="-16777216" backgroundLight="0">Calibration monitors</note>
+    <monitor x="980" precision="0" y="566" height="44" fontSize="10" display="diplomacy-layer" width="250" sizeVersion="0">diplomacy-layer</monitor>
+    <monitor x="980" precision="0" y="506" height="44" fontSize="10" display="access-layer" width="250" sizeVersion="0">access-layer</monitor>
+    <monitor x="980" precision="0" y="446" height="44" fontSize="10" display="economic-war-layer" width="250" sizeVersion="0">economic-war-layer</monitor>
+    <monitor x="980" precision="0" y="386" height="44" fontSize="10" display="military-layer" width="250" sizeVersion="0">military-layer</monitor>
+    <note x="980" y="356" backgroundDark="0" fontSize="12" width="250" markdown="false" height="24" textColorDark="-1" textColorLight="-16777216" backgroundLight="0">Layered state monitors</note>
+    <monitor x="980" precision="2" y="296" height="44" fontSize="10" display="calibration-score" width="250" sizeVersion="0">calibration-score</monitor>
+    <monitor x="980" precision="3" y="236" height="44" fontSize="10" display="partial-closure-share" width="250" sizeVersion="0">partial-closure-share</monitor>
+    <monitor x="980" precision="3" y="176" height="44" fontSize="10" display="contested-reopening-share" width="250" sizeVersion="0">contested-reopening-share</monitor>
+    <monitor x="980" precision="3" y="116" height="44" fontSize="10" display="selective-passage-share" width="250" sizeVersion="0">selective-passage-share</monitor>
+    <monitor x="980" precision="0" y="626" height="64" fontSize="10" display="strategic-regime" width="410" sizeVersion="0">strategic-regime</monitor>
+    <note x="100" y="685" backgroundDark="0" fontSize="11" width="300" markdown="false" height="32" textColorDark="-1" textColorLight="-16777216" backgroundLight="0"></note>
+    <slider x="100" step="0.05" y="725" max="2.0" display="tau-d-rate" height="33" min="0.1" direction="Horizontal" default="1.0" variable="tau-d-rate" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.05" y="765" max="2.0" display="tau-c-rate" height="33" min="0.1" direction="Horizontal" default="1.0" variable="tau-c-rate" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.05" y="805" max="2.0" display="tau-k-rate" height="33" min="0.1" direction="Horizontal" default="1.0" variable="tau-k-rate" width="300" sizeVersion="0"></slider>
+    <slider x="430" step="0.05" y="685" max="1.0" display="initial-insurer-memory" height="33" min="0" direction="Horizontal" default="0.3" variable="initial-insurer-memory" width="300" sizeVersion="0"></slider>
+    <slider x="430" step="0.05" y="725" max="1.0" display="initial-operator-memory" height="33" min="0" direction="Horizontal" default="0.35" variable="initial-operator-memory" width="300" sizeVersion="0"></slider>
+    <slider x="430" step="0.05" y="765" max="1.0" display="initial-market-memory" height="33" min="0" direction="Horizontal" default="0.45" variable="initial-market-memory" width="300" sizeVersion="0"></slider>
+    <slider x="430" step="0.01" y="805" max="1.0" display="initial-israel-incomplete-victory-aversion" height="33" min="0" direction="Horizontal" default="0.72" variable="initial-israel-incomplete-victory-aversion" width="300" sizeVersion="0"></slider>
+    <slider x="100" step="0.05" y="845" max="1.0" display="selective-targeting-recognition" height="33" min="0" direction="Horizontal" default="0.0" variable="selective-targeting-recognition" width="300" sizeVersion="0"></slider>
+    <slider x="430" step="0.01" y="845" max="0.15" display="diplomacy-bridge-prob" height="33" min="0" direction="Horizontal" default="0.06" variable="diplomacy-bridge-prob" width="300" sizeVersion="0"></slider>
+    <monitor x="790" precision="2" y="715" height="44" fontSize="10" display="oil-risk-premium" width="170" sizeVersion="0">risk-premium</monitor>
+    <monitor x="790" precision="0" y="775" height="44" fontSize="10" display="price-recovery-lag" width="170" sizeVersion="0">price-recovery-lag</monitor>
+    <monitor x="790" precision="0" y="835" height="44" fontSize="10" display="ever-managed-stalemate" width="170" sizeVersion="0">ever-managed-stalemate</monitor>
+    <note x="980" y="695" backgroundDark="0" fontSize="11" width="170" markdown="false" height="32" textColorDark="-1" textColorLight="-16777216" backgroundLight="0">tau_C / tau_M ratio</note>
+    <monitor x="980" precision="2" y="730" height="44" fontSize="10" display="tau-C/tau-M" width="170" sizeVersion="0">tau-c-over-tau-m</monitor>
+    <monitor x="1155" precision="3" y="725" height="44" fontSize="10" display="AWRP" width="170" sizeVersion="0">awrp-current</monitor>
+    <monitor x="980" precision="0" y="780" height="44" fontSize="10" display="managed-stalemate" width="170" sizeVersion="0">outcome-managed-stalemate</monitor>
+    <monitor x="1155" precision="0" y="780" height="44" fontSize="10" display="awrp-recovery-lag" width="170" sizeVersion="0">awrp-recovery-lag</monitor>
+    <monitor x="980" precision="3" y="830" height="44" fontSize="10" display="disruption-belief" width="170" sizeVersion="0">disruption-belief</monitor>
+    <monitor x="1155" precision="0" y="830" height="44" fontSize="10" display="tau-C leads tau-M?" width="170" sizeVersion="0">outcome-tau-c-leads</monitor>
+    <note x="100" y="655" backgroundDark="0" fontSize="13" width="205" markdown="false" height="26" textColorDark="-1" textColorLight="-16777216" backgroundLight="0">Four Clocks</note>
+  </widgets>
+  <info><![CDATA[
+# Hormuz Escalation ABM (v1.88, Conference)
+
+Author: Young Joon Oh
+
+A hybrid agent-based model of a maritime-chokepoint crisis at the Strait of Hormuz. Rule-based strategic agents (United States, Iran, Israel) interact with aggregate adaptive submodels for commercial insurance, the oil market, and diplomacy. Each layer recovers from a shock at its own speed, governed by four clocks with recovery rates r_M (military, fixed at 1.0 as the baseline), r_C (commercial), r_K (oil market), and r_D (diplomatic).
+
+## Focal outcome
+Managed stalemate: military violence has paused but commercial and market activity have not normalized. The run-level measure is whether a run ever displays the signature (a military pause with elevated war-risk premium, depressed access, and no formal ceasefire).
+
+## How to run
+1. Set the sliders. The main lever is the commercial-clock rate (tau-c-rate, written r_C in the paper); a value below 1.0 is a slow commercial clock.
+2. Click `setup`, then `go`.
+3. Batch experiments are in BehaviorSpace (Tools > BehaviorSpace).
+
+## Verify the parameter surface
+python extract_literals.py Hormuz_Escalation_ver_1_88_conference.nlogox --out ./scan
+
+## Documentation
+Full ODD and TRACE documentation, the decision lineage, and all results are in the companion paper and its supplements (Oh 2026).
+
+]]></info>
+  <turtleShapes>
+    <shape name="default" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="5"></point>
+        <point x="40" y="250"></point>
+        <point x="150" y="205"></point>
+        <point x="260" y="250"></point>
+      </polygon>
+    </shape>
+    <shape name="airplane" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="0"></point>
+        <point x="135" y="15"></point>
+        <point x="120" y="60"></point>
+        <point x="120" y="105"></point>
+        <point x="15" y="165"></point>
+        <point x="15" y="195"></point>
+        <point x="120" y="180"></point>
+        <point x="135" y="240"></point>
+        <point x="105" y="270"></point>
+        <point x="120" y="285"></point>
+        <point x="150" y="270"></point>
+        <point x="180" y="285"></point>
+        <point x="210" y="270"></point>
+        <point x="165" y="240"></point>
+        <point x="180" y="180"></point>
+        <point x="285" y="195"></point>
+        <point x="285" y="165"></point>
+        <point x="180" y="105"></point>
+        <point x="180" y="60"></point>
+        <point x="165" y="15"></point>
+      </polygon>
+    </shape>
+    <shape name="arrow" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="0"></point>
+        <point x="0" y="150"></point>
+        <point x="105" y="150"></point>
+        <point x="105" y="293"></point>
+        <point x="195" y="293"></point>
+        <point x="195" y="150"></point>
+        <point x="300" y="150"></point>
+      </polygon>
+    </shape>
+    <shape name="box" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="285"></point>
+        <point x="285" y="225"></point>
+        <point x="285" y="75"></point>
+        <point x="150" y="135"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="135"></point>
+        <point x="15" y="75"></point>
+        <point x="150" y="15"></point>
+        <point x="285" y="75"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="15" y="75"></point>
+        <point x="15" y="225"></point>
+        <point x="150" y="285"></point>
+        <point x="150" y="135"></point>
+      </polygon>
+      <line endX="150" startY="285" marked="false" color="255" endY="135" startX="150"></line>
+      <line endX="15" startY="135" marked="false" color="255" endY="75" startX="150"></line>
+      <line endX="285" startY="135" marked="false" color="255" endY="75" startX="150"></line>
+    </shape>
+    <shape name="bug" rotatable="true" editableColorIndex="0">
+      <circle x="96" y="182" marked="true" color="-1920102913" diameter="108" filled="true"></circle>
+      <circle x="110" y="127" marked="true" color="-1920102913" diameter="80" filled="true"></circle>
+      <circle x="110" y="75" marked="true" color="-1920102913" diameter="80" filled="true"></circle>
+      <line endX="80" startY="100" marked="true" color="-1920102913" endY="30" startX="150"></line>
+      <line endX="220" startY="100" marked="true" color="-1920102913" endY="30" startX="150"></line>
+    </shape>
+    <shape name="butterfly" rotatable="true" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="165"></point>
+        <point x="209" y="199"></point>
+        <point x="225" y="225"></point>
+        <point x="225" y="255"></point>
+        <point x="195" y="270"></point>
+        <point x="165" y="255"></point>
+        <point x="150" y="240"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="165"></point>
+        <point x="89" y="198"></point>
+        <point x="75" y="225"></point>
+        <point x="75" y="255"></point>
+        <point x="105" y="270"></point>
+        <point x="135" y="255"></point>
+        <point x="150" y="240"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="139" y="148"></point>
+        <point x="100" y="105"></point>
+        <point x="55" y="90"></point>
+        <point x="25" y="90"></point>
+        <point x="10" y="105"></point>
+        <point x="10" y="135"></point>
+        <point x="25" y="180"></point>
+        <point x="40" y="195"></point>
+        <point x="85" y="194"></point>
+        <point x="139" y="163"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="162" y="150"></point>
+        <point x="200" y="105"></point>
+        <point x="245" y="90"></point>
+        <point x="275" y="90"></point>
+        <point x="290" y="105"></point>
+        <point x="290" y="135"></point>
+        <point x="275" y="180"></point>
+        <point x="260" y="195"></point>
+        <point x="215" y="195"></point>
+        <point x="162" y="165"></point>
+      </polygon>
+      <polygon color="255" filled="true" marked="false">
+        <point x="150" y="255"></point>
+        <point x="135" y="225"></point>
+        <point x="120" y="150"></point>
+        <point x="135" y="120"></point>
+        <point x="150" y="105"></point>
+        <point x="165" y="120"></point>
+        <point x="180" y="150"></point>
+        <point x="165" y="225"></point>
+      </polygon>
+      <circle x="135" y="90" marked="false" color="255" diameter="30" filled="true"></circle>
+      <line endX="195" startY="105" marked="false" color="255" endY="60" startX="150"></line>
+      <line endX="105" startY="105" marked="false" color="255" endY="60" startX="150"></line>
+    </shape>
+    <shape name="car" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="300" y="180"></point>
+        <point x="279" y="164"></point>
+        <point x="261" y="144"></point>
+        <point x="240" y="135"></point>
+        <point x="226" y="132"></point>
+        <point x="213" y="106"></point>
+        <point x="203" y="84"></point>
+        <point x="185" y="63"></point>
+        <point x="159" y="50"></point>
+        <point x="135" y="50"></point>
+        <point x="75" y="60"></point>
+        <point x="0" y="150"></point>
+        <point x="0" y="165"></point>
+        <point x="0" y="225"></point>
+        <point x="300" y="225"></point>
+        <point x="300" y="180"></point>
+      </polygon>
+      <circle x="180" y="180" marked="false" color="255" diameter="90" filled="true"></circle>
+      <circle x="30" y="180" marked="false" color="255" diameter="90" filled="true"></circle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="162" y="80"></point>
+        <point x="132" y="78"></point>
+        <point x="134" y="135"></point>
+        <point x="209" y="135"></point>
+        <point x="194" y="105"></point>
+        <point x="189" y="96"></point>
+        <point x="180" y="89"></point>
+      </polygon>
+      <circle x="47" y="195" marked="true" color="-1920102913" diameter="58" filled="true"></circle>
+      <circle x="195" y="195" marked="true" color="-1920102913" diameter="58" filled="true"></circle>
+    </shape>
+    <shape name="circle" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+    </shape>
+    <shape name="circle 2" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+      <circle x="30" y="30" marked="false" color="255" diameter="240" filled="true"></circle>
+    </shape>
+    <shape name="cow" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="200" y="193"></point>
+        <point x="197" y="249"></point>
+        <point x="179" y="249"></point>
+        <point x="177" y="196"></point>
+        <point x="166" y="187"></point>
+        <point x="140" y="189"></point>
+        <point x="93" y="191"></point>
+        <point x="78" y="179"></point>
+        <point x="72" y="211"></point>
+        <point x="49" y="209"></point>
+        <point x="48" y="181"></point>
+        <point x="37" y="149"></point>
+        <point x="25" y="120"></point>
+        <point x="25" y="89"></point>
+        <point x="45" y="72"></point>
+        <point x="103" y="84"></point>
+        <point x="179" y="75"></point>
+        <point x="198" y="76"></point>
+        <point x="252" y="64"></point>
+        <point x="272" y="81"></point>
+        <point x="293" y="103"></point>
+        <point x="285" y="121"></point>
+        <point x="255" y="121"></point>
+        <point x="242" y="118"></point>
+        <point x="224" y="167"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="73" y="210"></point>
+        <point x="86" y="251"></point>
+        <point x="62" y="249"></point>
+        <point x="48" y="208"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="25" y="114"></point>
+        <point x="16" y="195"></point>
+        <point x="9" y="204"></point>
+        <point x="23" y="213"></point>
+        <point x="25" y="200"></point>
+        <point x="39" y="123"></point>
+      </polygon>
+    </shape>
+    <shape name="cylinder" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+    </shape>
+    <shape name="dot" rotatable="false" editableColorIndex="0">
+      <circle x="90" y="90" marked="true" color="-1920102913" diameter="120" filled="true"></circle>
+    </shape>
+    <shape name="face happy" rotatable="false" editableColorIndex="0">
+      <circle x="8" y="8" marked="true" color="-1920102913" diameter="285" filled="true"></circle>
+      <circle x="60" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <circle x="180" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="150" y="255"></point>
+        <point x="90" y="239"></point>
+        <point x="62" y="213"></point>
+        <point x="47" y="191"></point>
+        <point x="67" y="179"></point>
+        <point x="90" y="203"></point>
+        <point x="109" y="218"></point>
+        <point x="150" y="225"></point>
+        <point x="192" y="218"></point>
+        <point x="210" y="203"></point>
+        <point x="227" y="181"></point>
+        <point x="251" y="194"></point>
+        <point x="236" y="217"></point>
+        <point x="212" y="240"></point>
+      </polygon>
+    </shape>
+    <shape name="face neutral" rotatable="false" editableColorIndex="0">
+      <circle x="8" y="7" marked="true" color="-1920102913" diameter="285" filled="true"></circle>
+      <circle x="60" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <circle x="180" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <rectangle endX="240" startY="195" marked="false" color="255" endY="225" startX="60" filled="true"></rectangle>
+    </shape>
+    <shape name="face sad" rotatable="false" editableColorIndex="0">
+      <circle x="8" y="8" marked="true" color="-1920102913" diameter="285" filled="true"></circle>
+      <circle x="60" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <circle x="180" y="75" marked="false" color="255" diameter="60" filled="true"></circle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="150" y="168"></point>
+        <point x="90" y="184"></point>
+        <point x="62" y="210"></point>
+        <point x="47" y="232"></point>
+        <point x="67" y="244"></point>
+        <point x="90" y="220"></point>
+        <point x="109" y="205"></point>
+        <point x="150" y="198"></point>
+        <point x="192" y="205"></point>
+        <point x="210" y="220"></point>
+        <point x="227" y="242"></point>
+        <point x="251" y="229"></point>
+        <point x="236" y="206"></point>
+        <point x="212" y="183"></point>
+      </polygon>
+    </shape>
+    <shape name="fish" rotatable="false" editableColorIndex="0">
+      <polygon color="-1" filled="true" marked="false">
+        <point x="44" y="131"></point>
+        <point x="21" y="87"></point>
+        <point x="15" y="86"></point>
+        <point x="0" y="120"></point>
+        <point x="15" y="150"></point>
+        <point x="0" y="180"></point>
+        <point x="13" y="214"></point>
+        <point x="20" y="212"></point>
+        <point x="45" y="166"></point>
+      </polygon>
+      <polygon color="-1" filled="true" marked="false">
+        <point x="135" y="195"></point>
+        <point x="119" y="235"></point>
+        <point x="95" y="218"></point>
+        <point x="76" y="210"></point>
+        <point x="46" y="204"></point>
+        <point x="60" y="165"></point>
+      </polygon>
+      <polygon color="-1" filled="true" marked="false">
+        <point x="75" y="45"></point>
+        <point x="83" y="77"></point>
+        <point x="71" y="103"></point>
+        <point x="86" y="114"></point>
+        <point x="166" y="78"></point>
+        <point x="135" y="60"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="30" y="136"></point>
+        <point x="151" y="77"></point>
+        <point x="226" y="81"></point>
+        <point x="280" y="119"></point>
+        <point x="292" y="146"></point>
+        <point x="292" y="160"></point>
+        <point x="287" y="170"></point>
+        <point x="270" y="195"></point>
+        <point x="195" y="210"></point>
+        <point x="151" y="212"></point>
+        <point x="30" y="166"></point>
+      </polygon>
+      <circle x="215" y="106" marked="false" color="255" diameter="30" filled="true"></circle>
+    </shape>
+    <shape name="flag" rotatable="false" editableColorIndex="0">
+      <rectangle endX="75" startY="15" marked="true" color="-1920102913" endY="300" startX="60" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="90" y="150"></point>
+        <point x="270" y="90"></point>
+        <point x="90" y="30"></point>
+      </polygon>
+      <line endX="90" startY="135" marked="true" color="-1920102913" endY="135" startX="75"></line>
+      <line endX="90" startY="45" marked="true" color="-1920102913" endY="45" startX="75"></line>
+    </shape>
+    <shape name="flower" rotatable="false" editableColorIndex="0">
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="135" y="120"></point>
+        <point x="165" y="165"></point>
+        <point x="180" y="210"></point>
+        <point x="180" y="240"></point>
+        <point x="150" y="300"></point>
+        <point x="165" y="300"></point>
+        <point x="195" y="240"></point>
+        <point x="195" y="195"></point>
+        <point x="165" y="135"></point>
+      </polygon>
+      <circle x="85" y="132" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="130" y="147" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="192" y="85" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="85" y="40" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="177" y="40" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="177" y="132" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="70" y="85" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="130" y="25" marked="true" color="-1920102913" diameter="38" filled="true"></circle>
+      <circle x="96" y="51" marked="true" color="-1920102913" diameter="108" filled="true"></circle>
+      <circle x="113" y="68" marked="false" color="255" diameter="74" filled="true"></circle>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="189" y="233"></point>
+        <point x="219" y="188"></point>
+        <point x="249" y="173"></point>
+        <point x="279" y="188"></point>
+        <point x="234" y="218"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="180" y="255"></point>
+        <point x="150" y="210"></point>
+        <point x="105" y="210"></point>
+        <point x="75" y="240"></point>
+        <point x="135" y="240"></point>
+      </polygon>
+    </shape>
+    <shape name="house" rotatable="false" editableColorIndex="0">
+      <rectangle endX="255" startY="120" marked="true" color="-1920102913" endY="285" startX="45" filled="true"></rectangle>
+      <rectangle endX="180" startY="210" marked="false" color="255" endY="285" startX="120" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="15" y="120"></point>
+        <point x="150" y="15"></point>
+        <point x="285" y="120"></point>
+      </polygon>
+      <line endX="270" startY="120" marked="false" color="255" endY="120" startX="30"></line>
+    </shape>
+    <shape name="leaf" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="210"></point>
+        <point x="135" y="195"></point>
+        <point x="120" y="210"></point>
+        <point x="60" y="210"></point>
+        <point x="30" y="195"></point>
+        <point x="60" y="180"></point>
+        <point x="60" y="165"></point>
+        <point x="15" y="135"></point>
+        <point x="30" y="120"></point>
+        <point x="15" y="105"></point>
+        <point x="40" y="104"></point>
+        <point x="45" y="90"></point>
+        <point x="60" y="90"></point>
+        <point x="90" y="105"></point>
+        <point x="105" y="120"></point>
+        <point x="120" y="120"></point>
+        <point x="105" y="60"></point>
+        <point x="120" y="60"></point>
+        <point x="135" y="30"></point>
+        <point x="150" y="15"></point>
+        <point x="165" y="30"></point>
+        <point x="180" y="60"></point>
+        <point x="195" y="60"></point>
+        <point x="180" y="120"></point>
+        <point x="195" y="120"></point>
+        <point x="210" y="105"></point>
+        <point x="240" y="90"></point>
+        <point x="255" y="90"></point>
+        <point x="263" y="104"></point>
+        <point x="285" y="105"></point>
+        <point x="270" y="120"></point>
+        <point x="285" y="135"></point>
+        <point x="240" y="165"></point>
+        <point x="240" y="180"></point>
+        <point x="270" y="195"></point>
+        <point x="240" y="210"></point>
+        <point x="180" y="210"></point>
+        <point x="165" y="195"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="195"></point>
+        <point x="135" y="240"></point>
+        <point x="120" y="255"></point>
+        <point x="105" y="255"></point>
+        <point x="105" y="285"></point>
+        <point x="135" y="285"></point>
+        <point x="165" y="240"></point>
+        <point x="165" y="195"></point>
+      </polygon>
+    </shape>
+    <shape name="line" rotatable="true" editableColorIndex="0">
+      <line endX="150" startY="0" marked="true" color="-1920102913" endY="300" startX="150"></line>
+    </shape>
+    <shape name="line half" rotatable="true" editableColorIndex="0">
+      <line endX="150" startY="0" marked="true" color="-1920102913" endY="150" startX="150"></line>
+    </shape>
+    <shape name="pentagon" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="15"></point>
+        <point x="15" y="120"></point>
+        <point x="60" y="285"></point>
+        <point x="240" y="285"></point>
+        <point x="285" y="120"></point>
+      </polygon>
+    </shape>
+    <shape name="person" rotatable="false" editableColorIndex="0">
+      <circle x="110" y="5" marked="true" color="-1920102913" diameter="80" filled="true"></circle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="105" y="90"></point>
+        <point x="120" y="195"></point>
+        <point x="90" y="285"></point>
+        <point x="105" y="300"></point>
+        <point x="135" y="300"></point>
+        <point x="150" y="225"></point>
+        <point x="165" y="300"></point>
+        <point x="195" y="300"></point>
+        <point x="210" y="285"></point>
+        <point x="180" y="195"></point>
+        <point x="195" y="90"></point>
+      </polygon>
+      <rectangle endX="172" startY="79" marked="true" color="-1920102913" endY="94" startX="127" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="195" y="90"></point>
+        <point x="240" y="150"></point>
+        <point x="225" y="180"></point>
+        <point x="165" y="105"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="105" y="90"></point>
+        <point x="60" y="150"></point>
+        <point x="75" y="180"></point>
+        <point x="135" y="105"></point>
+      </polygon>
+    </shape>
+    <shape name="plant" rotatable="false" editableColorIndex="0">
+      <rectangle endX="165" startY="90" marked="true" color="-1920102913" endY="300" startX="135" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="255"></point>
+        <point x="90" y="210"></point>
+        <point x="45" y="195"></point>
+        <point x="75" y="255"></point>
+        <point x="135" y="285"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="165" y="255"></point>
+        <point x="210" y="210"></point>
+        <point x="255" y="195"></point>
+        <point x="225" y="255"></point>
+        <point x="165" y="285"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="180"></point>
+        <point x="90" y="135"></point>
+        <point x="45" y="120"></point>
+        <point x="75" y="180"></point>
+        <point x="135" y="210"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="165" y="180"></point>
+        <point x="165" y="210"></point>
+        <point x="225" y="180"></point>
+        <point x="255" y="120"></point>
+        <point x="210" y="135"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="105"></point>
+        <point x="90" y="60"></point>
+        <point x="45" y="45"></point>
+        <point x="75" y="105"></point>
+        <point x="135" y="135"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="165" y="105"></point>
+        <point x="165" y="135"></point>
+        <point x="225" y="105"></point>
+        <point x="255" y="45"></point>
+        <point x="210" y="60"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="135" y="90"></point>
+        <point x="120" y="45"></point>
+        <point x="150" y="15"></point>
+        <point x="180" y="45"></point>
+        <point x="165" y="90"></point>
+      </polygon>
+    </shape>
+    <shape name="sheep" rotatable="false" editableColorIndex="15">
+      <circle x="203" y="65" marked="true" color="-1" diameter="88" filled="true"></circle>
+      <circle x="70" y="65" marked="true" color="-1" diameter="162" filled="true"></circle>
+      <circle x="150" y="105" marked="true" color="-1" diameter="120" filled="true"></circle>
+      <polygon color="-1920102913" filled="true" marked="false">
+        <point x="218" y="120"></point>
+        <point x="240" y="165"></point>
+        <point x="255" y="165"></point>
+        <point x="278" y="120"></point>
+      </polygon>
+      <circle x="214" y="72" marked="false" color="-1920102913" diameter="67" filled="true"></circle>
+      <rectangle endX="179" startY="223" marked="true" color="-1" endY="298" startX="164" filled="true"></rectangle>
+      <polygon color="-1" filled="true" marked="true">
+        <point x="45" y="285"></point>
+        <point x="30" y="285"></point>
+        <point x="30" y="240"></point>
+        <point x="15" y="195"></point>
+        <point x="45" y="210"></point>
+      </polygon>
+      <circle x="3" y="83" marked="true" color="-1" diameter="150" filled="true"></circle>
+      <rectangle endX="80" startY="221" marked="true" color="-1" endY="296" startX="65" filled="true"></rectangle>
+      <polygon color="-1" filled="true" marked="true">
+        <point x="195" y="285"></point>
+        <point x="210" y="285"></point>
+        <point x="210" y="240"></point>
+        <point x="240" y="210"></point>
+        <point x="195" y="210"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="false">
+        <point x="276" y="85"></point>
+        <point x="285" y="105"></point>
+        <point x="302" y="99"></point>
+        <point x="294" y="83"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="false">
+        <point x="219" y="85"></point>
+        <point x="210" y="105"></point>
+        <point x="193" y="99"></point>
+        <point x="201" y="83"></point>
+      </polygon>
+    </shape>
+    <shape name="square" rotatable="false" editableColorIndex="0">
+      <rectangle endX="270" startY="30" marked="true" color="-1920102913" endY="270" startX="30" filled="true"></rectangle>
+    </shape>
+    <shape name="square 2" rotatable="false" editableColorIndex="0">
+      <rectangle endX="270" startY="30" marked="true" color="-1920102913" endY="270" startX="30" filled="true"></rectangle>
+      <rectangle endX="240" startY="60" marked="false" color="255" endY="240" startX="60" filled="true"></rectangle>
+    </shape>
+    <shape name="star" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="151" y="1"></point>
+        <point x="185" y="108"></point>
+        <point x="298" y="108"></point>
+        <point x="207" y="175"></point>
+        <point x="242" y="282"></point>
+        <point x="151" y="216"></point>
+        <point x="59" y="282"></point>
+        <point x="94" y="175"></point>
+        <point x="3" y="108"></point>
+        <point x="116" y="108"></point>
+      </polygon>
+    </shape>
+    <shape name="target" rotatable="false" editableColorIndex="0">
+      <circle x="0" y="0" marked="true" color="-1920102913" diameter="300" filled="true"></circle>
+      <circle x="30" y="30" marked="false" color="255" diameter="240" filled="true"></circle>
+      <circle x="60" y="60" marked="true" color="-1920102913" diameter="180" filled="true"></circle>
+      <circle x="90" y="90" marked="false" color="255" diameter="120" filled="true"></circle>
+      <circle x="120" y="120" marked="true" color="-1920102913" diameter="60" filled="true"></circle>
+    </shape>
+    <shape name="tree" rotatable="false" editableColorIndex="0">
+      <circle x="118" y="3" marked="true" color="-1920102913" diameter="94" filled="true"></circle>
+      <rectangle endX="180" startY="195" marked="false" color="-1653716737" endY="300" startX="120" filled="true"></rectangle>
+      <circle x="65" y="21" marked="true" color="-1920102913" diameter="108" filled="true"></circle>
+      <circle x="116" y="41" marked="true" color="-1920102913" diameter="127" filled="true"></circle>
+      <circle x="45" y="90" marked="true" color="-1920102913" diameter="120" filled="true"></circle>
+      <circle x="104" y="74" marked="true" color="-1920102913" diameter="152" filled="true"></circle>
+    </shape>
+    <shape name="triangle" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="30"></point>
+        <point x="15" y="255"></point>
+        <point x="285" y="255"></point>
+      </polygon>
+    </shape>
+    <shape name="triangle 2" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="150" y="30"></point>
+        <point x="15" y="255"></point>
+        <point x="285" y="255"></point>
+      </polygon>
+      <polygon color="255" filled="true" marked="false">
+        <point x="151" y="99"></point>
+        <point x="225" y="223"></point>
+        <point x="75" y="224"></point>
+      </polygon>
+    </shape>
+    <shape name="truck" rotatable="false" editableColorIndex="0">
+      <rectangle endX="195" startY="45" marked="true" color="-1920102913" endY="187" startX="4" filled="true"></rectangle>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="296" y="193"></point>
+        <point x="296" y="150"></point>
+        <point x="259" y="134"></point>
+        <point x="244" y="104"></point>
+        <point x="208" y="104"></point>
+        <point x="207" y="194"></point>
+      </polygon>
+      <rectangle endX="195" startY="60" marked="false" color="-1" endY="105" startX="195" filled="true"></rectangle>
+      <polygon color="255" filled="true" marked="false">
+        <point x="238" y="112"></point>
+        <point x="252" y="141"></point>
+        <point x="219" y="141"></point>
+        <point x="218" y="112"></point>
+      </polygon>
+      <circle x="234" y="174" marked="false" color="255" diameter="42" filled="true"></circle>
+      <rectangle endX="214" startY="185" marked="true" color="-1920102913" endY="194" startX="181" filled="true"></rectangle>
+      <circle x="144" y="174" marked="false" color="255" diameter="42" filled="true"></circle>
+      <circle x="24" y="174" marked="false" color="255" diameter="42" filled="true"></circle>
+      <circle x="24" y="174" marked="true" color="-1920102913" diameter="42" filled="false"></circle>
+      <circle x="144" y="174" marked="true" color="-1920102913" diameter="42" filled="false"></circle>
+      <circle x="234" y="174" marked="true" color="-1920102913" diameter="42" filled="false"></circle>
+    </shape>
+    <shape name="turtle" rotatable="true" editableColorIndex="0">
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="215" y="204"></point>
+        <point x="240" y="233"></point>
+        <point x="246" y="254"></point>
+        <point x="228" y="266"></point>
+        <point x="215" y="252"></point>
+        <point x="193" y="210"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="195" y="90"></point>
+        <point x="225" y="75"></point>
+        <point x="245" y="75"></point>
+        <point x="260" y="89"></point>
+        <point x="269" y="108"></point>
+        <point x="261" y="124"></point>
+        <point x="240" y="105"></point>
+        <point x="225" y="105"></point>
+        <point x="210" y="105"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="105" y="90"></point>
+        <point x="75" y="75"></point>
+        <point x="55" y="75"></point>
+        <point x="40" y="89"></point>
+        <point x="31" y="108"></point>
+        <point x="39" y="124"></point>
+        <point x="60" y="105"></point>
+        <point x="75" y="105"></point>
+        <point x="90" y="105"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="132" y="85"></point>
+        <point x="134" y="64"></point>
+        <point x="107" y="51"></point>
+        <point x="108" y="17"></point>
+        <point x="150" y="2"></point>
+        <point x="192" y="18"></point>
+        <point x="192" y="52"></point>
+        <point x="169" y="65"></point>
+        <point x="172" y="87"></point>
+      </polygon>
+      <polygon color="1504722175" filled="true" marked="false">
+        <point x="85" y="204"></point>
+        <point x="60" y="233"></point>
+        <point x="54" y="254"></point>
+        <point x="72" y="266"></point>
+        <point x="85" y="252"></point>
+        <point x="107" y="210"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="119" y="75"></point>
+        <point x="179" y="75"></point>
+        <point x="209" y="101"></point>
+        <point x="224" y="135"></point>
+        <point x="220" y="225"></point>
+        <point x="175" y="261"></point>
+        <point x="128" y="261"></point>
+        <point x="81" y="224"></point>
+        <point x="74" y="135"></point>
+        <point x="88" y="99"></point>
+      </polygon>
+    </shape>
+    <shape name="wheel" rotatable="false" editableColorIndex="0">
+      <circle x="3" y="3" marked="true" color="-1920102913" diameter="294" filled="true"></circle>
+      <circle x="30" y="30" marked="false" color="255" diameter="240" filled="true"></circle>
+      <line endX="150" startY="285" marked="true" color="-1920102913" endY="15" startX="150"></line>
+      <line endX="285" startY="150" marked="true" color="-1920102913" endY="150" startX="15"></line>
+      <circle x="120" y="120" marked="true" color="-1920102913" diameter="60" filled="true"></circle>
+      <line endX="79" startY="40" marked="true" color="-1920102913" endY="269" startX="216"></line>
+      <line endX="269" startY="84" marked="true" color="-1920102913" endY="221" startX="40"></line>
+      <line endX="269" startY="216" marked="true" color="-1920102913" endY="79" startX="40"></line>
+      <line endX="221" startY="40" marked="true" color="-1920102913" endY="269" startX="84"></line>
+    </shape>
+    <shape name="wolf" rotatable="false" editableColorIndex="0">
+      <polygon color="255" filled="true" marked="false">
+        <point x="253" y="133"></point>
+        <point x="245" y="131"></point>
+        <point x="245" y="133"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="2" y="194"></point>
+        <point x="13" y="197"></point>
+        <point x="30" y="191"></point>
+        <point x="38" y="193"></point>
+        <point x="38" y="205"></point>
+        <point x="20" y="226"></point>
+        <point x="20" y="257"></point>
+        <point x="27" y="265"></point>
+        <point x="38" y="266"></point>
+        <point x="40" y="260"></point>
+        <point x="31" y="253"></point>
+        <point x="31" y="230"></point>
+        <point x="60" y="206"></point>
+        <point x="68" y="198"></point>
+        <point x="75" y="209"></point>
+        <point x="66" y="228"></point>
+        <point x="65" y="243"></point>
+        <point x="82" y="261"></point>
+        <point x="84" y="268"></point>
+        <point x="100" y="267"></point>
+        <point x="103" y="261"></point>
+        <point x="77" y="239"></point>
+        <point x="79" y="231"></point>
+        <point x="100" y="207"></point>
+        <point x="98" y="196"></point>
+        <point x="119" y="201"></point>
+        <point x="143" y="202"></point>
+        <point x="160" y="195"></point>
+        <point x="166" y="210"></point>
+        <point x="172" y="213"></point>
+        <point x="173" y="238"></point>
+        <point x="167" y="251"></point>
+        <point x="160" y="248"></point>
+        <point x="154" y="265"></point>
+        <point x="169" y="264"></point>
+        <point x="178" y="247"></point>
+        <point x="186" y="240"></point>
+        <point x="198" y="260"></point>
+        <point x="200" y="271"></point>
+        <point x="217" y="271"></point>
+        <point x="219" y="262"></point>
+        <point x="207" y="258"></point>
+        <point x="195" y="230"></point>
+        <point x="192" y="198"></point>
+        <point x="210" y="184"></point>
+        <point x="227" y="164"></point>
+        <point x="242" y="144"></point>
+        <point x="259" y="145"></point>
+        <point x="284" y="151"></point>
+        <point x="277" y="141"></point>
+        <point x="293" y="140"></point>
+        <point x="299" y="134"></point>
+        <point x="297" y="127"></point>
+        <point x="273" y="119"></point>
+        <point x="270" y="105"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="-1" y="195"></point>
+        <point x="14" y="180"></point>
+        <point x="36" y="166"></point>
+        <point x="40" y="153"></point>
+        <point x="53" y="140"></point>
+        <point x="82" y="131"></point>
+        <point x="134" y="133"></point>
+        <point x="159" y="126"></point>
+        <point x="188" y="115"></point>
+        <point x="227" y="108"></point>
+        <point x="236" y="102"></point>
+        <point x="238" y="98"></point>
+        <point x="268" y="86"></point>
+        <point x="269" y="92"></point>
+        <point x="281" y="87"></point>
+        <point x="269" y="103"></point>
+        <point x="269" y="113"></point>
+      </polygon>
+    </shape>
+    <shape name="x" rotatable="false" editableColorIndex="0">
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="270" y="75"></point>
+        <point x="225" y="30"></point>
+        <point x="30" y="225"></point>
+        <point x="75" y="270"></point>
+      </polygon>
+      <polygon color="-1920102913" filled="true" marked="true">
+        <point x="30" y="75"></point>
+        <point x="75" y="30"></point>
+        <point x="270" y="225"></point>
+        <point x="225" y="270"></point>
+      </polygon>
+    </shape>
+  </turtleShapes>
+  <linkShapes>
+    <shape name="default" curviness="0.0">
+      <lines>
+        <line x="-0.2" visible="false">
+          <dash value="0.0"></dash>
+          <dash value="1.0"></dash>
+        </line>
+        <line x="0.0" visible="true">
+          <dash value="1.0"></dash>
+          <dash value="0.0"></dash>
+        </line>
+        <line x="0.2" visible="false">
+          <dash value="0.0"></dash>
+          <dash value="1.0"></dash>
+        </line>
+      </lines>
+      <indicator>
+        <shape name="link direction" rotatable="true" editableColorIndex="0">
+          <line endX="90" startY="150" marked="true" color="-1920102913" endY="180" startX="150"></line>
+          <line endX="210" startY="150" marked="true" color="-1920102913" endY="180" startX="150"></line>
+        </shape>
+      </indicator>
+    </shape>
+  </linkShapes>
+  <previewCommands>setup repeat 75 [ go ]</previewCommands>
+  <experiments>
+    <experiment name="ISA-v188-baseline-table" repetitions="100" sequentialRunOrder="false" runMetricsEveryStep="true">
+      <setup>setup</setup>
+      <go>go</go>
+      <metrics>
+        <metric>military-layer</metric>
+        <metric>economic-war-layer</metric>
+        <metric>access-layer</metric>
+        <metric>diplomacy-layer</metric>
+        <metric>ever-backchannel</metric>
+        <metric>ever-ceasefire-talks</metric>
+        <metric>ever-fragile-arrangement</metric>
+        <metric>diplomacy-bridge-count</metric>
+        <metric>first-backchannel-tick-report</metric>
+        <metric>no-talks-share</metric>
+        <metric>backchannel-share</metric>
+        <metric>ceasefire-talks-share</metric>
+        <metric>fragile-arrangement-share</metric>
+        <metric>diplomatic-activation-share</metric>
+        <metric>max-diplomatic-momentum-report</metric>
+        <metric>strategic-regime</metric>
+        <metric>throughput</metric>
+        <metric>insurance</metric>
+        <metric>operator-caution</metric>
+        <metric>permission-factor</metric>
+        <metric>brent-crude-price</metric>
+        <metric>crisis-state</metric>
+        <metric>outcome-ground-war</metric>
+        <metric>outcome-accidental-war</metric>
+        <metric>outcome-escalation-cascade</metric>
+        <metric>outcome-severe-escalation</metric>
+        <metric>awrp-current</metric>
+        <metric>risk-premium</metric>
+        <metric>market-memory</metric>
+        <metric>disruption-belief</metric>
+        <metric>risk-premium-gross-signal</metric>
+        <metric>risk-premium-reassurance-signal</metric>
+        <metric>risk-premium-target</metric>
+        <metric>risk-premium-gap</metric>
+        <metric>market-shock-build-up-rate</metric>
+        <metric>market-recovery-rate-current</metric>
+        <metric>outcome-managed-stalemate</metric>
+        <metric>ever-managed-stalemate</metric>
+        <metric>ms-condition-this-tick</metric>
+        <metric>ms-share</metric>
+        <metric>ms-duration</metric>
+        <metric>first-managed-stalemate-tick</metric>
+        <metric>military-pause-window-flag</metric>
+        <metric>military-deescalation-window-flag</metric>
+        <metric>major-action-this-tick-flag</metric>
+        <metric>low-intensity-military-flag</metric>
+        <metric>commercial-non-normalization-score</metric>
+        <metric>ticks-since-major-strike-flag</metric>
+        <metric>risk-premium-decay-share</metric>
+        <metric>risk-premium-post-deescalation-decay-share</metric>
+        <metric>risk-premium-normalized-recovery</metric>
+        <metric>price-recovery-20pct-fired</metric>
+        <metric>price-recovery-lag-20pct-deescalation</metric>
+        <metric>price-recovery-fired</metric>
+        <metric>price-recovery-strict-fired</metric>
+        <metric>tick-military-deescalation-window-start</metric>
+        <metric>tick-awrp-recovery-frac</metric>
+        <metric>tick-price-recovery-frac</metric>
+        <metric>tick-price-recovery-frac-strict</metric>
+        <metric>tick-price-recovery-20pct</metric>
+        <metric>awrp-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-strict</metric>
+        <metric>tau-c-over-tau-m</metric>
+        <metric>tau-k-over-tau-m</metric>
+        <metric>tau-d-over-tau-m</metric>
+        <metric>insurance-floor-hit</metric>
+        <metric>operator-caution-ceiling-hit</metric>
+        <metric>awrp-ceiling-hit</metric>
+        <metric>risk-premium-high-hit</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="decision-noise">
+          <value value="0.08"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="observation-error-rate">
+          <value value="0.05"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-friction">
+          <value value="0.45"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-security-perception">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-assets">
+          <value value="40"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-regime-stability">
+          <value value="0.33"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-mine-count">
+          <value value="8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="mine-batch-size">
+          <value value="6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="max-ticks">
+          <value value="150"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-d-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="diplomacy-bridge-prob">
+          <value value="0.06"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-c-rate">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-k-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="selective-targeting-recognition">
+          <value value="0"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-insurer-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-operator-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-market-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-incomplete-victory-aversion">
+          <value value="0.72"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="ISA-v188-baseline-neutral-counterfactual" repetitions="100" sequentialRunOrder="false" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <runMetricsCondition><![CDATA[ticks mod 10 = 0 or ceasefire? or ground-war? or ticks >= (max-ticks - 1)]]></runMetricsCondition>
+      <metrics>
+        <metric>military-layer</metric>
+        <metric>economic-war-layer</metric>
+        <metric>access-layer</metric>
+        <metric>diplomacy-layer</metric>
+        <metric>ever-backchannel</metric>
+        <metric>ever-ceasefire-talks</metric>
+        <metric>ever-fragile-arrangement</metric>
+        <metric>diplomacy-bridge-count</metric>
+        <metric>first-backchannel-tick-report</metric>
+        <metric>no-talks-share</metric>
+        <metric>backchannel-share</metric>
+        <metric>ceasefire-talks-share</metric>
+        <metric>fragile-arrangement-share</metric>
+        <metric>diplomatic-activation-share</metric>
+        <metric>max-diplomatic-momentum-report</metric>
+        <metric>strategic-regime</metric>
+        <metric>throughput</metric>
+        <metric>insurance</metric>
+        <metric>operator-caution</metric>
+        <metric>permission-factor</metric>
+        <metric>brent-crude-price</metric>
+        <metric>crisis-state</metric>
+        <metric>outcome-ground-war</metric>
+        <metric>outcome-accidental-war</metric>
+        <metric>outcome-escalation-cascade</metric>
+        <metric>outcome-severe-escalation</metric>
+        <metric>awrp-current</metric>
+        <metric>risk-premium</metric>
+        <metric>market-memory</metric>
+        <metric>disruption-belief</metric>
+        <metric>risk-premium-gross-signal</metric>
+        <metric>risk-premium-reassurance-signal</metric>
+        <metric>risk-premium-target</metric>
+        <metric>risk-premium-gap</metric>
+        <metric>market-shock-build-up-rate</metric>
+        <metric>market-recovery-rate-current</metric>
+        <metric>outcome-managed-stalemate</metric>
+        <metric>ever-managed-stalemate</metric>
+        <metric>ms-condition-this-tick</metric>
+        <metric>ms-share</metric>
+        <metric>ms-duration</metric>
+        <metric>first-managed-stalemate-tick</metric>
+        <metric>military-pause-window-flag</metric>
+        <metric>military-deescalation-window-flag</metric>
+        <metric>major-action-this-tick-flag</metric>
+        <metric>low-intensity-military-flag</metric>
+        <metric>commercial-non-normalization-score</metric>
+        <metric>ticks-since-major-strike-flag</metric>
+        <metric>risk-premium-decay-share</metric>
+        <metric>risk-premium-post-deescalation-decay-share</metric>
+        <metric>risk-premium-normalized-recovery</metric>
+        <metric>price-recovery-20pct-fired</metric>
+        <metric>price-recovery-lag-20pct-deescalation</metric>
+        <metric>price-recovery-fired</metric>
+        <metric>price-recovery-strict-fired</metric>
+        <metric>tick-military-deescalation-window-start</metric>
+        <metric>tick-awrp-recovery-frac</metric>
+        <metric>tick-price-recovery-frac</metric>
+        <metric>tick-price-recovery-frac-strict</metric>
+        <metric>tick-price-recovery-20pct</metric>
+        <metric>awrp-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-strict</metric>
+        <metric>tau-c-over-tau-m</metric>
+        <metric>tau-k-over-tau-m</metric>
+        <metric>tau-d-over-tau-m</metric>
+        <metric>insurance-floor-hit</metric>
+        <metric>operator-caution-ceiling-hit</metric>
+        <metric>awrp-ceiling-hit</metric>
+        <metric>risk-premium-high-hit</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="decision-noise">
+          <value value="0.08"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="observation-error-rate">
+          <value value="0.05"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-friction">
+          <value value="0.45"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-security-perception">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-assets">
+          <value value="40"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-regime-stability">
+          <value value="0.33"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-mine-count">
+          <value value="8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="mine-batch-size">
+          <value value="6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="max-ticks">
+          <value value="150"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-d-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="diplomacy-bridge-prob">
+          <value value="0.06"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-c-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-k-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="selective-targeting-recognition">
+          <value value="0"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-insurer-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-operator-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-market-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-incomplete-victory-aversion">
+          <value value="0.72"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="ISA-v188-H1-clock-ratio-sweep" repetitions="100" sequentialRunOrder="false" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <runMetricsCondition><![CDATA[ticks mod 10 = 0 or ceasefire? or ground-war? or ticks >= (max-ticks - 1)]]></runMetricsCondition>
+      <metrics>
+        <metric>military-layer</metric>
+        <metric>economic-war-layer</metric>
+        <metric>access-layer</metric>
+        <metric>diplomacy-layer</metric>
+        <metric>ever-backchannel</metric>
+        <metric>ever-ceasefire-talks</metric>
+        <metric>ever-fragile-arrangement</metric>
+        <metric>diplomacy-bridge-count</metric>
+        <metric>first-backchannel-tick-report</metric>
+        <metric>no-talks-share</metric>
+        <metric>backchannel-share</metric>
+        <metric>ceasefire-talks-share</metric>
+        <metric>fragile-arrangement-share</metric>
+        <metric>diplomatic-activation-share</metric>
+        <metric>max-diplomatic-momentum-report</metric>
+        <metric>strategic-regime</metric>
+        <metric>throughput</metric>
+        <metric>insurance</metric>
+        <metric>operator-caution</metric>
+        <metric>permission-factor</metric>
+        <metric>brent-crude-price</metric>
+        <metric>crisis-state</metric>
+        <metric>outcome-ground-war</metric>
+        <metric>outcome-accidental-war</metric>
+        <metric>outcome-escalation-cascade</metric>
+        <metric>outcome-severe-escalation</metric>
+        <metric>awrp-current</metric>
+        <metric>risk-premium</metric>
+        <metric>market-memory</metric>
+        <metric>disruption-belief</metric>
+        <metric>risk-premium-gross-signal</metric>
+        <metric>risk-premium-reassurance-signal</metric>
+        <metric>risk-premium-target</metric>
+        <metric>risk-premium-gap</metric>
+        <metric>market-shock-build-up-rate</metric>
+        <metric>market-recovery-rate-current</metric>
+        <metric>outcome-managed-stalemate</metric>
+        <metric>ever-managed-stalemate</metric>
+        <metric>ms-condition-this-tick</metric>
+        <metric>ms-share</metric>
+        <metric>ms-duration</metric>
+        <metric>first-managed-stalemate-tick</metric>
+        <metric>military-pause-window-flag</metric>
+        <metric>military-deescalation-window-flag</metric>
+        <metric>major-action-this-tick-flag</metric>
+        <metric>low-intensity-military-flag</metric>
+        <metric>commercial-non-normalization-score</metric>
+        <metric>ticks-since-major-strike-flag</metric>
+        <metric>risk-premium-decay-share</metric>
+        <metric>risk-premium-post-deescalation-decay-share</metric>
+        <metric>risk-premium-normalized-recovery</metric>
+        <metric>price-recovery-20pct-fired</metric>
+        <metric>price-recovery-lag-20pct-deescalation</metric>
+        <metric>price-recovery-fired</metric>
+        <metric>price-recovery-strict-fired</metric>
+        <metric>tick-military-deescalation-window-start</metric>
+        <metric>tick-awrp-recovery-frac</metric>
+        <metric>tick-price-recovery-frac</metric>
+        <metric>tick-price-recovery-frac-strict</metric>
+        <metric>tick-price-recovery-20pct</metric>
+        <metric>awrp-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-strict</metric>
+        <metric>tau-c-over-tau-m</metric>
+        <metric>tau-k-over-tau-m</metric>
+        <metric>tau-d-over-tau-m</metric>
+        <metric>insurance-floor-hit</metric>
+        <metric>operator-caution-ceiling-hit</metric>
+        <metric>awrp-ceiling-hit</metric>
+        <metric>risk-premium-high-hit</metric>
+        <metric>outcome-tau-c-leads-frac-deescalation</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="decision-noise">
+          <value value="0.08"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="observation-error-rate">
+          <value value="0.05"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-friction">
+          <value value="0.45"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-security-perception">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-assets">
+          <value value="40"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-regime-stability">
+          <value value="0.33"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-mine-count">
+          <value value="8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="mine-batch-size">
+          <value value="6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="max-ticks">
+          <value value="150"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-d-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="diplomacy-bridge-prob">
+          <value value="0.06"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-c-rate">
+          <value value="0.25"></value>
+          <value value="0.4"></value>
+          <value value="0.6"></value>
+          <value value="0.8"></value>
+          <value value="1"></value>
+          <value value="1.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-k-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="selective-targeting-recognition">
+          <value value="0"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-insurer-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-operator-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-market-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-incomplete-victory-aversion">
+          <value value="0.72"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="ISA-v188-H2-market-recovery-factorial" repetitions="100" sequentialRunOrder="false" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <runMetricsCondition><![CDATA[ticks mod 10 = 0 or ceasefire? or ground-war? or ticks >= (max-ticks - 1)]]></runMetricsCondition>
+      <metrics>
+        <metric>military-layer</metric>
+        <metric>economic-war-layer</metric>
+        <metric>access-layer</metric>
+        <metric>diplomacy-layer</metric>
+        <metric>ever-backchannel</metric>
+        <metric>ever-ceasefire-talks</metric>
+        <metric>ever-fragile-arrangement</metric>
+        <metric>diplomacy-bridge-count</metric>
+        <metric>first-backchannel-tick-report</metric>
+        <metric>no-talks-share</metric>
+        <metric>backchannel-share</metric>
+        <metric>ceasefire-talks-share</metric>
+        <metric>fragile-arrangement-share</metric>
+        <metric>diplomatic-activation-share</metric>
+        <metric>max-diplomatic-momentum-report</metric>
+        <metric>strategic-regime</metric>
+        <metric>throughput</metric>
+        <metric>insurance</metric>
+        <metric>operator-caution</metric>
+        <metric>permission-factor</metric>
+        <metric>brent-crude-price</metric>
+        <metric>crisis-state</metric>
+        <metric>outcome-ground-war</metric>
+        <metric>outcome-accidental-war</metric>
+        <metric>outcome-escalation-cascade</metric>
+        <metric>outcome-severe-escalation</metric>
+        <metric>awrp-current</metric>
+        <metric>risk-premium</metric>
+        <metric>market-memory</metric>
+        <metric>disruption-belief</metric>
+        <metric>risk-premium-gross-signal</metric>
+        <metric>risk-premium-reassurance-signal</metric>
+        <metric>risk-premium-target</metric>
+        <metric>risk-premium-gap</metric>
+        <metric>market-shock-build-up-rate</metric>
+        <metric>market-recovery-rate-current</metric>
+        <metric>outcome-managed-stalemate</metric>
+        <metric>ever-managed-stalemate</metric>
+        <metric>ms-condition-this-tick</metric>
+        <metric>ms-share</metric>
+        <metric>ms-duration</metric>
+        <metric>first-managed-stalemate-tick</metric>
+        <metric>military-pause-window-flag</metric>
+        <metric>military-deescalation-window-flag</metric>
+        <metric>major-action-this-tick-flag</metric>
+        <metric>low-intensity-military-flag</metric>
+        <metric>commercial-non-normalization-score</metric>
+        <metric>ticks-since-major-strike-flag</metric>
+        <metric>risk-premium-decay-share</metric>
+        <metric>risk-premium-post-deescalation-decay-share</metric>
+        <metric>risk-premium-normalized-recovery</metric>
+        <metric>price-recovery-20pct-fired</metric>
+        <metric>price-recovery-lag-20pct-deescalation</metric>
+        <metric>price-recovery-fired</metric>
+        <metric>price-recovery-strict-fired</metric>
+        <metric>tick-military-deescalation-window-start</metric>
+        <metric>tick-awrp-recovery-frac</metric>
+        <metric>tick-price-recovery-frac</metric>
+        <metric>tick-price-recovery-frac-strict</metric>
+        <metric>tick-price-recovery-20pct</metric>
+        <metric>awrp-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-strict</metric>
+        <metric>tau-c-over-tau-m</metric>
+        <metric>tau-k-over-tau-m</metric>
+        <metric>tau-d-over-tau-m</metric>
+        <metric>insurance-floor-hit</metric>
+        <metric>operator-caution-ceiling-hit</metric>
+        <metric>awrp-ceiling-hit</metric>
+        <metric>risk-premium-high-hit</metric>
+        <metric>selective-passage-share</metric>
+        <metric>partial-closure-share</metric>
+        <metric>contested-reopening-share</metric>
+        <metric>ever-selective-passage</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="decision-noise">
+          <value value="0.08"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="observation-error-rate">
+          <value value="0.05"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-friction">
+          <value value="0.45"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-security-perception">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-assets">
+          <value value="40"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-regime-stability">
+          <value value="0.33"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-mine-count">
+          <value value="8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="mine-batch-size">
+          <value value="6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="max-ticks">
+          <value value="150"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-d-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="diplomacy-bridge-prob">
+          <value value="0.06"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-c-rate">
+          <value value="0.4"></value>
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-k-rate">
+          <value value="0.5"></value>
+          <value value="1"></value>
+          <value value="1.5"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="selective-targeting-recognition">
+          <value value="0"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-insurer-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-operator-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-market-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-incomplete-victory-aversion">
+          <value value="0.72"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="ISA-v188-H3-robustness-tanker-war" repetitions="100" sequentialRunOrder="false" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <runMetricsCondition><![CDATA[ticks mod 10 = 0 or ceasefire? or ground-war? or ticks >= (max-ticks - 1)]]></runMetricsCondition>
+      <metrics>
+        <metric>military-layer</metric>
+        <metric>economic-war-layer</metric>
+        <metric>access-layer</metric>
+        <metric>diplomacy-layer</metric>
+        <metric>ever-backchannel</metric>
+        <metric>ever-ceasefire-talks</metric>
+        <metric>ever-fragile-arrangement</metric>
+        <metric>diplomacy-bridge-count</metric>
+        <metric>first-backchannel-tick-report</metric>
+        <metric>no-talks-share</metric>
+        <metric>backchannel-share</metric>
+        <metric>ceasefire-talks-share</metric>
+        <metric>fragile-arrangement-share</metric>
+        <metric>diplomatic-activation-share</metric>
+        <metric>max-diplomatic-momentum-report</metric>
+        <metric>strategic-regime</metric>
+        <metric>throughput</metric>
+        <metric>insurance</metric>
+        <metric>operator-caution</metric>
+        <metric>permission-factor</metric>
+        <metric>brent-crude-price</metric>
+        <metric>crisis-state</metric>
+        <metric>outcome-ground-war</metric>
+        <metric>outcome-accidental-war</metric>
+        <metric>outcome-escalation-cascade</metric>
+        <metric>outcome-severe-escalation</metric>
+        <metric>awrp-current</metric>
+        <metric>risk-premium</metric>
+        <metric>market-memory</metric>
+        <metric>disruption-belief</metric>
+        <metric>risk-premium-gross-signal</metric>
+        <metric>risk-premium-reassurance-signal</metric>
+        <metric>risk-premium-target</metric>
+        <metric>risk-premium-gap</metric>
+        <metric>market-shock-build-up-rate</metric>
+        <metric>market-recovery-rate-current</metric>
+        <metric>outcome-managed-stalemate</metric>
+        <metric>ever-managed-stalemate</metric>
+        <metric>ms-condition-this-tick</metric>
+        <metric>ms-share</metric>
+        <metric>ms-duration</metric>
+        <metric>first-managed-stalemate-tick</metric>
+        <metric>military-pause-window-flag</metric>
+        <metric>military-deescalation-window-flag</metric>
+        <metric>major-action-this-tick-flag</metric>
+        <metric>low-intensity-military-flag</metric>
+        <metric>commercial-non-normalization-score</metric>
+        <metric>ticks-since-major-strike-flag</metric>
+        <metric>risk-premium-decay-share</metric>
+        <metric>risk-premium-post-deescalation-decay-share</metric>
+        <metric>risk-premium-normalized-recovery</metric>
+        <metric>price-recovery-20pct-fired</metric>
+        <metric>price-recovery-lag-20pct-deescalation</metric>
+        <metric>price-recovery-fired</metric>
+        <metric>price-recovery-strict-fired</metric>
+        <metric>tick-military-deescalation-window-start</metric>
+        <metric>tick-awrp-recovery-frac</metric>
+        <metric>tick-price-recovery-frac</metric>
+        <metric>tick-price-recovery-frac-strict</metric>
+        <metric>tick-price-recovery-20pct</metric>
+        <metric>awrp-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-deescalation</metric>
+        <metric>price-recovery-lag-frac-strict</metric>
+        <metric>tau-c-over-tau-m</metric>
+        <metric>tau-k-over-tau-m</metric>
+        <metric>tau-d-over-tau-m</metric>
+        <metric>insurance-floor-hit</metric>
+        <metric>operator-caution-ceiling-hit</metric>
+        <metric>awrp-ceiling-hit</metric>
+        <metric>risk-premium-high-hit</metric>
+        <metric>awrp-peak-value</metric>
+        <metric>risk-premium-peak-value</metric>
+        <metric>outcome-tau-c-leads-frac-deescalation</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="decision-noise">
+          <value value="0.08"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="observation-error-rate">
+          <value value="0.05"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-friction">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-security-perception">
+          <value value="0.3"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-assets">
+          <value value="50"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-regime-stability">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-mine-count">
+          <value value="6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="mine-batch-size">
+          <value value="4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="max-ticks">
+          <value value="150"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-d-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="diplomacy-bridge-prob">
+          <value value="0.06"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-c-rate">
+          <value value="0.4"></value>
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-k-rate">
+          <value value="0.8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="selective-targeting-recognition">
+          <value value="0"></value>
+          <value value="0.25"></value>
+          <value value="0.5"></value>
+          <value value="0.75"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-insurer-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-operator-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-market-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-incomplete-victory-aversion">
+          <value value="0.72"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+    <experiment name="ISA-v188-diplomacy-bridge-sensitivity" repetitions="100" sequentialRunOrder="false" runMetricsEveryStep="false">
+      <setup>setup</setup>
+      <go>go</go>
+      <runMetricsCondition><![CDATA[ticks mod 10 = 0 or ceasefire? or ground-war? or ticks >= (max-ticks - 1)]]></runMetricsCondition>
+      <metrics>
+        <metric>military-layer</metric>
+        <metric>economic-war-layer</metric>
+        <metric>access-layer</metric>
+        <metric>diplomacy-layer</metric>
+        <metric>ever-backchannel</metric>
+        <metric>ever-ceasefire-talks</metric>
+        <metric>ever-fragile-arrangement</metric>
+        <metric>diplomacy-bridge-count</metric>
+        <metric>first-backchannel-tick-report</metric>
+        <metric>no-talks-share</metric>
+        <metric>backchannel-share</metric>
+        <metric>ceasefire-talks-share</metric>
+        <metric>fragile-arrangement-share</metric>
+        <metric>diplomatic-activation-share</metric>
+        <metric>max-diplomatic-momentum-report</metric>
+        <metric>strategic-regime</metric>
+        <metric>throughput</metric>
+        <metric>insurance</metric>
+        <metric>operator-caution</metric>
+        <metric>permission-factor</metric>
+        <metric>brent-crude-price</metric>
+        <metric>crisis-state</metric>
+        <metric>outcome-severe-escalation</metric>
+        <metric>outcome-managed-stalemate</metric>
+        <metric>ever-managed-stalemate</metric>
+        <metric>ms-share</metric>
+        <metric>ms-duration</metric>
+        <metric>first-managed-stalemate-tick</metric>
+        <metric>military-deescalation-window-flag</metric>
+        <metric>awrp-current</metric>
+        <metric>risk-premium</metric>
+        <metric>tau-c-over-tau-m</metric>
+        <metric>tau-k-over-tau-m</metric>
+        <metric>tau-d-over-tau-m</metric>
+        <metric>insurance-floor-hit</metric>
+        <metric>operator-caution-ceiling-hit</metric>
+        <metric>awrp-ceiling-hit</metric>
+        <metric>risk-premium-high-hit</metric>
+      </metrics>
+      <constants>
+        <enumeratedValueSet variable="decision-noise">
+          <value value="0.08"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="observation-error-rate">
+          <value value="0.05"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-friction">
+          <value value="0.45"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-security-perception">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-assets">
+          <value value="40"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-iran-regime-stability">
+          <value value="0.33"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-mine-count">
+          <value value="8"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="mine-batch-size">
+          <value value="6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="max-ticks">
+          <value value="150"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-d-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="diplomacy-bridge-prob">
+          <value value="0.03"></value>
+          <value value="0.06"></value>
+          <value value="0.09"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-c-rate">
+          <value value="0.4"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="tau-k-rate">
+          <value value="1"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="selective-targeting-recognition">
+          <value value="0"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-insurer-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-operator-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-market-memory">
+          <value value="0.6"></value>
+        </enumeratedValueSet>
+        <enumeratedValueSet variable="initial-israel-incomplete-victory-aversion">
+          <value value="0.72"></value>
+        </enumeratedValueSet>
+      </constants>
+    </experiment>
+  </experiments>
+</model>
