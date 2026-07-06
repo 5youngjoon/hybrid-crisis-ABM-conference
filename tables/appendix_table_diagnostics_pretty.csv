@@ -1,0 +1,27 @@
+experiment,condition,n,ever_ms,insurance_floor_hit,operator_caution_ceiling_hit,awrp_ceiling_hit,risk_premium_high_hit
+Baseline,all runs,100,25.0%,0.0%,10.0%,0.0%,15.0%
+Diplomacy by bridge probability,diplomacy_bridge_prob=0.06,100,17.0%,0.0%,18.0%,0.0%,16.0%
+Diplomacy by bridge probability,diplomacy_bridge_prob=0.03,100,17.0%,0.0%,12.0%,0.0%,21.0%
+Diplomacy by bridge probability,diplomacy_bridge_prob=0.09,100,20.0%,0.0%,11.0%,0.0%,10.0%
+H1 by commercial clock,"tau_c_rate=0.25, tau_c_over_tau_m=4",100,45.0%,3.0%,68.0%,0.0%,20.0%
+H1 by commercial clock,"tau_c_rate=0.4, tau_c_over_tau_m=2.5",100,15.0%,0.0%,13.0%,0.0%,14.0%
+H1 by commercial clock,"tau_c_rate=0.6, tau_c_over_tau_m=1.66666666666667",100,2.0%,0.0%,3.0%,0.0%,7.0%
+H1 by commercial clock,"tau_c_rate=0.8, tau_c_over_tau_m=1.25",100,1.0%,0.0%,1.0%,0.0%,6.0%
+H1 by commercial clock,"tau_c_rate=1, tau_c_over_tau_m=1",100,4.0%,0.0%,1.0%,0.0%,6.0%
+H1 by commercial clock,"tau_c_rate=1.4, tau_c_over_tau_m=0.714285714285714",100,2.0%,0.0%,0.0%,0.0%,2.0%
+H1 clock sweep: all runs,all runs,600,11.5%,0.5%,14.3%,0.0%,9.2%
+H2 by commercial and market clocks,"tau_c_rate=0.4, tau_k_rate=1.5",100,24.0%,0.0%,16.0%,0.0%,12.0%
+H2 by commercial and market clocks,"tau_c_rate=0.4, tau_k_rate=0.5",100,16.0%,0.0%,13.0%,0.0%,15.0%
+H2 by commercial and market clocks,"tau_c_rate=0.4, tau_k_rate=1",100,17.0%,0.0%,11.0%,0.0%,15.0%
+H2 by commercial and market clocks,"tau_c_rate=1, tau_k_rate=1",100,1.0%,0.0%,1.0%,0.0%,7.0%
+H2 by commercial and market clocks,"tau_c_rate=1, tau_k_rate=0.5",100,1.0%,0.0%,0.0%,0.0%,5.0%
+H2 by commercial and market clocks,"tau_c_rate=1, tau_k_rate=1.5",100,4.0%,0.0%,0.0%,0.0%,5.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0.75, tau_c_rate=0.4",100,15.0%,0.0%,19.0%,0.0%,36.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0, tau_c_rate=0.4",100,11.0%,2.0%,17.0%,0.0%,27.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0.25, tau_c_rate=0.4",100,19.0%,1.0%,17.0%,0.0%,24.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0.5, tau_c_rate=0.4",100,14.0%,1.0%,17.0%,0.0%,22.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0.25, tau_c_rate=1",100,0.0%,0.0%,1.0%,0.0%,6.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0.75, tau_c_rate=1",100,0.0%,0.0%,1.0%,0.0%,12.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0, tau_c_rate=1",100,0.0%,0.0%,0.0%,0.0%,16.0%
+H3 by recognition and commercial clock,"selective_targeting_recognition=0.5, tau_c_rate=1",100,0.0%,0.0%,0.0%,0.0%,4.0%
+Neutral counterfactual,all runs,100,3.0%,0.0%,0.0%,0.0%,0.0%

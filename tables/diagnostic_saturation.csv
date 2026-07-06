@@ -1,0 +1,7 @@
+experiment,n,insurance-floor-hit,operator-caution-ceiling-hit,awrp-ceiling-hit,risk-premium-high-hit
+baseline,100,0.0,0.1,0.0,0.15
+neutral,100,0.0,0.0,0.0,0.0
+H1,600,0.005,0.1433,0.0,0.0917
+H2,600,0.0,0.0683,0.0,0.0983
+H3,800,0.005,0.09,0.0,0.1838
+diplomacy,300,0.0,0.1367,0.0,0.1567
