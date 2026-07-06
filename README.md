@@ -9,9 +9,9 @@ Replication archive for the papers "How a Hybrid Crisis ABM's Parameters Were Fo
 python extract_literals.py Hormuz_Escalation_ver_1_88_conference.nlogox --out ./scan
 ```
 
-OutputS: 18 interface controls, 114 declared globals, 134 procedures, 1,161 numeric-literal occurrences, 938 consequential occurrences, and 128 distinct consequential numeric values. 
+Outputs: 18 interface controls, 114 declared globals, 134 procedures, 1,161 numeric-literal occurrences, 938 consequential occurrences, and 128 distinct consequential numeric values. 
 
-To run the model itself, open `Hormuz_Escalation_ver_1_88_conference.nlogox` in NetLogo 7.0 or later with The BehaviorSpace experiments.
+To run the model itself, open `Hormuz_Escalation_ver_1_88_conference.nlogox` in NetLogo 7.0 or later and run the BehaviorSpace experiments.
 
 ## In this Repository
 
