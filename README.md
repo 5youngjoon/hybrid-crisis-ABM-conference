@@ -17,6 +17,6 @@ To run the model itself, open `Hormuz_Escalation_ver_1_88_conference.nlogox` in 
 
 - `extract_literals.py`
 - `scan/` — Raw and de-duplicated literal lists, declared globals, interface widgets, and the summary counts.
-- `audit/validation_sample.csv` — The manual audit ledger
+- `validation_sample.csv` — The manual audit ledger
 - `tables/` — The summary tables cited in Sections 4 and 5 and in Supplement S1.
 - `results/` — States for the six experiment families (baseline, neutral, H1, H2, H3, diplomacy).
