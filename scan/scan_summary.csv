@@ -1,0 +1,14 @@
+quantity,count
+interface controls,18
+declared globals,114
+procedures,134
+literal occurrences (total),1161
+behavioral occurrences,762
+classifier occurrences,176
+scale-bound occurrences,209
+inert occurrences,12
+display occurrences,2
+consequential occurrences,938
+distinct behavioral entries,101
+distinct classifier entries,27
+distinct consequential numeric values,128

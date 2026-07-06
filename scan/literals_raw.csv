@@ -1,0 +1,1162 @@
+occurrence_id,value,bin,procedure,local_role,context
+1,0,behavioral,setup,setup::ticks-in-selective-passage,set ticks-in-selective-passage 0
+2,0,behavioral,setup,setup::ticks-in-contested-reopening,set ticks-in-contested-reopening 0
+3,0,behavioral,setup,setup::ticks-in-partial-closure,set ticks-in-partial-closure 0
+4,0.15,behavioral,setup-parameters,setup-parameters::military-degradation,set military-degradation 0.15
+5,0,behavioral,setup-parameters,setup-parameters::us-casualties,set us-casualties 0
+6,0,behavioral,setup-parameters,setup-parameters::regional-strike-volume,set regional-strike-volume 0
+7,0,behavioral,setup-parameters,setup-parameters::proxy-attack-level,set proxy-attack-level 0
+8,0,behavioral,setup-parameters,setup-parameters::physical-throughput,set physical-throughput 0
+9,0.35,behavioral,setup-parameters,setup-parameters::commercial-throughput,set commercial-throughput 0.35
+10,0.45,behavioral,setup-parameters,setup-parameters::navigational-reliability,set navigational-reliability 0.45
+11,0.35,behavioral,setup-parameters,setup-parameters::permission-factor,set permission-factor 0.35
+12,0.30,behavioral,setup-parameters,setup-parameters::insurance-availability,set insurance-availability 0.30
+13,0.75,behavioral,setup-parameters,setup-parameters::operator-caution,set operator-caution 0.75
+14,0.70,behavioral,setup-parameters,setup-parameters::port-operability,set port-operability 0.70
+15,0.55,behavioral,setup-parameters,setup-parameters::anchorage-risk,set anchorage-risk 0.55
+16,0.45,behavioral,setup-parameters,setup-parameters::gnss-reliability,set gnss-reliability 0.45
+17,0.45,behavioral,setup-parameters,setup-parameters::recovery-factor,set recovery-factor 0.45
+18,0,behavioral,setup-parameters,setup-parameters::strait-throughput,set strait-throughput 0
+19,70,behavioral,setup-parameters,setup-parameters::brent-crude-price,set brent-crude-price 70
+20,0,behavioral,setup-parameters,setup-parameters::market-panic-index,set market-panic-index 0
+21,7,behavioral,setup-parameters,setup-parameters::deadline-remaining,set deadline-remaining 7
+22,0,behavioral,setup-parameters,setup-parameters::equilibrium-pain-streak,set equilibrium-pain-streak 0
+23,0,behavioral,setup-parameters,setup-parameters::cascade-streak,set cascade-streak 0
+24,0,behavioral,setup-parameters,setup-parameters::ceasefire-stability-streak,set ceasefire-stability-streak 0
+25,0,behavioral,setup-parameters,setup-parameters::partial-closure-streak,set partial-closure-streak 0
+26,0,behavioral,setup-parameters,setup-parameters::selective-passage-streak,set selective-passage-streak 0
+27,0,behavioral,setup-parameters,setup-parameters::contested-reopening-streak,set contested-reopening-streak 0
+28,0,behavioral,setup-parameters,setup-parameters::cumulative-oil-burden,set cumulative-oil-burden 0
+29,0,behavioral,setup-parameters,setup-parameters::low-throughput-days,set low-throughput-days 0
+30,0,behavioral,setup-parameters,setup-parameters::recent-iran-escalation-streak,set recent-iran-escalation-streak 0
+31,0,behavioral,setup-parameters,setup-parameters::diplomatic-momentum,set diplomatic-momentum 0
+32,0,behavioral,setup-parameters,setup-parameters::misperception-count,set misperception-count 0
+33,-1,behavioral,setup-parameters,setup-parameters::resolution-tick,set resolution-tick -1
+34,0.20,behavioral,setup-parameters,setup-parameters::disruption-prior,set disruption-prior 0.20
+35,0.55,behavioral,setup-parameters,setup-parameters::disruption-posterior,set disruption-posterior 0.55
+36,0.20,behavioral,setup-parameters,setup-parameters::awrp-baseline,set awrp-baseline 0.20
+37,0.55,behavioral,setup-parameters,setup-parameters::awrp,set awrp 0.55
+38,0.55,behavioral,setup-parameters,setup-parameters::awrp-peak,set awrp-peak 0.55
+39,70,behavioral,setup-parameters,setup-parameters::oil-fundamental-price,set oil-fundamental-price 70
+40,0,behavioral,setup-parameters,setup-parameters::oil-risk-premium,set oil-risk-premium 0
+41,0,behavioral,setup-parameters,setup-parameters::risk-premium-peak,set risk-premium-peak 0
+42,-1,behavioral,setup-parameters,setup-parameters::tick-military-pause-start,set tick-military-pause-start -1
+43,-1,behavioral,setup-parameters,setup-parameters::tick-military-pause-window-start,set tick-military-pause-window-start -1
+44,-1,behavioral,setup-parameters,setup-parameters::tick-military-deescalation-window-start,set tick-military-deescalation-window-start -1
+45,-1,behavioral,setup-parameters,setup-parameters::tick-awrp-recovery,set tick-awrp-recovery -1
+46,-1,behavioral,setup-parameters,setup-parameters::tick-price-recovery,set tick-price-recovery -1
+47,0,behavioral,setup-parameters,setup-parameters::managed-stalemate-streak,set managed-stalemate-streak 0
+48,1.0,behavioral,setup-parameters,setup-parameters::tau-m-rate,set tau-m-rate 1.0
+49,0,behavioral,setup-parameters,setup-parameters::recent-strike-history,set recent-strike-history (list 0 0 0)
+50,0,behavioral,setup-parameters,setup-parameters::recent-strike-history,set recent-strike-history (list 0 0 0)
+51,0,behavioral,setup-parameters,setup-parameters::recent-strike-history,set recent-strike-history (list 0 0 0)
+52,0,behavioral,setup-parameters,setup-parameters::recent-major-strike-history,set recent-major-strike-history (list 0 0 0)
+53,0,behavioral,setup-parameters,setup-parameters::recent-major-strike-history,set recent-major-strike-history (list 0 0 0)
+54,0,behavioral,setup-parameters,setup-parameters::recent-major-strike-history,set recent-major-strike-history (list 0 0 0)
+55,0,scale-bound,setup-parameters,setup-parameters::commercial-non-normalization-score,set commercial-non-normalization-score 0
+56,0,behavioral,setup-parameters,setup-parameters::ticks-in-ms-conditions,set ticks-in-ms-conditions 0
+57,-1,behavioral,setup-parameters,setup-parameters::tick-awrp-recovery-frac,set tick-awrp-recovery-frac -1
+58,-1,behavioral,setup-parameters,setup-parameters::tick-price-recovery-frac,set tick-price-recovery-frac -1
+59,0,behavioral,setup-parameters,setup-parameters::ticks-since-major-strike,set ticks-since-major-strike 0
+60,-1,behavioral,setup-parameters,setup-parameters::tick-price-recovery-frac-strict,set tick-price-recovery-frac-strict -1
+61,0.25,behavioral,setup-parameters,setup-parameters::market-shock-build-up-rate,set market-shock-build-up-rate 0.25
+62,0,behavioral,setup-parameters,setup-parameters::market-recovery-rate-current,set market-recovery-rate-current 0
+63,0,behavioral,setup-parameters,setup-parameters::risk-premium-gross-signal,set risk-premium-gross-signal 0
+64,0,behavioral,setup-parameters,setup-parameters::risk-premium-reassurance-signal,set risk-premium-reassurance-signal 0
+65,0,behavioral,setup-parameters,setup-parameters::risk-premium-target,set risk-premium-target 0
+66,0,behavioral,setup-parameters,setup-parameters::risk-premium-gap,set risk-premium-gap 0
+67,0,behavioral,setup-parameters,setup-parameters::risk-premium-post-peak-ticks,set risk-premium-post-peak-ticks 0
+68,0,behavioral,setup-parameters,setup-parameters::risk-premium-decay-ticks,set risk-premium-decay-ticks 0
+69,0,behavioral,setup-parameters,setup-parameters::risk-premium-post-deescalation-ticks,set risk-premium-post-deescalation-ticks 0
+70,0,behavioral,setup-parameters,setup-parameters::risk-premium-post-deescalation-decay-ticks,set risk-premium-post-deescalation-decay-ticks 0
+71,-1,behavioral,setup-parameters,setup-parameters::tick-price-recovery-20pct,set tick-price-recovery-20pct -1
+72,-1,behavioral,setup-parameters,setup-parameters::tick-first-managed-stalemate,set tick-first-managed-stalemate -1
+73,0,behavioral,setup-parameters,setup-parameters::diplomacy-bridge-events,set diplomacy-bridge-events 0
+74,-1,behavioral,setup-parameters,setup-parameters::first-backchannel-tick,set first-backchannel-tick -1
+75,-1,behavioral,setup-parameters,setup-parameters::first-ceasefire-talks-tick,set first-ceasefire-talks-tick -1
+76,-1,behavioral,setup-parameters,setup-parameters::first-fragile-arrangement-tick,set first-fragile-arrangement-tick -1
+77,0,behavioral,setup-parameters,setup-parameters::ticks-in-no-talks,set ticks-in-no-talks 0
+78,0,behavioral,setup-parameters,setup-parameters::ticks-in-backchannel,set ticks-in-backchannel 0
+79,0,behavioral,setup-parameters,setup-parameters::ticks-in-ceasefire-talks,set ticks-in-ceasefire-talks 0
+80,0,behavioral,setup-parameters,setup-parameters::ticks-in-fragile-arrangement,set ticks-in-fragile-arrangement 0
+81,4,behavioral,setup-geography,setup-geography::water?,if abs pycor <= 4 [ set water? true ]
+82,2,behavioral,setup-geography,setup-geography::lane?,if abs pycor <= 2 [ set lane? true ]
+83,87,behavioral,recolor-patch,recolor-patch::pcolor,[ set pcolor 87 ]
+84,95,behavioral,recolor-patch,recolor-patch::pcolor,[ set pcolor 95 ]
+85,35,behavioral,recolor-patch,recolor-patch::pcolor,[ set pcolor 35 ]
+86,1,inert,setup-actors,setup-actors::_,create-state-actors 1 [
+87,2,behavioral,setup-actors,setup-actors::size,set size 2
+88,3,behavioral,setup-actors,setup-actors::_,setxy (min-pxcor + 3) (max-pycor - 2)
+89,2,behavioral,setup-actors,setup-actors::_,setxy (min-pxcor + 3) (max-pycor - 2)
+90,0.33,behavioral,setup-actors,setup-actors::risk-tolerance,set risk-tolerance 0.33
+91,0.78,behavioral,setup-actors,setup-actors::electoral-proximity,set electoral-proximity 0.78
+92,0.40,behavioral,setup-actors,setup-actors::belief-iran-bluffing,set belief-iran-bluffing 0.40
+93,0,behavioral,setup-actors,setup-actors::regime-stability,set regime-stability 0
+94,0,behavioral,setup-actors,setup-actors::asymmetric-assets,set asymmetric-assets 0
+95,0,behavioral,setup-actors,setup-actors::economic-buffer,set economic-buffer 0
+96,0,behavioral,setup-actors,setup-actors::belief-us-will-invade,set belief-us-will-invade 0
+97,0,behavioral,setup-actors,setup-actors::security-perception,set security-perception 0
+98,0,behavioral,setup-actors,setup-actors::tolerance-us-friction,set tolerance-us-friction 0
+99,1,inert,setup-actors,setup-actors::_,create-state-actors 1 [
+100,2,behavioral,setup-actors,setup-actors::size,set size 2
+101,0,behavioral,setup-actors,setup-actors::_,setxy 0 (max-pycor - 2)
+102,2,behavioral,setup-actors,setup-actors::_,setxy 0 (max-pycor - 2)
+103,0,behavioral,setup-actors,setup-actors::risk-tolerance,set risk-tolerance 0
+104,0,behavioral,setup-actors,setup-actors::electoral-proximity,set electoral-proximity 0
+105,0,behavioral,setup-actors,setup-actors::belief-iran-bluffing,set belief-iran-bluffing 0
+106,0.35,behavioral,setup-actors,setup-actors::economic-buffer,set economic-buffer 0.35
+107,0.20,behavioral,setup-actors,setup-actors::belief-us-will-invade,set belief-us-will-invade 0.20
+108,0,behavioral,setup-actors,setup-actors::security-perception,set security-perception 0
+109,0,behavioral,setup-actors,setup-actors::tolerance-us-friction,set tolerance-us-friction 0
+110,1,inert,setup-actors,setup-actors::_,create-state-actors 1 [
+111,2,behavioral,setup-actors,setup-actors::size,set size 2
+112,3,behavioral,setup-actors,setup-actors::_,setxy (max-pxcor - 3) (max-pycor - 2)
+113,2,behavioral,setup-actors,setup-actors::_,setxy (max-pxcor - 3) (max-pycor - 2)
+114,0,behavioral,setup-actors,setup-actors::risk-tolerance,set risk-tolerance 0
+115,0,behavioral,setup-actors,setup-actors::electoral-proximity,set electoral-proximity 0
+116,0,behavioral,setup-actors,setup-actors::belief-iran-bluffing,set belief-iran-bluffing 0
+117,0,behavioral,setup-actors,setup-actors::regime-stability,set regime-stability 0
+118,0,behavioral,setup-actors,setup-actors::asymmetric-assets,set asymmetric-assets 0
+119,0,behavioral,setup-actors,setup-actors::economic-buffer,set economic-buffer 0
+120,0,behavioral,setup-actors,setup-actors::belief-us-will-invade,set belief-us-will-invade 0
+121,1,behavioral,setup-initial-mines,setup-initial-mines::_,sprout-mines 1 [
+122,2,display,setup-initial-mines,setup-initial-mines::color,set color red + 2
+123,0.8,behavioral,setup-initial-mines,setup-initial-mines::size,set size 0.8
+124,0,behavioral,go,go::deadline-remaining,set deadline-remaining max (list 0 (deadline-remaining - 1))
+125,1,behavioral,go,go::deadline-remaining,set deadline-remaining max (list 0 (deadline-remaining - 1))
+126,1,behavioral,update-state-counters,update-state-counters::ticks-in-selective-passage,set ticks-in-selective-passage ticks-in-selective-passage + 1
+127,1,behavioral,update-state-counters,update-state-counters::ticks-in-contested-reopening,set ticks-in-contested-reopening ticks-in-contested-reopening + 1
+128,1,behavioral,update-state-counters,update-state-counters::ticks-in-partial-closure,set ticks-in-partial-closure ticks-in-partial-closure + 1
+129,1,behavioral,update-state-counters,update-state-counters::ticks-in-no-talks,set ticks-in-no-talks (ticks-in-no-talks + 1)
+130,1,behavioral,update-state-counters,update-state-counters::ticks-in-backchannel,set ticks-in-backchannel (ticks-in-backchannel + 1)
+131,1,behavioral,update-state-counters,update-state-counters::ticks-in-ceasefire-talks,set ticks-in-ceasefire-talks (ticks-in-ceasefire-talks + 1)
+132,1,behavioral,update-state-counters,update-state-counters::ticks-in-fragile-arrangement,set ticks-in-fragile-arrangement (ticks-in-fragile-arrangement + 1)
+133,-1,behavioral,update-state-counters,update-state-counters::first-backchannel-tick,if first-backchannel-tick = -1 [ set first-backchannel-tick ticks ]
+134,-1,behavioral,update-state-counters,update-state-counters::first-ceasefire-talks-tick,if first-ceasefire-talks-tick = -1 [ set first-ceasefire-talks-tick ticks ]
+135,-1,behavioral,update-state-counters,update-state-counters::first-fragile-arrangement-tick,if first-fragile-arrangement-tick = -1 [ set first-fragile-arrangement-tick ticks ]
+136,0,behavioral,update-state-counters,update-state-counters::ticks-since-major-strike,[ set ticks-since-major-strike 0 ]
+137,1,behavioral,update-state-counters,update-state-counters::ticks-since-major-strike,[ set ticks-since-major-strike (ticks-since-major-strike + 1) ]
+138,1,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::misperception-count,if us-observed-iran-action != last-iran-action and last-iran-action !=   [ set misperception-count (misperception-count + 1) ]
+139,1,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::misperception-count,if iran-observed-us-action != last-us-action and last-us-action !=   [ set misperception-count (misperception-count + 1) ]
+140,1,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::misperception-count,if israel-observed-iran-action != last-iran-action and last-iran-action !=   [ set misperception-count (misperception-count + 1) ]
+141,1,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::misperception-count,if israel-observed-us-action != last-us-action and last-us-action !=   [ set misperception-count (misperception-count + 1) ]
+142,0.15,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.15 0.85) ]
+143,0.85,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.15 0.85) ]
+144,0.55,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.55 0.45) ]
+145,0.45,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.55 0.45) ]
+146,0.62,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.62 0.32) ]
+147,0.32,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.62 0.32) ]
+148,0.25,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.25 0.72) ]
+149,0.72,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.25 0.72) ]
+150,0.10,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.10 0.80) ]
+151,0.80,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.10 0.80) ]
+152,0.18,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.18 0.78) ]
+153,0.78,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.18 0.78) ]
+154,0.20,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.20 0.75) ]
+155,0.75,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-iran-bluffing,ask us-agent [ set belief-iran-bluffing (bayes-update belief-iran-bluffing 0.20 0.75) ]
+156,0.90,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.90 0.40) ]
+157,0.40,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.90 0.40) ]
+158,0.95,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.95 0.10) ]
+159,0.10,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.95 0.10) ]
+160,0.70,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.70 0.45) ]
+161,0.45,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.70 0.45) ]
+162,0.15,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.15 0.60) ]
+163,0.60,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::belief-us-will-invade,ask iran-agent [ set belief-us-will-invade (bayes-update belief-us-will-invade 0.15 0.60) ]
+164,0.05,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.05) 0 1) ]
+165,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.05) 0 1) ]
+166,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.05) 0 1) ]
+167,0.03,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+168,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+169,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+170,0.01,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception + 0.01) 0 1) ]
+171,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception + 0.01) 0 1) ]
+172,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception + 0.01) 0 1) ]
+173,0.02,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception + 0.02) 0 1) ]
+174,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception + 0.02) 0 1) ]
+175,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception + 0.02) 0 1) ]
+176,0.03,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+177,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+178,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.03) 0 1) ]
+179,0.04,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.04) 0 1) ]
+180,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.04) 0 1) ]
+181,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.04) 0 1) ]
+182,0.40,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::_,if security-perception < 0.40 [
+183,0.02,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::tolerance-us-friction,set tolerance-us-friction (bound (tolerance-us-friction + 0.02) 0 1)
+184,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::tolerance-us-friction,set tolerance-us-friction (bound (tolerance-us-friction + 0.02) 0 1)
+185,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::tolerance-us-friction,set tolerance-us-friction (bound (tolerance-us-friction + 0.02) 0 1)
+186,0.01,behavioral,observe-and-update-beliefs,observe-and-update-beliefs::tolerance-us-friction,ask israel-agent [ set tolerance-us-friction (bound (tolerance-us-friction - 0.01) 0 1) ]
+187,0,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::tolerance-us-friction,ask israel-agent [ set tolerance-us-friction (bound (tolerance-us-friction - 0.01) 0 1) ]
+188,1,scale-bound,observe-and-update-beliefs,observe-and-update-beliefs::tolerance-us-friction,ask israel-agent [ set tolerance-us-friction (bound (tolerance-us-friction - 0.01) 0 1) ]
+189,-999999,behavioral,decide-us-action,decide-us-action::_,let best-u -999999
+190,-999999,behavioral,decide-israel-action,decide-israel-action::_,let best-u -999999
+191,-999999,behavioral,decide-iran-action,decide-iran-action::_,let best-u -999999
+192,0,behavioral,us-utility-of,us-utility-of::_,let degradation 0
+193,0,behavioral,us-utility-of,us-utility-of::_,let casualties 0
+194,0,behavioral,us-utility-of,us-utility-of::_,let oil-impact 0
+195,0,behavioral,us-utility-of,us-utility-of::degradation,set degradation 0
+196,0,behavioral,us-utility-of,us-utility-of::casualties,set casualties 0
+197,-18,behavioral,us-utility-of,us-utility-of::oil-impact,set oil-impact -18
+198,0.01,behavioral,us-utility-of,us-utility-of::degradation,set degradation 0.01
+199,0.01,behavioral,us-utility-of,us-utility-of::casualties,set casualties 0.01
+200,3,behavioral,us-utility-of,us-utility-of::oil-impact,set oil-impact 3
+201,0.05,behavioral,us-utility-of,us-utility-of::degradation,set degradation 0.05
+202,0.02,behavioral,us-utility-of,us-utility-of::casualties,set casualties 0.02
+203,8,behavioral,us-utility-of,us-utility-of::oil-impact,set oil-impact 8
+204,0.18,behavioral,us-utility-of,us-utility-of::degradation,set degradation (0.18 + (belief * 0.20))
+205,0.20,behavioral,us-utility-of,us-utility-of::degradation,set degradation (0.18 + (belief * 0.20))
+206,0.05,behavioral,us-utility-of,us-utility-of::casualties,set casualties 0.05
+207,15,behavioral,us-utility-of,us-utility-of::oil-impact,set oil-impact 15
+208,0.65,behavioral,us-utility-of,us-utility-of::degradation,set degradation 0.65
+209,0.55,behavioral,us-utility-of,us-utility-of::casualties,set casualties 0.55
+210,35,behavioral,us-utility-of,us-utility-of::oil-impact,set oil-impact 35
+211,100,behavioral,us-utility-of,us-utility-of::_,let political-cost ((projected-oil / 100) * elect)
+212,0.40,behavioral,us-utility-of,us-utility-of::_,let alpha 0.40
+213,0.60,behavioral,us-utility-of,us-utility-of::_,let beta 0.60
+214,0.80,behavioral,us-utility-of,us-utility-of::_,let gamma 0.80
+215,0.90,behavioral,us-utility-of,us-utility-of::_,let delta 0.90
+216,150,behavioral,us-utility-of,us-utility-of::_,- (beta * (projected-oil / 150))
+217,110,behavioral,us-utility-of,us-utility-of::u,if projected-oil > 110 [ set u (u + 0.25) ]
+218,0.25,behavioral,us-utility-of,us-utility-of::u,if projected-oil > 110 [ set u (u + 0.25) ]
+219,0.20,behavioral,us-utility-of,us-utility-of::u,if belief < 0.20 [ set u (u + 0.10) ]
+220,0.10,behavioral,us-utility-of,us-utility-of::u,if belief < 0.20 [ set u (u + 0.10) ]
+221,0.35,behavioral,us-utility-of,us-utility-of::u,if military-degradation > 0.35 [ set u (u + 0.10) ]
+222,0.10,behavioral,us-utility-of,us-utility-of::u,if military-degradation > 0.35 [ set u (u + 0.10) ]
+223,0.65,behavioral,us-utility-of,us-utility-of::u,if strait-throughput > 0.65 [ set u (u + 0.08) ]
+224,0.08,behavioral,us-utility-of,us-utility-of::u,if strait-throughput > 0.65 [ set u (u + 0.08) ]
+225,0.35,behavioral,us-utility-of,us-utility-of::u,if strait-throughput < 0.35 [ set u (u - 0.25) ]
+226,0.25,behavioral,us-utility-of,us-utility-of::u,if strait-throughput < 0.35 [ set u (u - 0.25) ]
+227,0.40,behavioral,us-utility-of,us-utility-of::u,if insurance-availability < 0.40 [ set u (u - 0.18) ]
+228,0.18,behavioral,us-utility-of,us-utility-of::u,if insurance-availability < 0.40 [ set u (u - 0.18) ]
+229,0.50,behavioral,us-utility-of,us-utility-of::u,if permission-factor < 0.50 [ set u (u - 0.12) ]
+230,0.12,behavioral,us-utility-of,us-utility-of::u,if permission-factor < 0.50 [ set u (u - 0.12) ]
+231,0,behavioral,us-utility-of,us-utility-of::u,if recent-iran-escalation-streak > 0 [ set u (u - 0.12) ]
+232,0.12,behavioral,us-utility-of,us-utility-of::u,if recent-iran-escalation-streak > 0 [ set u (u - 0.12) ]
+233,0.10,behavioral,us-utility-of,us-utility-of::u,set u (u + (diplomatic-momentum * 0.10))
+234,0.18,behavioral,us-utility-of,us-utility-of::u,if strait-throughput < 0.18 [ set u (u + 0.12) ]
+235,0.12,behavioral,us-utility-of,us-utility-of::u,if strait-throughput < 0.18 [ set u (u + 0.12) ]
+236,0.20,behavioral,us-utility-of,us-utility-of::u,if us-casualties > 0.20 [ set u (u + 0.10) ]
+237,0.10,behavioral,us-utility-of,us-utility-of::u,if us-casualties > 0.20 [ set u (u + 0.10) ]
+238,2,behavioral,us-utility-of,us-utility-of::u,if deadline-remaining <= 2 and strait-throughput < 0.30 [ set u (u + 0.10) ]
+239,0.30,behavioral,us-utility-of,us-utility-of::u,if deadline-remaining <= 2 and strait-throughput < 0.30 [ set u (u + 0.10) ]
+240,0.10,behavioral,us-utility-of,us-utility-of::u,if deadline-remaining <= 2 and strait-throughput < 0.30 [ set u (u + 0.10) ]
+241,0.08,behavioral,us-utility-of,us-utility-of::u,set u (u + (risk * 0.08))
+242,0.18,behavioral,us-utility-of,us-utility-of::u,if military-deescalation-window? [ set u (u - 0.18) ]
+243,0.85,behavioral,us-utility-of,us-utility-of::u,if elect > 0.85 [ set u (u - 0.20) ]
+244,0.20,behavioral,us-utility-of,us-utility-of::u,if elect > 0.85 [ set u (u - 0.20) ]
+245,0.40,behavioral,us-utility-of,us-utility-of::u,if strait-throughput < 0.40 [ set u (u + 0.10) ]
+246,0.10,behavioral,us-utility-of,us-utility-of::u,if strait-throughput < 0.40 [ set u (u + 0.10) ]
+247,0,behavioral,us-utility-of,us-utility-of::_,report (u + random-normal 0 decision-noise)
+248,70,behavioral,iran-utility-of,iran-utility-of::_,let economic-leverage (((brent-crude-price - 70) / 100)
+249,100,behavioral,iran-utility-of,iran-utility-of::_,let economic-leverage (((brent-crude-price - 70) / 100)
+250,1,behavioral,iran-utility-of,iran-utility-of::_,+ ((1 - insurance-availability) * 0.35)
+251,0.35,behavioral,iran-utility-of,iran-utility-of::_,+ ((1 - insurance-availability) * 0.35)
+252,1,behavioral,iran-utility-of,iran-utility-of::_,+ ((1 - permission-factor) * 0.22)
+253,0.22,behavioral,iran-utility-of,iran-utility-of::_,+ ((1 - permission-factor) * 0.22)
+254,0.25,behavioral,iran-utility-of,iran-utility-of::_,+ (market-memory * 0.25))
+255,0,behavioral,iran-utility-of,iran-utility-of::_,let sovereignty-loss 0
+256,0,behavioral,iran-utility-of,iran-utility-of::_,let asset-cost 0
+257,0.06,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.06)
+258,0.05,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.05
+259,0.10,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.10)
+260,0.03,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.03
+261,0.20,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.20)
+262,0.02,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.02
+263,0.03,behavioral,iran-utility-of,iran-utility-of::asset-cost,set asset-cost 0.03
+264,0.04,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage - 0.04)
+265,0.22,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.22)
+266,0.05,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.05
+267,0.06,behavioral,iran-utility-of,iran-utility-of::asset-cost,set asset-cost 0.06
+268,0.17,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.17)
+269,0.03,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.03
+270,0.05,behavioral,iran-utility-of,iran-utility-of::asset-cost,set asset-cost 0.05
+271,0.12,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.12)
+272,0.06,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.06
+273,0.06,behavioral,iran-utility-of,iran-utility-of::asset-cost,set asset-cost 0.06
+274,0.18,behavioral,iran-utility-of,iran-utility-of::economic-leverage,set economic-leverage (economic-leverage + 0.18)
+275,0.10,behavioral,iran-utility-of,iran-utility-of::sovereignty-loss,set sovereignty-loss 0.10
+276,0.12,behavioral,iran-utility-of,iran-utility-of::asset-cost,set asset-cost 0.12
+277,1.15,behavioral,iran-utility-of,iran-utility-of::_,let zeta 1.15
+278,0.85,behavioral,iran-utility-of,iran-utility-of::_,let eta 0.85
+279,0.70,behavioral,iran-utility-of,iran-utility-of::_,let theta 0.70
+280,0.95,behavioral,iran-utility-of,iran-utility-of::_,let kappa 0.95
+281,0.35,behavioral,iran-utility-of,iran-utility-of::_,if stability < 0.35 [
+282,0.35,behavioral,iran-utility-of,iran-utility-of::_,let pressure ((0.35 - stability) / 0.35)
+283,0.35,behavioral,iran-utility-of,iran-utility-of::_,let pressure ((0.35 - stability) / 0.35)
+284,0.35,behavioral,iran-utility-of,iran-utility-of::u,set u (u - (pressure * 0.35))
+285,0.35,behavioral,iran-utility-of,iran-utility-of::u,set u (u + (pressure * 0.35))
+286,0.18,behavioral,iran-utility-of,iran-utility-of::u,if act =   [ set u (u + 0.18) ]
+287,0.08,behavioral,iran-utility-of,iran-utility-of::u,if act =   [ set u (u + 0.08) ]
+288,0.15,behavioral,iran-utility-of,iran-utility-of::u,if act =   [ set u (u - 0.15) ]
+289,0.45,behavioral,iran-utility-of,iran-utility-of::u,if diplomatic-momentum > 0.45 [ set u (u + 0.14) ]
+290,0.14,behavioral,iran-utility-of,iran-utility-of::u,if diplomatic-momentum > 0.45 [ set u (u + 0.14) ]
+291,0.35,behavioral,iran-utility-of,iran-utility-of::u,if buffer < 0.35 [ set u (u + 0.10) ]
+292,0.10,behavioral,iran-utility-of,iran-utility-of::u,if buffer < 0.35 [ set u (u + 0.10) ]
+293,0.70,behavioral,iran-utility-of,iran-utility-of::u,if invade-belief > 0.70 [ set u (u + 0.06) ]
+294,0.06,behavioral,iran-utility-of,iran-utility-of::u,if invade-belief > 0.70 [ set u (u + 0.06) ]
+295,0.35,behavioral,iran-utility-of,iran-utility-of::u,if buffer < 0.35 [ set u (u + 0.18) ]
+296,0.18,behavioral,iran-utility-of,iran-utility-of::u,if buffer < 0.35 [ set u (u + 0.18) ]
+297,0.40,behavioral,iran-utility-of,iran-utility-of::u,if diplomatic-momentum > 0.40 [ set u (u + 0.06) ]
+298,0.06,behavioral,iran-utility-of,iran-utility-of::u,if diplomatic-momentum > 0.40 [ set u (u + 0.06) ]
+299,0.40,behavioral,iran-utility-of,iran-utility-of::u,if market-memory > 0.40 [ set u (u + 0.12) ]
+300,0.12,behavioral,iran-utility-of,iran-utility-of::u,if market-memory > 0.40 [ set u (u + 0.12) ]
+301,95,behavioral,iran-utility-of,iran-utility-of::u,if brent-crude-price > 95 [ set u (u + 0.08) ]
+302,0.08,behavioral,iran-utility-of,iran-utility-of::u,if brent-crude-price > 95 [ set u (u + 0.08) ]
+303,15,behavioral,iran-utility-of,iran-utility-of::u,if assets < 15 [ set u (u - 0.08) ]
+304,0.08,behavioral,iran-utility-of,iran-utility-of::u,if assets < 15 [ set u (u - 0.08) ]
+305,20,behavioral,iran-utility-of,iran-utility-of::u,if assets < 20 [ set u (u - 0.30) ]
+306,0.30,behavioral,iran-utility-of,iran-utility-of::u,if assets < 20 [ set u (u - 0.30) ]
+307,0.75,behavioral,iran-utility-of,iran-utility-of::u,if invade-belief > 0.75 [ set u (u - 0.18) ]
+308,0.18,behavioral,iran-utility-of,iran-utility-of::u,if invade-belief > 0.75 [ set u (u - 0.18) ]
+309,20,behavioral,iran-utility-of,iran-utility-of::u,if assets < 20 [ set u (u - 0.18) ]
+310,0.18,behavioral,iran-utility-of,iran-utility-of::u,if assets < 20 [ set u (u - 0.18) ]
+311,0.80,behavioral,iran-utility-of,iran-utility-of::u,if invade-belief > 0.80 [ set u (u - 0.08) ]
+312,0.08,behavioral,iran-utility-of,iran-utility-of::u,if invade-belief > 0.80 [ set u (u - 0.08) ]
+313,0.20,behavioral,iran-utility-of,iran-utility-of::u,set u (u - 0.20)
+314,0,behavioral,iran-utility-of,iran-utility-of::_,report ((u - asset-cost) + random-normal 0 decision-noise)
+315,1,behavioral,israel-utility-of,israel-utility-of::_,let threat (1 - sec)
+316,0,behavioral,israel-utility-of,israel-utility-of::_,let threat-reduction 0
+317,0,behavioral,israel-utility-of,israel-utility-of::_,let us-friction-cost 0
+318,0,behavioral,israel-utility-of,israel-utility-of::_,let escalation-risk 0
+319,0.02,behavioral,israel-utility-of,israel-utility-of::threat-reduction,set threat-reduction 0.02
+320,0,behavioral,israel-utility-of,israel-utility-of::us-friction-cost,set us-friction-cost 0
+321,0,behavioral,israel-utility-of,israel-utility-of::escalation-risk,set escalation-risk 0
+322,0.16,behavioral,israel-utility-of,israel-utility-of::threat-reduction,set threat-reduction 0.16
+323,0.04,behavioral,israel-utility-of,israel-utility-of::us-friction-cost,set us-friction-cost 0.04
+324,0.08,behavioral,israel-utility-of,israel-utility-of::escalation-risk,set escalation-risk 0.08
+325,0.24,behavioral,israel-utility-of,israel-utility-of::threat-reduction,set threat-reduction 0.24
+326,0.10,behavioral,israel-utility-of,israel-utility-of::us-friction-cost,set us-friction-cost 0.10
+327,0.16,behavioral,israel-utility-of,israel-utility-of::escalation-risk,set escalation-risk 0.16
+328,0.40,behavioral,israel-utility-of,israel-utility-of::threat-reduction,set threat-reduction 0.40
+329,0.18,behavioral,israel-utility-of,israel-utility-of::us-friction-cost,set us-friction-cost 0.18
+330,0.25,behavioral,israel-utility-of,israel-utility-of::escalation-risk,set escalation-risk 0.25
+331,0.90,behavioral,israel-utility-of,israel-utility-of::_,let omega 0.90
+332,0.55,behavioral,israel-utility-of,israel-utility-of::_,let phi 0.55
+333,0.40,behavioral,israel-utility-of,israel-utility-of::_,let psi 0.40
+334,1,behavioral,israel-utility-of,israel-utility-of::_,- (phi * (us-friction-cost * (1 - friction)))
+335,0.60,behavioral,israel-utility-of,israel-utility-of::u,if act =   and threat > 0.60 [ set u (u + 0.20) ]
+336,0.20,behavioral,israel-utility-of,israel-utility-of::u,if act =   and threat > 0.60 [ set u (u + 0.20) ]
+337,0.75,behavioral,israel-utility-of,israel-utility-of::u,if act =   and threat > 0.75 [ set u (u + 0.15) ]
+338,0.15,behavioral,israel-utility-of,israel-utility-of::u,if act =   and threat > 0.75 [ set u (u + 0.15) ]
+339,0.05,behavioral,israel-utility-of,israel-utility-of::u,if last-us-action =   and act =   [ set u (u + 0.05) ]
+340,0.70,behavioral,israel-utility-of,israel-utility-of::u,if last-us-action =   and act =   and threat > 0.70 [ set u (u + 0.10) ]
+341,0.10,behavioral,israel-utility-of,israel-utility-of::u,if last-us-action =   and act =   and threat > 0.70 [ set u (u + 0.10) ]
+342,0.60,behavioral,israel-utility-of,israel-utility-of::u,if military-degradation > 0.60 and act =   [ set u (u + 0.12) ]
+343,0.12,behavioral,israel-utility-of,israel-utility-of::u,if military-degradation > 0.60 and act =   [ set u (u + 0.12) ]
+344,0.18,behavioral,israel-utility-of,israel-utility-of::u,if act =   [ set u (u - (0.18 * israel-incomplete-victory-aversion)) ]
+345,0.10,behavioral,israel-utility-of,israel-utility-of::u,if act =   [ set u (u + (0.10 * israel-incomplete-victory-aversion)) ]
+346,0.14,behavioral,israel-utility-of,israel-utility-of::u,if act =   [ set u (u + (0.14 * israel-incomplete-victory-aversion)) ]
+347,0.04,behavioral,israel-utility-of,israel-utility-of::u,if act =   [ set u (u + (0.04 * israel-incomplete-victory-aversion)) ]
+348,0.30,behavioral,israel-utility-of,israel-utility-of::_,if act =   and diplomatic-momentum > 0.30 [
+349,0.12,behavioral,israel-utility-of,israel-utility-of::u,set u (u - 0.12)
+350,0.06,behavioral,israel-utility-of,israel-utility-of::u,set u (u + 0.06)
+351,0.08,behavioral,israel-utility-of,israel-utility-of::u,set u (u - 0.08)
+352,0.05,behavioral,israel-utility-of,israel-utility-of::u,set u (u - 0.05)
+353,8,behavioral,israel-utility-of,israel-utility-of::u,if act =   and ticks < 8 [ set u (u - 0.40) ]
+354,0.40,behavioral,israel-utility-of,israel-utility-of::u,if act =   and ticks < 8 [ set u (u - 0.40) ]
+355,4,behavioral,israel-utility-of,israel-utility-of::u,if act =   and ticks < 4 [ set u (u - 0.15) ]
+356,0.15,behavioral,israel-utility-of,israel-utility-of::u,if act =   and ticks < 4 [ set u (u - 0.15) ]
+357,0,behavioral,israel-utility-of,israel-utility-of::_,report (u + random-normal 0 decision-noise)
+358,0,behavioral,execute-actions,execute-actions::regional-strike-volume,set regional-strike-volume 0
+359,0,behavioral,execute-actions,execute-actions::proxy-attack-level,set proxy-attack-level 0
+360,0.005,behavioral,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.005) 0 1) ]
+361,0,scale-bound,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.005) 0 1) ]
+362,1,scale-bound,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.005) 0 1) ]
+363,0.004,behavioral,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+364,0,scale-bound,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+365,1,scale-bound,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+366,1,behavioral,execute-us-action,execute-us-action::regional-strike-volume,set regional-strike-volume (regional-strike-volume + 1)
+367,0.03,behavioral,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.03) 0 1)
+368,0,scale-bound,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.03) 0 1)
+369,1,scale-bound,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.03) 0 1)
+370,0.004,behavioral,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+371,0,scale-bound,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+372,1,scale-bound,execute-us-action,execute-us-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.004) 0 1) ]
+373,2,behavioral,execute-us-action,execute-us-action::regional-strike-volume,set regional-strike-volume (regional-strike-volume + 2)
+374,0.10,behavioral,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.10) 0 1)
+375,0,scale-bound,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.10) 0 1)
+376,1,scale-bound,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.10) 0 1)
+377,0.03,behavioral,execute-us-action,execute-us-action::us-casualties,set us-casualties (bound (us-casualties + 0.03) 0 1)
+378,0,scale-bound,execute-us-action,execute-us-action::us-casualties,set us-casualties (bound (us-casualties + 0.03) 0 1)
+379,1,scale-bound,execute-us-action,execute-us-action::us-casualties,set us-casualties (bound (us-casualties + 0.03) 0 1)
+380,0.08,behavioral,execute-us-action,execute-us-action::regime-stability,set regime-stability (bound (regime-stability - 0.08) 0 1)
+381,0,scale-bound,execute-us-action,execute-us-action::regime-stability,set regime-stability (bound (regime-stability - 0.08) 0 1)
+382,1,scale-bound,execute-us-action,execute-us-action::regime-stability,set regime-stability (bound (regime-stability - 0.08) 0 1)
+383,8,behavioral,execute-us-action,execute-us-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 8) 0 100)
+384,0,scale-bound,execute-us-action,execute-us-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 8) 0 100)
+385,100,scale-bound,execute-us-action,execute-us-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 8) 0 100)
+386,3,behavioral,execute-us-action,execute-us-action::regional-strike-volume,set regional-strike-volume (regional-strike-volume + 3)
+387,0.28,behavioral,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.28) 0 1)
+388,0,scale-bound,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.28) 0 1)
+389,1,scale-bound,execute-us-action,execute-us-action::military-degradation,set military-degradation (bound (military-degradation + 0.28) 0 1)
+390,0.18,behavioral,execute-us-action,execute-us-action::us-casualties,set us-casualties (bound (us-casualties + 0.18) 0 1)
+391,0,scale-bound,execute-us-action,execute-us-action::us-casualties,set us-casualties (bound (us-casualties + 0.18) 0 1)
+392,1,scale-bound,execute-us-action,execute-us-action::us-casualties,set us-casualties (bound (us-casualties + 0.18) 0 1)
+393,0.18,behavioral,execute-us-action,execute-us-action::regime-stability,set regime-stability (bound (regime-stability - 0.18) 0 1)
+394,0,scale-bound,execute-us-action,execute-us-action::regime-stability,set regime-stability (bound (regime-stability - 0.18) 0 1)
+395,1,scale-bound,execute-us-action,execute-us-action::regime-stability,set regime-stability (bound (regime-stability - 0.18) 0 1)
+396,15,behavioral,execute-us-action,execute-us-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+397,0,scale-bound,execute-us-action,execute-us-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+398,100,scale-bound,execute-us-action,execute-us-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+399,1,behavioral,execute-israel-action,execute-israel-action::regional-strike-volume,set regional-strike-volume (regional-strike-volume + 1)
+400,0.08,behavioral,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.08) 0 1)
+401,0,scale-bound,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.08) 0 1)
+402,1,scale-bound,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.08) 0 1)
+403,0.05,behavioral,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.05) 0 1)
+404,0,scale-bound,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.05) 0 1)
+405,1,scale-bound,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.05) 0 1)
+406,6,behavioral,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 6) 0 100)
+407,0,scale-bound,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 6) 0 100)
+408,100,scale-bound,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 6) 0 100)
+409,2,behavioral,execute-israel-action,execute-israel-action::regional-strike-volume,set regional-strike-volume (regional-strike-volume + 2)
+410,0.15,behavioral,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.15) 0 1)
+411,0,scale-bound,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.15) 0 1)
+412,1,scale-bound,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.15) 0 1)
+413,0.12,behavioral,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.12) 0 1)
+414,0,scale-bound,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.12) 0 1)
+415,1,scale-bound,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.12) 0 1)
+416,12,behavioral,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 12) 0 100)
+417,0,scale-bound,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 12) 0 100)
+418,100,scale-bound,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 12) 0 100)
+419,0.05,behavioral,execute-israel-action,execute-israel-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.05) 0 1) ]
+420,0,scale-bound,execute-israel-action,execute-israel-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.05) 0 1) ]
+421,1,scale-bound,execute-israel-action,execute-israel-action::electoral-proximity,ask us-agent [ set electoral-proximity (bound (electoral-proximity + 0.05) 0 1) ]
+422,3,behavioral,execute-israel-action,execute-israel-action::regional-strike-volume,set regional-strike-volume (regional-strike-volume + 3)
+423,0.25,behavioral,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.25) 0 1)
+424,0,scale-bound,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.25) 0 1)
+425,1,scale-bound,execute-israel-action,execute-israel-action::military-degradation,set military-degradation (bound (military-degradation + 0.25) 0 1)
+426,0.20,behavioral,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.20) 0 1)
+427,0,scale-bound,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.20) 0 1)
+428,1,scale-bound,execute-israel-action,execute-israel-action::regime-stability,set regime-stability (bound (regime-stability - 0.20) 0 1)
+429,15,behavioral,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+430,0,scale-bound,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+431,100,scale-bound,execute-israel-action,execute-israel-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 15) 0 100)
+432,0.10,behavioral,execute-israel-action,execute-israel-action::us-casualties,set us-casualties (bound (us-casualties + 0.10) 0 1)
+433,0,scale-bound,execute-israel-action,execute-israel-action::us-casualties,set us-casualties (bound (us-casualties + 0.10) 0 1)
+434,1,scale-bound,execute-israel-action,execute-israel-action::us-casualties,set us-casualties (bound (us-casualties + 0.10) 0 1)
+435,0.10,behavioral,execute-israel-action,execute-israel-action::_,let miscoord-risk (0.10 + (0.30 * decision-noise) + (0.15 * observation-error-rate))
+436,0.30,behavioral,execute-israel-action,execute-israel-action::_,let miscoord-risk (0.10 + (0.30 * decision-noise) + (0.15 * observation-error-rate))
+437,0.15,behavioral,execute-israel-action,execute-israel-action::_,let miscoord-risk (0.10 + (0.30 * decision-noise) + (0.15 * observation-error-rate))
+438,0.12,behavioral,execute-israel-action,execute-israel-action::miscoord-risk,if member? last-us-action [   ] [ set miscoord-risk (miscoord-risk + 0.12) ]
+439,0.06,behavioral,execute-israel-action,execute-israel-action::miscoord-risk,if last-us-action =   [ set miscoord-risk (miscoord-risk + 0.06) ]
+440,0.40,behavioral,execute-israel-action,execute-israel-action::miscoord-risk,if diplomatic-momentum > 0.40 [ set miscoord-risk (miscoord-risk - 0.12) ]
+441,0.12,behavioral,execute-israel-action,execute-israel-action::miscoord-risk,if diplomatic-momentum > 0.40 [ set miscoord-risk (miscoord-risk - 0.12) ]
+442,0.30,behavioral,execute-israel-action,execute-israel-action::miscoord-risk,if [security-perception] of israel-agent < 0.30 [ set miscoord-risk (miscoord-risk + 0.06) ]
+443,0.06,behavioral,execute-israel-action,execute-israel-action::miscoord-risk,if [security-perception] of israel-agent < 0.30 [ set miscoord-risk (miscoord-risk + 0.06) ]
+444,1,behavioral,execute-israel-action,execute-israel-action::accidental-war?,if (random-float 1) < (bound miscoord-risk 0.03 0.65) [ set accidental-war? true ]
+445,0.03,scale-bound,execute-israel-action,execute-israel-action::accidental-war?,if (random-float 1) < (bound miscoord-risk 0.03 0.65) [ set accidental-war? true ]
+446,0.65,scale-bound,execute-israel-action,execute-israel-action::accidental-war?,if (random-float 1) < (bound miscoord-risk 0.03 0.65) [ set accidental-war? true ]
+447,1,behavioral,execute-iran-action,execute-iran-action::_,ask n-of (min (list 1 (count mines))) mines [ die ]
+448,0.14,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor + 0.14) 0.10 0.98)
+449,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor + 0.14) 0.10 0.98)
+450,0.98,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor + 0.14) 0.10 0.98)
+451,0.05,behavioral,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability + 0.05) 0.10 1)
+452,0.10,scale-bound,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability + 0.05) 0.10 1)
+453,1,scale-bound,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability + 0.05) 0.10 1)
+454,0.03,behavioral,execute-iran-action,execute-iran-action::gnss-reliability,set gnss-reliability (bound (gnss-reliability + 0.03) 0.15 1)
+455,0.15,scale-bound,execute-iran-action,execute-iran-action::gnss-reliability,set gnss-reliability (bound (gnss-reliability + 0.03) 0.15 1)
+456,1,scale-bound,execute-iran-action,execute-iran-action::gnss-reliability,set gnss-reliability (bound (gnss-reliability + 0.03) 0.15 1)
+457,0.04,behavioral,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution - 0.04) 0 1)
+458,0,scale-bound,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution - 0.04) 0 1)
+459,1,scale-bound,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution - 0.04) 0 1)
+460,0.03,behavioral,execute-iran-action,execute-iran-action::insurer-memory,set insurer-memory (bound (insurer-memory - 0.03) 0 1)
+461,0,scale-bound,execute-iran-action,execute-iran-action::insurer-memory,set insurer-memory (bound (insurer-memory - 0.03) 0 1)
+462,1,scale-bound,execute-iran-action,execute-iran-action::insurer-memory,set insurer-memory (bound (insurer-memory - 0.03) 0 1)
+463,0.03,behavioral,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory - 0.03) 0 1)
+464,0,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory - 0.03) 0 1)
+465,1,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory - 0.03) 0 1)
+466,0.01,behavioral,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+467,0,scale-bound,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+468,1,scale-bound,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+469,2,behavioral,execute-iran-action,execute-iran-action::_,ask n-of (min (list 2 (count mines))) mines [ die ]
+470,0.08,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor + 0.08) 0.10 0.97)
+471,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor + 0.08) 0.10 0.97)
+472,0.97,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor + 0.08) 0.10 0.97)
+473,0.02,behavioral,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability + 0.02) 0.10 1)
+474,0.10,scale-bound,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability + 0.02) 0.10 1)
+475,1,scale-bound,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability + 0.02) 0.10 1)
+476,0.02,behavioral,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution - 0.02) 0 1)
+477,0,scale-bound,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution - 0.02) 0 1)
+478,1,scale-bound,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution - 0.02) 0 1)
+479,0.02,behavioral,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.02) 0 1)
+480,0,scale-bound,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.02) 0 1)
+481,1,scale-bound,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.02) 0 1)
+482,0.04,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.04) 0.10 0.97)
+483,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.04) 0.10 0.97)
+484,0.97,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.04) 0.10 0.97)
+485,0.03,behavioral,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability - 0.03) 0.10 1)
+486,0.10,scale-bound,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability - 0.03) 0.10 1)
+487,1,scale-bound,execute-iran-action,execute-iran-action::insurance-availability,set insurance-availability (bound (insurance-availability - 0.03) 0.10 1)
+488,0.08,behavioral,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution + 0.08) 0 1)
+489,0,scale-bound,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution + 0.08) 0 1)
+490,1,scale-bound,execute-iran-action,execute-iran-action::operator-caution,set operator-caution (bound (operator-caution + 0.08) 0 1)
+491,0.06,behavioral,execute-iran-action,execute-iran-action::insurer-memory,set insurer-memory (bound (insurer-memory + 0.06) 0 1)
+492,0,scale-bound,execute-iran-action,execute-iran-action::insurer-memory,set insurer-memory (bound (insurer-memory + 0.06) 0 1)
+493,1,scale-bound,execute-iran-action,execute-iran-action::insurer-memory,set insurer-memory (bound (insurer-memory + 0.06) 0 1)
+494,0.05,behavioral,execute-iran-action,execute-iran-action::operator-memory,set operator-memory (bound (operator-memory + 0.05) 0 1)
+495,0,scale-bound,execute-iran-action,execute-iran-action::operator-memory,set operator-memory (bound (operator-memory + 0.05) 0 1)
+496,1,scale-bound,execute-iran-action,execute-iran-action::operator-memory,set operator-memory (bound (operator-memory + 0.05) 0 1)
+497,0.08,behavioral,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.08) 0 1)
+498,0,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.08) 0 1)
+499,1,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.08) 0 1)
+500,2,behavioral,execute-iran-action,execute-iran-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 2) 0 100)
+501,0,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 2) 0 100)
+502,100,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - 2) 0 100)
+503,0.01,behavioral,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+504,0,scale-bound,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+505,1,scale-bound,execute-iran-action,execute-iran-action::economic-buffer,set economic-buffer (bound (economic-buffer + 0.01) 0 1)
+506,4,behavioral,execute-iran-action,execute-iran-action::_,let n (min (list mine-batch-size (round (asymmetric-assets / 4))))
+507,0,behavioral,execute-iran-action,execute-iran-action::_,if n > 0 [
+508,1,behavioral,execute-iran-action,execute-iran-action::_,sprout-mines 1 [
+509,2,display,execute-iran-action,execute-iran-action::color,set color red + 2
+510,0.8,behavioral,execute-iran-action,execute-iran-action::size,set size 0.8
+511,1.5,behavioral,execute-iran-action,execute-iran-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - (actual-n * 1.5)) 0 100)
+512,0,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - (actual-n * 1.5)) 0 100)
+513,100,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,set asymmetric-assets (bound (asymmetric-assets - (actual-n * 1.5)) 0 100)
+514,0.15,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.15) 0.10 0.95)
+515,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.15) 0.10 0.95)
+516,0.95,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.15) 0.10 0.95)
+517,0.10,behavioral,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.10) 0 1)
+518,0,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.10) 0 1)
+519,1,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.10) 0 1)
+520,1,behavioral,execute-iran-action,execute-iran-action::proxy-attack-level,set proxy-attack-level (proxy-attack-level + 1)
+521,0.02,behavioral,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.02) 0 1)
+522,0,scale-bound,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.02) 0 1)
+523,1,scale-bound,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.02) 0 1)
+524,0.08,behavioral,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.08) 0 1)
+525,0,scale-bound,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.08) 0 1)
+526,1,scale-bound,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.08) 0 1)
+527,0.07,behavioral,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.07) 0 1)
+528,0,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.07) 0 1)
+529,1,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.07) 0 1)
+530,5,behavioral,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 5) 0 100) ]
+531,0,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 5) 0 100) ]
+532,100,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 5) 0 100) ]
+533,0.12,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.12) 0.10 0.95)
+534,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.12) 0.10 0.95)
+535,0.95,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.12) 0.10 0.95)
+536,1,behavioral,execute-iran-action,execute-iran-action::proxy-attack-level,set proxy-attack-level (proxy-attack-level + 1)
+537,0.04,behavioral,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.04) 0 1)
+538,0,scale-bound,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.04) 0 1)
+539,1,scale-bound,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.04) 0 1)
+540,0.05,behavioral,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.05) 0 1)
+541,0,scale-bound,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.05) 0 1)
+542,1,scale-bound,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.05) 0 1)
+543,0.05,behavioral,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.05) 0 1)
+544,0,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.05) 0 1)
+545,1,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.05) 0 1)
+546,4,behavioral,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 4) 0 100) ]
+547,0,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 4) 0 100) ]
+548,100,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 4) 0 100) ]
+549,0.08,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.08) 0.10 0.95)
+550,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.08) 0.10 0.95)
+551,0.95,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.08) 0.10 0.95)
+552,2,behavioral,execute-iran-action,execute-iran-action::proxy-attack-level,set proxy-attack-level (proxy-attack-level + 2)
+553,0.06,behavioral,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.06) 0 1)
+554,0,scale-bound,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.06) 0 1)
+555,1,scale-bound,execute-iran-action,execute-iran-action::us-casualties,set us-casualties (bound (us-casualties + 0.06) 0 1)
+556,0.10,behavioral,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.10) 0 1)
+557,0,scale-bound,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.10) 0 1)
+558,1,scale-bound,execute-iran-action,execute-iran-action::anchorage-risk,set anchorage-risk (bound (anchorage-risk + 0.10) 0 1)
+559,0.08,behavioral,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.08) 0 1)
+560,0,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.08) 0 1)
+561,1,scale-bound,execute-iran-action,execute-iran-action::market-memory,set market-memory (bound (market-memory + 0.08) 0 1)
+562,7,behavioral,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 7) 0 100) ]
+563,0,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 7) 0 100) ]
+564,100,scale-bound,execute-iran-action,execute-iran-action::asymmetric-assets,ask iran-agent [ set asymmetric-assets (bound (asymmetric-assets - 7) 0 100) ]
+565,0.08,behavioral,execute-iran-action,execute-iran-action::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.08) 0 1) ]
+566,0,scale-bound,execute-iran-action,execute-iran-action::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.08) 0 1) ]
+567,1,scale-bound,execute-iran-action,execute-iran-action::security-perception,ask israel-agent [ set security-perception (bound (security-perception - 0.08) 0 1) ]
+568,0.10,behavioral,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.10) 0.10 0.95)
+569,0.10,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.10) 0.10 0.95)
+570,0.95,scale-bound,execute-iran-action,execute-iran-action::permission-factor,set permission-factor (bound (permission-factor - 0.10) 0.10 0.95)
+571,0.55,behavioral,update-market-state,update-market-state::_,(bound ((0.55 * gnss-reliability) + (0.45 * port-operability)) 0.15 1)
+572,0.45,behavioral,update-market-state,update-market-state::_,(bound ((0.55 * gnss-reliability) + (0.45 * port-operability)) 0.15 1)
+573,0.15,scale-bound,update-market-state,update-market-state::_,(bound ((0.55 * gnss-reliability) + (0.45 * port-operability)) 0.15 1)
+574,1,scale-bound,update-market-state,update-market-state::_,(bound ((0.55 * gnss-reliability) + (0.45 * port-operability)) 0.15 1)
+575,0.38,behavioral,update-market-state,update-market-state::_,(bound ((0.38 * commercial-throughput)
+576,0.25,behavioral,update-market-state,update-market-state::_,+ (0.25 * navigational-reliability)
+577,0.22,behavioral,update-market-state,update-market-state::_,+ (0.22 * permission-factor)
+578,0.15,behavioral,update-market-state,update-market-state::_,+ (0.15 * (1 - market-memory))) 0.10 1)
+579,1,behavioral,update-market-state,update-market-state::_,+ (0.15 * (1 - market-memory))) 0.10 1)
+580,0.10,behavioral,update-market-state,update-market-state::_,+ (0.15 * (1 - market-memory))) 0.10 1)
+581,1,behavioral,update-market-state,update-market-state::_,+ (0.15 * (1 - market-memory))) 0.10 1)
+582,0.62,behavioral,update-market-state,update-market-state::_,* (0.62 + (0.38 * recovery-factor))) 0.02 1)
+583,0.38,behavioral,update-market-state,update-market-state::_,* (0.62 + (0.38 * recovery-factor))) 0.02 1)
+584,0.02,behavioral,update-market-state,update-market-state::_,* (0.62 + (0.38 * recovery-factor))) 0.02 1)
+585,1,behavioral,update-market-state,update-market-state::_,* (0.62 + (0.38 * recovery-factor))) 0.02 1)
+586,1,behavioral,update-market-state,update-market-state::_,(bound ((1 - strait-throughput)
+587,1,behavioral,update-market-state,update-market-state::_,+ ((1 - insurance-availability) * 0.30)
+588,0.30,behavioral,update-market-state,update-market-state::_,+ ((1 - insurance-availability) * 0.30)
+589,1,behavioral,update-market-state,update-market-state::_,+ ((1 - gnss-reliability) * 0.16)
+590,0.16,behavioral,update-market-state,update-market-state::_,+ ((1 - gnss-reliability) * 0.16)
+591,0.14,behavioral,update-market-state,update-market-state::_,+ (regional-strike-volume * 0.14)
+592,0.10,behavioral,update-market-state,update-market-state::_,+ (proxy-attack-level * 0.10)
+593,0.22,behavioral,update-market-state,update-market-state::_,+ (market-memory * 0.22)) 0 1.8)
+594,0,behavioral,update-market-state,update-market-state::_,+ (market-memory * 0.22)) 0 1.8)
+595,1.8,behavioral,update-market-state,update-market-state::_,+ (market-memory * 0.22)) 0 1.8)
+596,0.45,behavioral,update-market-state,update-market-state::_,and strait-throughput > 0.45
+597,0.40,behavioral,update-market-state,update-market-state::_,and permission-factor > 0.40)
+598,20,behavioral,update-market-state,update-market-state::_,let habituation-term (min list 20 (ticks-since-major-strike * 0.4))
+599,0.4,behavioral,update-market-state,update-market-state::_,let habituation-term (min list 20 (ticks-since-major-strike * 0.4))
+600,1,behavioral,update-market-state,update-market-state::risk-premium-gross-signal,set risk-premium-gross-signal (((1 - strait-throughput) * 22)
+601,22,behavioral,update-market-state,update-market-state::risk-premium-gross-signal,set risk-premium-gross-signal (((1 - strait-throughput) * 22)
+602,20,behavioral,update-market-state,update-market-state::_,+ (market-panic-index * 20)
+603,8,behavioral,update-market-state,update-market-state::_,+ (market-memory * 8))
+604,9,behavioral,update-market-state,update-market-state::risk-premium-reassurance-signal,set risk-premium-reassurance-signal ((recovery-factor * 9)
+605,10,behavioral,update-market-state,update-market-state::_,+ (diplomatic-momentum * 10)
+606,10,behavioral,update-market-state,update-market-state::_,+ (ifelse-value (not major-strike-this-tick?) [10] [0])
+607,0,behavioral,update-market-state,update-market-state::_,+ (ifelse-value (not major-strike-this-tick?) [10] [0])
+608,0.55,behavioral,update-market-state,update-market-state::_,+ (ifelse-value (strait-throughput > 0.55) [12] [0])
+609,12,behavioral,update-market-state,update-market-state::_,+ (ifelse-value (strait-throughput > 0.55) [12] [0])
+610,0,behavioral,update-market-state,update-market-state::_,+ (ifelse-value (strait-throughput > 0.55) [12] [0])
+611,8,behavioral,update-market-state,update-market-state::_,+ (ifelse-value stable-access-for-market? [8] [0])
+612,0,behavioral,update-market-state,update-market-state::_,+ (ifelse-value stable-access-for-market? [8] [0])
+613,0,behavioral,update-market-state,update-market-state::risk-premium-target,set risk-premium-target (max list 0 (risk-premium-gross-signal - risk-premium-reassurance-signal))
+614,0.80,behavioral,update-market-state,update-market-state::market-recovery-rate-current,set market-recovery-rate-current (min list 0.80 (0.20 * tau-k-rate))
+615,0.20,behavioral,update-market-state,update-market-state::market-recovery-rate-current,set market-recovery-rate-current (min list 0.80 (0.20 * tau-k-rate))
+616,0,behavioral,update-market-state,update-market-state::_,ifelse risk-premium-gap > 0
+617,0,scale-bound,update-market-state,update-market-state::oil-risk-premium,set oil-risk-premium (bound oil-risk-premium 0 120)
+618,120,scale-bound,update-market-state,update-market-state::oil-risk-premium,set oil-risk-premium (bound oil-risk-premium 0 120)
+619,25,behavioral,update-market-state,update-market-state::_,if previous-risk-premium-peak >= 25 [
+620,1,behavioral,update-market-state,update-market-state::risk-premium-post-peak-ticks,set risk-premium-post-peak-ticks (risk-premium-post-peak-ticks + 1)
+621,1,behavioral,update-market-state,update-market-state::risk-premium-decay-ticks,set risk-premium-decay-ticks (risk-premium-decay-ticks + 1)
+622,-1,behavioral,update-market-state,update-market-state::_,if tick-military-deescalation-window-start != -1 [
+623,1,behavioral,update-market-state,update-market-state::risk-premium-post-deescalation-ticks,set risk-premium-post-deescalation-ticks (risk-premium-post-deescalation-ticks + 1)
+624,1,behavioral,update-market-state,update-market-state::risk-premium-post-deescalation-decay-ticks,set risk-premium-post-deescalation-decay-ticks (risk-premium-post-deescalation-decay-ticks + 1)
+625,70,behavioral,update-market-state,update-market-state::_,if brent-crude-price > 70 [
+626,70,behavioral,update-market-state,update-market-state::cumulative-oil-burden,set cumulative-oil-burden (cumulative-oil-burden + (brent-crude-price - 70))
+627,0.35,behavioral,update-market-state,update-market-state::_,if strait-throughput < 0.35 [
+628,1,behavioral,update-market-state,update-market-state::low-throughput-days,set low-throughput-days (low-throughput-days + 1)
+629,1,behavioral,update-physical-throughput,update-physical-throughput::_,let mine-density ((count mines) / max (list 1 (count patches with [ lane? ])))
+630,1,behavioral,update-physical-throughput,update-physical-throughput::physical-throughput,set physical-throughput (bound (reachable-share * (1 - (mine-density * 1.4))) 0.05 1)
+631,1.4,behavioral,update-physical-throughput,update-physical-throughput::physical-throughput,set physical-throughput (bound (reachable-share * (1 - (mine-density * 1.4))) 0.05 1)
+632,0.05,scale-bound,update-physical-throughput,update-physical-throughput::physical-throughput,set physical-throughput (bound (reachable-share * (1 - (mine-density * 1.4))) 0.05 1)
+633,1,scale-bound,update-physical-throughput,update-physical-throughput::physical-throughput,set physical-throughput (bound (reachable-share * (1 - (mine-density * 1.4))) 0.05 1)
+634,0.05,behavioral,update-physical-throughput,update-physical-throughput::physical-throughput,set physical-throughput 0.05
+635,0.02,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.02 + (diplomatic-momentum * 0.01)) 0.10 0.98)
+636,0.01,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.02 + (diplomatic-momentum * 0.01)) 0.10 0.98)
+637,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.02 + (diplomatic-momentum * 0.01)) 0.10 0.98)
+638,0.98,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.02 + (diplomatic-momentum * 0.01)) 0.10 0.98)
+639,0.010,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.010 + (diplomatic-momentum * 0.008)) 0.10 0.97)
+640,0.008,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.010 + (diplomatic-momentum * 0.008)) 0.10 0.97)
+641,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.010 + (diplomatic-momentum * 0.008)) 0.10 0.97)
+642,0.97,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.010 + (diplomatic-momentum * 0.008)) 0.10 0.97)
+643,0.004,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.004 + (diplomatic-momentum * 0.004) - (regional-strike-volume * 0.003)) 0.10 0.97)
+644,0.004,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.004 + (diplomatic-momentum * 0.004) - (regional-strike-volume * 0.003)) 0.10 0.97)
+645,0.003,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.004 + (diplomatic-momentum * 0.004) - (regional-strike-volume * 0.003)) 0.10 0.97)
+646,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.004 + (diplomatic-momentum * 0.004) - (regional-strike-volume * 0.003)) 0.10 0.97)
+647,0.97,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor + 0.004 + (diplomatic-momentum * 0.004) - (regional-strike-volume * 0.003)) 0.10 0.97)
+648,0.020,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.020) 0.10 0.97)
+649,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.020) 0.10 0.97)
+650,0.97,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.020) 0.10 0.97)
+651,0.05,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.05) 0.10 0.97)
+652,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.05) 0.10 0.97)
+653,0.97,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.05) 0.10 0.97)
+654,0.035,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.035) 0.10 0.97)
+655,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.035) 0.10 0.97)
+656,0.97,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.035) 0.10 0.97)
+657,0.025,behavioral,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.025) 0.10 0.97)
+658,0.10,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.025) 0.10 0.97)
+659,0.97,scale-bound,update-permission-factor,update-permission-factor::permission-factor,set permission-factor (bound (permission-factor - 0.025) 0.10 0.97)
+660,0.05,behavioral,update-gnss-reliability,update-gnss-reliability::_,let gnss-shock ((proxy-attack-level * 0.05) + (regional-strike-volume * 0.04) + (anchorage-risk * 0.03) + (operator-memory * 0.03))
+661,0.04,behavioral,update-gnss-reliability,update-gnss-reliability::_,let gnss-shock ((proxy-attack-level * 0.05) + (regional-strike-volume * 0.04) + (anchorage-risk * 0.03) + (operator-memory * 0.03))
+662,0.03,behavioral,update-gnss-reliability,update-gnss-reliability::_,let gnss-shock ((proxy-attack-level * 0.05) + (regional-strike-volume * 0.04) + (anchorage-risk * 0.03) + (operator-memory * 0.03))
+663,0.03,behavioral,update-gnss-reliability,update-gnss-reliability::_,let gnss-shock ((proxy-attack-level * 0.05) + (regional-strike-volume * 0.04) + (anchorage-risk * 0.03) + (operator-memory * 0.03))
+664,0.030,behavioral,update-gnss-reliability,update-gnss-reliability::_,let repair-boost ((recovery-factor * 0.030) + (permission-factor * 0.012) + (diplomatic-momentum * 0.020))
+665,0.012,behavioral,update-gnss-reliability,update-gnss-reliability::_,let repair-boost ((recovery-factor * 0.030) + (permission-factor * 0.012) + (diplomatic-momentum * 0.020))
+666,0.020,behavioral,update-gnss-reliability,update-gnss-reliability::_,let repair-boost ((recovery-factor * 0.030) + (permission-factor * 0.012) + (diplomatic-momentum * 0.020))
+667,0.02,behavioral,update-gnss-reliability,update-gnss-reliability::repair-boost,if last-iran-action =   [ set repair-boost (repair-boost + 0.02) ]
+668,0.15,scale-bound,update-gnss-reliability,update-gnss-reliability::gnss-reliability,set gnss-reliability (bound (gnss-reliability - gnss-shock + repair-boost) 0.15 1)
+669,1,scale-bound,update-gnss-reliability,update-gnss-reliability::gnss-reliability,set gnss-reliability (bound (gnss-reliability - gnss-shock + repair-boost) 0.15 1)
+670,0.08,behavioral,update-port-operability,update-port-operability::_,let port-shock ((regional-strike-volume * 0.08) + (proxy-attack-level * 0.05) + ((1 - gnss-reliability) * 0.05))
+671,0.05,behavioral,update-port-operability,update-port-operability::_,let port-shock ((regional-strike-volume * 0.08) + (proxy-attack-level * 0.05) + ((1 - gnss-reliability) * 0.05))
+672,1,behavioral,update-port-operability,update-port-operability::_,let port-shock ((regional-strike-volume * 0.08) + (proxy-attack-level * 0.05) + ((1 - gnss-reliability) * 0.05))
+673,0.05,behavioral,update-port-operability,update-port-operability::_,let port-shock ((regional-strike-volume * 0.08) + (proxy-attack-level * 0.05) + ((1 - gnss-reliability) * 0.05))
+674,0.04,behavioral,update-port-operability,update-port-operability::anchorage-risk,set anchorage-risk (bound (anchorage-risk + port-shock - (recovery-factor * 0.04)) 0 1)
+675,0,scale-bound,update-port-operability,update-port-operability::anchorage-risk,set anchorage-risk (bound (anchorage-risk + port-shock - (recovery-factor * 0.04)) 0 1)
+676,1,scale-bound,update-port-operability,update-port-operability::anchorage-risk,set anchorage-risk (bound (anchorage-risk + port-shock - (recovery-factor * 0.04)) 0 1)
+677,1,behavioral,update-port-operability,update-port-operability::port-operability,set port-operability (bound (1 - anchorage-risk - (regional-strike-volume * 0.03)) 0.15 1)
+678,0.03,behavioral,update-port-operability,update-port-operability::port-operability,set port-operability (bound (1 - anchorage-risk - (regional-strike-volume * 0.03)) 0.15 1)
+679,0.15,scale-bound,update-port-operability,update-port-operability::port-operability,set port-operability (bound (1 - anchorage-risk - (regional-strike-volume * 0.03)) 0.15 1)
+680,1,scale-bound,update-port-operability,update-port-operability::port-operability,set port-operability (bound (1 - anchorage-risk - (regional-strike-volume * 0.03)) 0.15 1)
+681,0.10,behavioral,update-memory-stocks,update-memory-stocks::_,let threat ((regional-strike-volume * 0.10)
+682,0.07,behavioral,update-memory-stocks,update-memory-stocks::_,+ (proxy-attack-level * 0.07)
+683,1,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - permission-factor) * 0.16)
+684,0.16,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - permission-factor) * 0.16)
+685,1,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - gnss-reliability) * 0.08)
+686,0.08,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - gnss-reliability) * 0.08)
+687,1,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - insurance-availability) * 0.06)
+688,0.06,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - insurance-availability) * 0.06)
+689,1,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - port-operability) * 0.05))
+690,0.05,behavioral,update-memory-stocks,update-memory-stocks::_,+ ((1 - port-operability) * 0.05))
+691,0.08,behavioral,update-memory-stocks,update-memory-stocks::threat,if last-iran-action =   [ set threat (threat + 0.08) ]
+692,0.06,behavioral,update-memory-stocks,update-memory-stocks::threat,if last-iran-action =   [ set threat (threat + 0.06) ]
+693,0.40,behavioral,update-memory-stocks,update-memory-stocks::_,and permission-factor > 0.40
+694,0.30,behavioral,update-memory-stocks,update-memory-stocks::_,and strait-throughput > 0.30)
+695,0.07,behavioral,update-memory-stocks,update-memory-stocks::_,let reassurance ((recovery-factor * 0.07) + (diplomatic-momentum * 0.06))
+696,0.06,behavioral,update-memory-stocks,update-memory-stocks::_,let reassurance ((recovery-factor * 0.07) + (diplomatic-momentum * 0.06))
+697,0.06,behavioral,update-memory-stocks,update-memory-stocks::reassurance,if member? last-iran-action [   ] [ set reassurance (reassurance + 0.06) ]
+698,0.06,behavioral,update-memory-stocks,update-memory-stocks::reassurance,if not major-strike-this-tick? [ set reassurance (reassurance + 0.06) ]
+699,0.07,behavioral,update-memory-stocks,update-memory-stocks::reassurance,if stable-access? [ set reassurance (reassurance + 0.07) ]
+700,0.05,behavioral,update-memory-stocks,update-memory-stocks::reassurance,if military-deescalation-window? = true [ set reassurance (reassurance + 0.05) ]
+701,0.10,behavioral,update-memory-stocks,update-memory-stocks::insurer-memory,set insurer-memory (bound (insurer-memory + (threat * 0.10 * tau-c-rate) - (reassurance * 0.18 * tau-c-rate)) 0 1)
+702,0.18,behavioral,update-memory-stocks,update-memory-stocks::insurer-memory,set insurer-memory (bound (insurer-memory + (threat * 0.10 * tau-c-rate) - (reassurance * 0.18 * tau-c-rate)) 0 1)
+703,0,scale-bound,update-memory-stocks,update-memory-stocks::insurer-memory,set insurer-memory (bound (insurer-memory + (threat * 0.10 * tau-c-rate) - (reassurance * 0.18 * tau-c-rate)) 0 1)
+704,1,scale-bound,update-memory-stocks,update-memory-stocks::insurer-memory,set insurer-memory (bound (insurer-memory + (threat * 0.10 * tau-c-rate) - (reassurance * 0.18 * tau-c-rate)) 0 1)
+705,0.08,behavioral,update-memory-stocks,update-memory-stocks::operator-memory,set operator-memory (bound (operator-memory + (threat * 0.08 * tau-c-rate) - (reassurance * 0.20 * tau-c-rate)) 0 1)
+706,0.20,behavioral,update-memory-stocks,update-memory-stocks::operator-memory,set operator-memory (bound (operator-memory + (threat * 0.08 * tau-c-rate) - (reassurance * 0.20 * tau-c-rate)) 0 1)
+707,0,scale-bound,update-memory-stocks,update-memory-stocks::operator-memory,set operator-memory (bound (operator-memory + (threat * 0.08 * tau-c-rate) - (reassurance * 0.20 * tau-c-rate)) 0 1)
+708,1,scale-bound,update-memory-stocks,update-memory-stocks::operator-memory,set operator-memory (bound (operator-memory + (threat * 0.08 * tau-c-rate) - (reassurance * 0.20 * tau-c-rate)) 0 1)
+709,0.08,behavioral,update-memory-stocks,update-memory-stocks::market-memory,set market-memory (bound (market-memory + (threat * 0.08 * tau-k-rate)
+710,0,behavioral,update-memory-stocks,update-memory-stocks::_,+ (max list 0 ((brent-crude-price - 85) / 100) * 0.035)
+711,85,behavioral,update-memory-stocks,update-memory-stocks::_,+ (max list 0 ((brent-crude-price - 85) / 100) * 0.035)
+712,100,behavioral,update-memory-stocks,update-memory-stocks::_,+ (max list 0 ((brent-crude-price - 85) / 100) * 0.035)
+713,0.035,behavioral,update-memory-stocks,update-memory-stocks::_,+ (max list 0 ((brent-crude-price - 85) / 100) * 0.035)
+714,0.16,behavioral,update-memory-stocks,update-memory-stocks::_,- (reassurance * 0.16 * tau-k-rate)) 0 1)
+715,0,behavioral,update-memory-stocks,update-memory-stocks::_,- (reassurance * 0.16 * tau-k-rate)) 0 1)
+716,1,behavioral,update-memory-stocks,update-memory-stocks::_,- (reassurance * 0.16 * tau-k-rate)) 0 1)
+717,1,behavioral,update-insurance-market,update-insurance-market::_,let threat-score (((1 - permission-factor) * 0.18)
+718,0.18,behavioral,update-insurance-market,update-insurance-market::_,let threat-score (((1 - permission-factor) * 0.18)
+719,1,behavioral,update-insurance-market,update-insurance-market::_,+ ((1 - gnss-reliability) * 0.10)
+720,0.10,behavioral,update-insurance-market,update-insurance-market::_,+ ((1 - gnss-reliability) * 0.10)
+721,0.05,behavioral,update-insurance-market,update-insurance-market::_,+ (regional-strike-volume * 0.05)
+722,0.05,behavioral,update-insurance-market,update-insurance-market::_,+ (proxy-attack-level * 0.05)
+723,1,behavioral,update-insurance-market,update-insurance-market::_,+ ((1 - port-operability) * 0.05)
+724,0.05,behavioral,update-insurance-market,update-insurance-market::_,+ ((1 - port-operability) * 0.05)
+725,0.08,behavioral,update-insurance-market,update-insurance-market::_,+ (insurer-memory * 0.08)
+726,0.04,behavioral,update-insurance-market,update-insurance-market::_,+ (market-memory * 0.04))
+727,0.40,behavioral,update-insurance-market,update-insurance-market::_,and permission-factor > 0.40
+728,0.30,behavioral,update-insurance-market,update-insurance-market::_,and strait-throughput > 0.30)
+729,0.04,behavioral,update-insurance-market,update-insurance-market::_,let reassurance-bonus ((recovery-factor * 0.04)
+730,0.04,behavioral,update-insurance-market,update-insurance-market::_,+ (diplomatic-momentum * 0.04)
+731,0.05,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (member? last-iran-action [   ]) [0.05] [0])
+732,0,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (member? last-iran-action [   ]) [0.05] [0])
+733,0.05,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value stable-access? [0.05] [0])
+734,0,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value stable-access? [0.05] [0])
+735,0.04,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (military-deescalation-window? = true) [0.04] [0])
+736,0,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (military-deescalation-window? = true) [0.04] [0])
+737,0.35,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (insurance-availability > 0.35) [0.025] [0]))
+738,0.025,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (insurance-availability > 0.35) [0.025] [0]))
+739,0,behavioral,update-insurance-market,update-insurance-market::_,+ (ifelse-value (insurance-availability > 0.35) [0.025] [0]))
+740,0.035,behavioral,update-insurance-market,update-insurance-market::_,+ (awrp * 0.035)
+741,0.09,behavioral,update-insurance-market,update-insurance-market::_,+ (threat-score * 0.09 * tau-c-rate)
+742,0.035,behavioral,update-insurance-market,update-insurance-market::_,+ (operator-memory * 0.035)
+743,0.14,behavioral,update-insurance-market,update-insurance-market::_,- (recovery-factor * 0.14 * tau-c-rate)
+744,0.06,behavioral,update-insurance-market,update-insurance-market::_,- (diplomatic-momentum * 0.06 * tau-c-rate)
+745,1.30,behavioral,update-insurance-market,update-insurance-market::_,- (reassurance-bonus * 1.30 * tau-c-rate)) 0 1)
+746,0,behavioral,update-insurance-market,update-insurance-market::_,- (reassurance-bonus * 1.30 * tau-c-rate)) 0 1)
+747,1,behavioral,update-insurance-market,update-insurance-market::_,- (reassurance-bonus * 1.30 * tau-c-rate)) 0 1)
+748,0.035,behavioral,update-insurance-market,update-insurance-market::_,- (awrp * 0.035)
+749,0.020,behavioral,update-insurance-market,update-insurance-market::_,- (threat-score * 0.020 * tau-c-rate)
+750,0.020,behavioral,update-insurance-market,update-insurance-market::_,- (insurer-memory * 0.020)
+751,1.45,behavioral,update-insurance-market,update-insurance-market::_,+ (reassurance-bonus * 1.45 * tau-c-rate)) 0.10 1)
+752,0.10,behavioral,update-insurance-market,update-insurance-market::_,+ (reassurance-bonus * 1.45 * tau-c-rate)) 0.10 1)
+753,1,behavioral,update-insurance-market,update-insurance-market::_,+ (reassurance-bonus * 1.45 * tau-c-rate)) 0.10 1)
+754,0.28,behavioral,update-commercial-throughput,update-commercial-throughput::_,(bound ((0.28 * insurance-availability)
+755,0.27,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.27 * permission-factor)
+756,0.18,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.18 * port-operability)
+757,0.10,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.10 * gnss-reliability)
+758,0.09,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.09 * (1 - operator-caution))
+759,1,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.09 * (1 - operator-caution))
+760,0.08,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.08 * (1 - market-memory))) 0.08 1)
+761,1,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.08 * (1 - market-memory))) 0.08 1)
+762,0.08,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.08 * (1 - market-memory))) 0.08 1)
+763,1,behavioral,update-commercial-throughput,update-commercial-throughput::_,+ (0.08 * (1 - market-memory))) 0.08 1)
+764,1,behavioral,update-recovery-factor,update-recovery-factor::recent-iran-escalation-streak,set recent-iran-escalation-streak (recent-iran-escalation-streak + 1)
+765,0.10,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.10) 0 1)
+766,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.10) 0 1)
+767,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.10) 0 1)
+768,1,behavioral,update-recovery-factor,update-recovery-factor::recent-iran-escalation-streak,set recent-iran-escalation-streak (recent-iran-escalation-streak + 1)
+769,0.05,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.05) 0 1)
+770,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.05) 0 1)
+771,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.05) 0 1)
+772,0,behavioral,update-recovery-factor,update-recovery-factor::recent-iran-escalation-streak,set recent-iran-escalation-streak max (list 0 (recent-iran-escalation-streak - 1))
+773,1,behavioral,update-recovery-factor,update-recovery-factor::recent-iran-escalation-streak,set recent-iran-escalation-streak max (list 0 (recent-iran-escalation-streak - 1))
+774,0,behavioral,update-recovery-factor,update-recovery-factor::_,if member? last-iran-action [   ] and regional-strike-volume = 0 and proxy-attack-level = 0 [
+775,0,behavioral,update-recovery-factor,update-recovery-factor::_,if member? last-iran-action [   ] and regional-strike-volume = 0 and proxy-attack-level = 0 [
+776,0.03,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor + 0.03) 0 1)
+777,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor + 0.03) 0 1)
+778,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor + 0.03) 0 1)
+779,0,behavioral,update-recovery-factor,update-recovery-factor::_,if military-pause? and regional-strike-volume = 0 and proxy-attack-level = 0 and insurance-availability > 0.45 [
+780,0,behavioral,update-recovery-factor,update-recovery-factor::_,if military-pause? and regional-strike-volume = 0 and proxy-attack-level = 0 and insurance-availability > 0.45 [
+781,0.45,behavioral,update-recovery-factor,update-recovery-factor::_,if military-pause? and regional-strike-volume = 0 and proxy-attack-level = 0 and insurance-availability > 0.45 [
+782,0.02,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor + 0.02) 0 1)
+783,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor + 0.02) 0 1)
+784,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor + 0.02) 0 1)
+785,0.35,behavioral,update-recovery-factor,update-recovery-factor::_,if insurance-availability < 0.35 or gnss-reliability < 0.40 [
+786,0.40,behavioral,update-recovery-factor,update-recovery-factor::_,if insurance-availability < 0.35 or gnss-reliability < 0.40 [
+787,0.02,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.02) 0 1)
+788,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.02) 0 1)
+789,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.02) 0 1)
+790,0.04,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+791,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+792,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+793,0.04,behavioral,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+794,0,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+795,1,scale-bound,update-recovery-factor,update-recovery-factor::recovery-factor,set recovery-factor (bound (recovery-factor - 0.04) 0 1)
+796,15,behavioral,recolor-lanes,recolor-lanes::pcolor,[ set pcolor 15 ]
+797,87,behavioral,recolor-lanes,recolor-lanes::pcolor,[ set pcolor 87 ]
+798,97,behavioral,recolor-lanes,recolor-lanes::pcolor,[ set pcolor 97 ]
+799,95,behavioral,recolor-lanes,recolor-lanes::pcolor,ask patches with [ water? and not lane? ] [ set pcolor 95 ]
+800,35,behavioral,recolor-lanes,recolor-lanes::pcolor,ask patches with [ not water? ] [ set pcolor 35 ]
+801,0.003,behavioral,update-actor-states,update-actor-states::electoral-proximity,set electoral-proximity (bound (electoral-proximity + 0.003) 0 1)
+802,0,scale-bound,update-actor-states,update-actor-states::electoral-proximity,set electoral-proximity (bound (electoral-proximity + 0.003) 0 1)
+803,1,scale-bound,update-actor-states,update-actor-states::electoral-proximity,set electoral-proximity (bound (electoral-proximity + 0.003) 0 1)
+804,1,behavioral,update-actor-states,update-actor-states::_,let buffer-drain (((1 - strait-throughput) * 0.012) + (regional-strike-volume * 0.005))
+805,0.012,behavioral,update-actor-states,update-actor-states::_,let buffer-drain (((1 - strait-throughput) * 0.012) + (regional-strike-volume * 0.005))
+806,0.005,behavioral,update-actor-states,update-actor-states::_,let buffer-drain (((1 - strait-throughput) * 0.012) + (regional-strike-volume * 0.005))
+807,0,behavioral,update-actor-states,update-actor-states::_,let oil-rent-gain 0
+808,90,behavioral,update-actor-states,update-actor-states::_,if brent-crude-price > 90 [
+809,90,behavioral,update-actor-states,update-actor-states::oil-rent-gain,set oil-rent-gain (((brent-crude-price - 90) / 100) * 0.04)
+810,100,behavioral,update-actor-states,update-actor-states::oil-rent-gain,set oil-rent-gain (((brent-crude-price - 90) / 100) * 0.04)
+811,0.04,behavioral,update-actor-states,update-actor-states::oil-rent-gain,set oil-rent-gain (((brent-crude-price - 90) / 100) * 0.04)
+812,0.006,behavioral,update-actor-states,update-actor-states::oil-rent-gain,set oil-rent-gain (oil-rent-gain + 0.006)
+813,0.55,behavioral,update-actor-states,update-actor-states::_,if permission-factor > 0.55 [
+814,0.004,behavioral,update-actor-states,update-actor-states::oil-rent-gain,set oil-rent-gain (oil-rent-gain + 0.004)
+815,0,scale-bound,update-actor-states,update-actor-states::economic-buffer,set economic-buffer (bound (economic-buffer - buffer-drain + oil-rent-gain) 0 1)
+816,1,scale-bound,update-actor-states,update-actor-states::economic-buffer,set economic-buffer (bound (economic-buffer - buffer-drain + oil-rent-gain) 0 1)
+817,0.010,behavioral,update-actor-states,update-actor-states::_,let stability-drain ((regional-strike-volume * 0.010) + ((1 - economic-buffer) * 0.008))
+818,1,behavioral,update-actor-states,update-actor-states::_,let stability-drain ((regional-strike-volume * 0.010) + ((1 - economic-buffer) * 0.008))
+819,0.008,behavioral,update-actor-states,update-actor-states::_,let stability-drain ((regional-strike-volume * 0.010) + ((1 - economic-buffer) * 0.008))
+820,0.004,behavioral,update-actor-states,update-actor-states::_,let stability-gain (proxy-attack-level * 0.004)
+821,95,behavioral,update-actor-states,update-actor-states::_,if brent-crude-price > 95 and military-pause? [
+822,0.010,behavioral,update-actor-states,update-actor-states::stability-gain,set stability-gain (stability-gain + 0.010)
+823,0,behavioral,update-actor-states,update-actor-states::_,if regional-strike-volume = 0 and permission-factor > 0.45 [
+824,0.45,behavioral,update-actor-states,update-actor-states::_,if regional-strike-volume = 0 and permission-factor > 0.45 [
+825,0.005,behavioral,update-actor-states,update-actor-states::stability-gain,set stability-gain (stability-gain + 0.005)
+826,0,scale-bound,update-actor-states,update-actor-states::regime-stability,set regime-stability (bound (regime-stability - stability-drain + stability-gain) 0 1)
+827,1,scale-bound,update-actor-states,update-actor-states::regime-stability,set regime-stability (bound (regime-stability - stability-drain + stability-gain) 0 1)
+828,0,behavioral,update-actor-states,update-actor-states::_,let d 0
+829,0.06,behavioral,update-actor-states,update-actor-states::d,if member? israel-observed-iran-action [         ] [ set d (d - 0.06) ]
+830,0.45,behavioral,update-actor-states,update-actor-states::d,if military-degradation > 0.45 [ set d (d + 0.04) ]
+831,0.04,behavioral,update-actor-states,update-actor-states::d,if military-degradation > 0.45 [ set d (d + 0.04) ]
+832,0.45,behavioral,update-actor-states,update-actor-states::d,if strait-throughput > 0.45 and permission-factor > 0.55 [ set d (d + 0.02) ]
+833,0.55,behavioral,update-actor-states,update-actor-states::d,if strait-throughput > 0.45 and permission-factor > 0.55 [ set d (d + 0.02) ]
+834,0.02,behavioral,update-actor-states,update-actor-states::d,if strait-throughput > 0.45 and permission-factor > 0.55 [ set d (d + 0.02) ]
+835,0.03,behavioral,update-actor-states,update-actor-states::d,if military-pause? and economic-war-active? [ set d (d - 0.03) ]
+836,0,scale-bound,update-actor-states,update-actor-states::security-perception,set security-perception (bound (security-perception + d) 0 1)
+837,1,scale-bound,update-actor-states,update-actor-states::security-perception,set security-perception (bound (security-perception + d) 0 1)
+838,0.03,behavioral,update-actor-states,update-actor-states::tolerance-us-friction,set tolerance-us-friction (bound (tolerance-us-friction - 0.03) 0 1)
+839,0,scale-bound,update-actor-states,update-actor-states::tolerance-us-friction,set tolerance-us-friction (bound (tolerance-us-friction - 0.03) 0 1)
+840,1,scale-bound,update-actor-states,update-actor-states::tolerance-us-friction,set tolerance-us-friction (bound (tolerance-us-friction - 0.03) 0 1)
+841,0.35,behavioral,determine-crisis-state,determine-crisis-state::access-state,set access-state (ifelse-value (strait-throughput < 0.35) [ ] [ ])
+842,0.04,behavioral,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum + (0.04 * tau-d-rate)) 0 1)
+843,0,scale-bound,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum + (0.04 * tau-d-rate)) 0 1)
+844,1,scale-bound,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum + (0.04 * tau-d-rate)) 0 1)
+845,0.03,behavioral,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum - (0.03 * tau-d-rate)) 0 1)
+846,0,scale-bound,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum - (0.03 * tau-d-rate)) 0 1)
+847,1,scale-bound,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum - (0.03 * tau-d-rate)) 0 1)
+848,0.5,behavioral,determine-crisis-state,determine-crisis-state::_,and (regional-strike-volume <= 0.5)
+849,0.5,behavioral,determine-crisis-state,determine-crisis-state::_,and (proxy-attack-level <= 0.5) [
+850,1,inert,determine-crisis-state,determine-crisis-state::recent-strike-history,set recent-strike-history (lput (ifelse-value strike-this-tick? [1] [0]) recent-strike-history)
+851,0,inert,determine-crisis-state,determine-crisis-state::recent-strike-history,set recent-strike-history (lput (ifelse-value strike-this-tick? [1] [0]) recent-strike-history)
+852,3,behavioral,determine-crisis-state,determine-crisis-state::_,if length recent-strike-history > 3 [
+853,0,behavioral,determine-crisis-state,determine-crisis-state::military-pause-window?,set military-pause-window? ((sum recent-strike-history) = 0)
+854,-1,behavioral,determine-crisis-state,determine-crisis-state::_,if military-pause-window? and tick-military-pause-window-start = -1 [
+855,1,inert,determine-crisis-state,determine-crisis-state::recent-major-strike-history,set recent-major-strike-history (lput (ifelse-value major-strike-this-tick [1] [0]) recent-major-strike-history)
+856,0,inert,determine-crisis-state,determine-crisis-state::recent-major-strike-history,set recent-major-strike-history (lput (ifelse-value major-strike-this-tick [1] [0]) recent-major-strike-history)
+857,3,behavioral,determine-crisis-state,determine-crisis-state::_,if length recent-major-strike-history > 3 [
+858,0,behavioral,determine-crisis-state,determine-crisis-state::military-deescalation-window?,set military-deescalation-window? (((sum recent-major-strike-history) = 0) and low-intensity-military?)
+859,-1,behavioral,determine-crisis-state,determine-crisis-state::_,if military-deescalation-window? and tick-military-deescalation-window-start = -1 [
+860,0.82,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput > 0.82) and (insurance-availability > 0.78) and (permission-factor > 0.82) [
+861,0.78,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput > 0.82) and (insurance-availability > 0.78) and (permission-factor > 0.82) [
+862,0.82,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput > 0.82) and (insurance-availability > 0.78) and (permission-factor > 0.82) [
+863,0.58,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput > 0.58) and (insurance-availability > 0.52) and (permission-factor > 0.60) and access-state !=   [
+864,0.52,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput > 0.58) and (insurance-availability > 0.52) and (permission-factor > 0.60) and access-state !=   [
+865,0.60,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput > 0.58) and (insurance-availability > 0.52) and (permission-factor > 0.60) and access-state !=   [
+866,0.38,behavioral,determine-crisis-state,determine-crisis-state::_,if (permission-factor > 0.38) and (strait-throughput > 0.18) and not member? access-state [   ] [
+867,0.18,behavioral,determine-crisis-state,determine-crisis-state::_,if (permission-factor > 0.38) and (strait-throughput > 0.18) and not member? access-state [   ] [
+868,0.18,behavioral,determine-crisis-state,determine-crisis-state::_,if not ((strait-throughput > 0.18) and (permission-factor > 0.38)) [
+869,0.38,behavioral,determine-crisis-state,determine-crisis-state::_,if not ((strait-throughput > 0.18) and (permission-factor > 0.38)) [
+870,0.015,behavioral,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum + (0.015 * tau-d-rate)) 0 1)
+871,0,scale-bound,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum + (0.015 * tau-d-rate)) 0 1)
+872,1,scale-bound,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (bound (diplomatic-momentum + (0.015 * tau-d-rate)) 0 1)
+873,0.40,behavioral,determine-crisis-state,determine-crisis-state::_,and insurance-availability > 0.40) [
+874,1,behavioral,determine-crisis-state,determine-crisis-state::_,if random-float 1 < diplomacy-bridge-prob [
+875,0.30,behavioral,determine-crisis-state,determine-crisis-state::diplomatic-momentum,set diplomatic-momentum (max list diplomatic-momentum 0.30)
+876,1,behavioral,determine-crisis-state,determine-crisis-state::diplomacy-bridge-events,set diplomacy-bridge-events (diplomacy-bridge-events + 1)
+877,0.70,behavioral,determine-crisis-state,determine-crisis-state::_,if diplomatic-momentum > 0.70 [
+878,0.45,behavioral,determine-crisis-state,determine-crisis-state::_,if diplomatic-momentum > 0.45 and diplomatic-momentum <= 0.70 [
+879,0.70,behavioral,determine-crisis-state,determine-crisis-state::_,if diplomatic-momentum > 0.45 and diplomatic-momentum <= 0.70 [
+880,0.20,behavioral,determine-crisis-state,determine-crisis-state::_,if diplomatic-momentum > 0.20 and diplomatic-momentum <= 0.45 [
+881,0.45,behavioral,determine-crisis-state,determine-crisis-state::_,if diplomatic-momentum > 0.20 and diplomatic-momentum <= 0.45 [
+882,0.20,behavioral,determine-crisis-state,determine-crisis-state::_,if diplomatic-momentum <= 0.20 [
+883,90,behavioral,determine-crisis-state,determine-crisis-state::economic-war-active?,set economic-war-active? ((brent-crude-price > 90)
+884,0.75,behavioral,determine-crisis-state,determine-crisis-state::_,or (insurance-availability < 0.75)
+885,0.88,behavioral,determine-crisis-state,determine-crisis-state::_,or (permission-factor < 0.88)
+886,0.25,behavioral,determine-crisis-state,determine-crisis-state::_,or (market-memory > 0.25)
+887,0.45,behavioral,determine-crisis-state,determine-crisis-state::_,if member? last-iran-action [     ] or (market-memory > 0.45) [
+888,100,behavioral,determine-crisis-state,determine-crisis-state::_,if (economic-war-state !=  ) and ((brent-crude-price > 100) or (insurance-availability < 0.55)) [
+889,0.55,behavioral,determine-crisis-state,determine-crisis-state::_,if (economic-war-state !=  ) and ((brent-crude-price > 100) or (insurance-availability < 0.55)) [
+890,0.66,behavioral,determine-crisis-state,determine-crisis-state::_,and ([security-perception] of israel-agent > 0.66)
+891,0.25,behavioral,determine-crisis-state,determine-crisis-state::_,and ([regime-stability] of iran-agent > 0.25)
+892,0,behavioral,determine-crisis-state,determine-crisis-state::_,and (regional-strike-volume = 0)
+893,0,behavioral,determine-crisis-state,determine-crisis-state::_,and (proxy-attack-level = 0))
+894,1,behavioral,determine-crisis-state,determine-crisis-state::ceasefire-stability-streak,set ceasefire-stability-streak (ceasefire-stability-streak + 1)
+895,0,behavioral,determine-crisis-state,determine-crisis-state::ceasefire-stability-streak,set ceasefire-stability-streak 0
+896,7,behavioral,determine-crisis-state,determine-crisis-state::_,if ceasefire-stability-streak >= 7 [
+897,0.15,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput < 0.15) and (us-casualties > 0.12) and not ceasefire? [
+898,0.12,behavioral,determine-crisis-state,determine-crisis-state::_,if (strait-throughput < 0.15) and (us-casualties > 0.12) and not ceasefire? [
+899,1,behavioral,determine-crisis-state,determine-crisis-state::cascade-streak,set cascade-streak (cascade-streak + 1)
+900,0.15,behavioral,determine-crisis-state,determine-crisis-state::_,if not ((strait-throughput < 0.15) and (us-casualties > 0.12) and not ceasefire?) [
+901,0.12,behavioral,determine-crisis-state,determine-crisis-state::_,if not ((strait-throughput < 0.15) and (us-casualties > 0.12) and not ceasefire?) [
+902,0,behavioral,determine-crisis-state,determine-crisis-state::cascade-streak,set cascade-streak 0
+903,2,behavioral,determine-crisis-state,determine-crisis-state::_,if cascade-streak >= 2 [
+904,0.30,behavioral,determine-crisis-state,determine-crisis-state::_,and (diplomatic-momentum > 0.30) [
+905,0.50,behavioral,determine-crisis-state,determine-crisis-state::_,let awrp-half-recovery-threshold (awrp-baseline + (0.50 * (awrp-peak - awrp-baseline)))
+906,0,behavioral,determine-crisis-state,determine-crisis-state::_,let commercial-score 0
+907,1,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if awrp > awrp-half-recovery-threshold [ set commercial-score (commercial-score + 1) ]
+908,0.50,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if insurance-availability < 0.50 [ set commercial-score (commercial-score + 1) ]
+909,1,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if insurance-availability < 0.50 [ set commercial-score (commercial-score + 1) ]
+910,0.65,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if operator-caution > 0.65 [ set commercial-score (commercial-score + 1) ]
+911,1,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if operator-caution > 0.65 [ set commercial-score (commercial-score + 1) ]
+912,0.65,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if strait-throughput < 0.65 [ set commercial-score (commercial-score + 1) ]
+913,1,behavioral,determine-crisis-state,determine-crisis-state::commercial-score,if strait-throughput < 0.65 [ set commercial-score (commercial-score + 1) ]
+914,2,scale-bound,determine-crisis-state,determine-crisis-state::_,let commercial-non-normalized? (commercial-score >= 2)
+915,10,behavioral,determine-crisis-state,determine-crisis-state::_,let market-still-elevated? (oil-risk-premium > 10)
+916,1,behavioral,determine-crisis-state,determine-crisis-state::managed-stalemate-streak,[ set managed-stalemate-streak (managed-stalemate-streak + 1)
+917,1,behavioral,determine-crisis-state,determine-crisis-state::ticks-in-ms-conditions,set ticks-in-ms-conditions (ticks-in-ms-conditions + 1) ]
+918,0,behavioral,determine-crisis-state,determine-crisis-state::managed-stalemate-streak,[ set managed-stalemate-streak 0 ]
+919,2,behavioral,determine-crisis-state,determine-crisis-state::managed-stalemate?,set managed-stalemate? (managed-stalemate-streak >= 2)
+920,-1,behavioral,determine-crisis-state,determine-crisis-state::tick-first-managed-stalemate,if tick-first-managed-stalemate = -1 [ set tick-first-managed-stalemate ticks ]
+921,1,behavioral,determine-crisis-state,determine-crisis-state::partial-closure-streak,[ set partial-closure-streak (partial-closure-streak + 1) ]
+922,0,behavioral,determine-crisis-state,determine-crisis-state::partial-closure-streak,[ set partial-closure-streak 0 ]
+923,1,behavioral,determine-crisis-state,determine-crisis-state::selective-passage-streak,[ set selective-passage-streak (selective-passage-streak + 1) ]
+924,0,behavioral,determine-crisis-state,determine-crisis-state::selective-passage-streak,[ set selective-passage-streak 0 ]
+925,1,behavioral,determine-crisis-state,determine-crisis-state::contested-reopening-streak,[ set contested-reopening-streak (contested-reopening-streak + 1) ]
+926,0,behavioral,determine-crisis-state,determine-crisis-state::contested-reopening-streak,[ set contested-reopening-streak 0 ]
+927,-1,behavioral,determine-crisis-state,determine-crisis-state::_,if crisis-state != previous-state and resolution-tick = -1 [
+928,0.18,behavioral,update-commercial-insurer,update-commercial-insurer::_,let raw-evidence ((regional-strike-volume * 0.18)
+929,0.12,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ (proxy-attack-level * 0.12)
+930,0.025,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((count mines) * 0.025)
+931,1,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((1 - permission-factor) * 0.30)
+932,0.30,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((1 - permission-factor) * 0.30)
+933,1,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((1 - gnss-reliability) * 0.10)
+934,0.10,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((1 - gnss-reliability) * 0.10)
+935,1,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((1 - port-operability) * 0.08))
+936,0.08,behavioral,update-commercial-insurer,update-commercial-insurer::_,+ ((1 - port-operability) * 0.08))
+937,0.7,behavioral,update-commercial-insurer,update-commercial-insurer::_,let routine-flow (regional-strike-volume + (proxy-attack-level * 0.7))
+938,0,behavioral,update-commercial-insurer,update-commercial-insurer::_,let selectivity-discount 0
+939,0,behavioral,update-commercial-insurer,update-commercial-insurer::_,if selective-targeting-recognition > 0 and routine-flow > 0 [
+940,0,behavioral,update-commercial-insurer,update-commercial-insurer::_,if selective-targeting-recognition > 0 and routine-flow > 0 [
+941,2,behavioral,update-commercial-insurer,update-commercial-insurer::_,let saturation (routine-flow / (routine-flow + 2))
+942,0.45,behavioral,update-commercial-insurer,update-commercial-insurer::selectivity-discount,set selectivity-discount (selective-targeting-recognition * 0.45 * saturation)
+943,1,behavioral,update-commercial-insurer,update-commercial-insurer::_,let discounted-evidence (raw-evidence * (1 - selectivity-discount))
+944,1.6,behavioral,update-commercial-insurer,update-commercial-insurer::_,let target-posterior (bound (discounted-evidence / 1.6) 0 0.95)
+945,0,scale-bound,update-commercial-insurer,update-commercial-insurer::_,let target-posterior (bound (discounted-evidence / 1.6) 0 0.95)
+946,0.95,scale-bound,update-commercial-insurer,update-commercial-insurer::_,let target-posterior (bound (discounted-evidence / 1.6) 0 0.95)
+947,0.18,behavioral,update-commercial-insurer,update-commercial-insurer::_,let kappa-C (0.18 * tau-c-rate)
+948,0,behavioral,update-commercial-insurer,update-commercial-insurer::_,if (regional-strike-volume = 0) and (proxy-attack-level = 0)
+949,0,behavioral,update-commercial-insurer,update-commercial-insurer::_,if (regional-strike-volume = 0) and (proxy-attack-level = 0)
+950,0.06,behavioral,update-commercial-insurer,update-commercial-insurer::_,let kappa-recovery (0.06 * tau-c-rate)
+951,0.85,behavioral,update-commercial-insurer,update-commercial-insurer::awrp,set awrp (bound (awrp-baseline + disruption-posterior * 0.85) 0 1)
+952,0,scale-bound,update-commercial-insurer,update-commercial-insurer::awrp,set awrp (bound (awrp-baseline + disruption-posterior * 0.85) 0 1)
+953,1,scale-bound,update-commercial-insurer,update-commercial-insurer::awrp,set awrp (bound (awrp-baseline + disruption-posterior * 0.85) 0 1)
+954,-1,behavioral,update-clock-trackers,update-clock-trackers::_,if military-pause? and tick-military-pause-start = -1 [
+955,0.55,behavioral,update-clock-trackers,update-clock-trackers::_,if (awrp-peak >= 0.55) and (awrp < 0.40) and (tick-awrp-recovery = -1) [
+956,0.40,behavioral,update-clock-trackers,update-clock-trackers::_,if (awrp-peak >= 0.55) and (awrp < 0.40) and (tick-awrp-recovery = -1) [
+957,-1,behavioral,update-clock-trackers,update-clock-trackers::_,if (awrp-peak >= 0.55) and (awrp < 0.40) and (tick-awrp-recovery = -1) [
+958,25,behavioral,update-clock-trackers,update-clock-trackers::_,if (risk-premium-peak >= 25) and (oil-risk-premium < 10) and (tick-price-recovery = -1) [
+959,10,behavioral,update-clock-trackers,update-clock-trackers::_,if (risk-premium-peak >= 25) and (oil-risk-premium < 10) and (tick-price-recovery = -1) [
+960,-1,behavioral,update-clock-trackers,update-clock-trackers::_,if (risk-premium-peak >= 25) and (oil-risk-premium < 10) and (tick-price-recovery = -1) [
+961,0.50,behavioral,update-clock-trackers,update-clock-trackers::_,let awrp-half-recovery-threshold (awrp-baseline + (0.50 * (awrp-peak - awrp-baseline)))
+962,0.55,behavioral,update-clock-trackers,update-clock-trackers::_,and (awrp-peak >= 0.55)
+963,25,behavioral,update-clock-trackers,update-clock-trackers::_,and (risk-premium-peak >= 25)
+964,0.30,behavioral,update-clock-trackers,update-clock-trackers::_,and (oil-risk-premium <= (0.30 * risk-premium-peak)) [
+965,25,behavioral,update-clock-trackers,update-clock-trackers::_,and (risk-premium-peak >= 25)
+966,0.50,behavioral,update-clock-trackers,update-clock-trackers::_,and (oil-risk-premium <= (0.50 * risk-premium-peak)) [
+967,25,behavioral,update-clock-trackers,update-clock-trackers::_,and (risk-premium-peak >= 25)
+968,0.80,behavioral,update-clock-trackers,update-clock-trackers::_,and (oil-risk-premium <= (0.80 * risk-premium-peak)) [
+969,1,behavioral,perceived-action,perceived-action::_,if random-float 1 >= observation-error-rate [ report actual-action ]
+970,1,behavioral,bayes-update,bayes-update::_,let denominator (numerator + (p-e-given-not-h * (1 - prior)))
+971,0,behavioral,bayes-update,bayes-update::_,if denominator = 0 [ report prior ]
+972,1,classifier,outcome-partial-closure,outcome-partial-closure::_,report ifelse-value (crisis-state =  ) [1] [0]
+973,0,classifier,outcome-partial-closure,outcome-partial-closure::_,report ifelse-value (crisis-state =  ) [1] [0]
+974,1,classifier,outcome-selective-passage,outcome-selective-passage::_,report ifelse-value (crisis-state =  ) [1] [0]
+975,0,classifier,outcome-selective-passage,outcome-selective-passage::_,report ifelse-value (crisis-state =  ) [1] [0]
+976,1,classifier,outcome-contested-reopening,outcome-contested-reopening::_,report ifelse-value (crisis-state =  ) [1] [0]
+977,0,classifier,outcome-contested-reopening,outcome-contested-reopening::_,report ifelse-value (crisis-state =  ) [1] [0]
+978,1,classifier,outcome-armed-bargaining,outcome-armed-bargaining::_,report ifelse-value (crisis-state =  ) [1] [0]
+979,0,classifier,outcome-armed-bargaining,outcome-armed-bargaining::_,report ifelse-value (crisis-state =  ) [1] [0]
+980,1,classifier,outcome-military-pause-economic-war,outcome-military-pause-economic-war::_,report ifelse-value (crisis-state =  ) [1] [0]
+981,0,classifier,outcome-military-pause-economic-war,outcome-military-pause-economic-war::_,report ifelse-value (crisis-state =  ) [1] [0]
+982,0.40,classifier,current-crisis-fit,current-crisis-fit::_,let target-throughput 0.40
+983,102,classifier,current-crisis-fit,current-crisis-fit::_,let target-price 102
+984,0.55,classifier,current-crisis-fit,current-crisis-fit::_,let target-insurance 0.55
+985,0.55,classifier,current-crisis-fit,current-crisis-fit::_,let target-gnss 0.55
+986,0.60,classifier,current-crisis-fit,current-crisis-fit::_,let target-permission 0.60
+987,0.50,classifier,current-crisis-fit,current-crisis-fit::_,let target-diplomacy 0.50
+988,0,classifier,current-crisis-fit,current-crisis-fit::_,let gap 0
+989,28,classifier,current-crisis-fit,current-crisis-fit::gap,set gap (gap + (abs (strait-throughput - target-throughput) * 28))
+990,0.38,classifier,current-crisis-fit,current-crisis-fit::gap,set gap (gap + (abs (brent-crude-price - target-price) * 0.38))
+991,16,classifier,current-crisis-fit,current-crisis-fit::gap,set gap (gap + (abs (insurance-availability - target-insurance) * 16))
+992,14,classifier,current-crisis-fit,current-crisis-fit::gap,set gap (gap + (abs (gnss-reliability - target-gnss) * 14))
+993,14,classifier,current-crisis-fit,current-crisis-fit::gap,set gap (gap + (abs (permission-factor - target-permission) * 14))
+994,10,classifier,current-crisis-fit,current-crisis-fit::gap,set gap (gap + (abs (diplomatic-momentum - target-diplomacy) * 10))
+995,10,classifier,current-crisis-fit,current-crisis-fit::gap,if military-state =   and economic-war-active? [ set gap (gap - 10) ]
+996,16,classifier,current-crisis-fit,current-crisis-fit::gap,if crisis-state =   [ set gap (gap - 16) ]
+997,8,classifier,current-crisis-fit,current-crisis-fit::gap,if economic-war-state =   [ set gap (gap - 8) ]
+998,8,classifier,current-crisis-fit,current-crisis-fit::gap,if access-state =   [ set gap (gap - 8) ]
+999,6,classifier,current-crisis-fit,current-crisis-fit::gap,if access-state =   [ set gap (gap - 6) ]
+1000,10,classifier,current-crisis-fit,current-crisis-fit::gap,if crisis-state =   [ set gap (gap - 10) ]
+1001,6,classifier,current-crisis-fit,current-crisis-fit::gap,if crisis-state =   [ set gap (gap + 6) ]
+1002,10,classifier,current-crisis-fit,current-crisis-fit::gap,if crisis-state =   [ set gap (gap + 10) ]
+1003,14,classifier,current-crisis-fit,current-crisis-fit::gap,if crisis-state =   [ set gap (gap + 14) ]
+1004,12,classifier,current-crisis-fit,current-crisis-fit::gap,if crisis-state =   [ set gap (gap + 12) ]
+1005,10,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score + 10) ]
+1006,8,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score + 8) ]
+1007,5,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score + 5) ]
+1008,2,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score + 2) ]
+1009,2,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score - 2) ]
+1010,8,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score - 8) ]
+1011,18,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score - 18) ]
+1012,10,classifier,calibration-score,calibration-score::score,if crisis-state =   [ set score (score - 10) ]
+1013,6,classifier,calibration-score,calibration-score::score,if military-state =   and economic-war-active? [ set score (score + 6) ]
+1014,4,classifier,calibration-score,calibration-score::score,if economic-war-state =   [ set score (score + 4) ]
+1015,4,classifier,calibration-score,calibration-score::score,if access-state =   [ set score (score + 4) ]
+1016,10,classifier,calibration-score,calibration-score::score,set score (score + (10 * contested-reopening-share))
+1017,7,classifier,calibration-score,calibration-score::score,set score (score + (7 * selective-passage-share))
+1018,3,classifier,calibration-score,calibration-score::score,set score (score + (3 * partial-closure-share))
+1019,2,classifier,calibration-score,calibration-score::score,if ever-contested-reopening? [ set score (score + 2) ]
+1020,1.5,classifier,calibration-score,calibration-score::score,if ever-selective-passage? [ set score (score + 1.5) ]
+1021,1,classifier,ever-backchannel,ever-backchannel::_,report ifelse-value ever-backchannel? [1] [0]
+1022,0,classifier,ever-backchannel,ever-backchannel::_,report ifelse-value ever-backchannel? [1] [0]
+1023,1,classifier,ever-ceasefire-talks,ever-ceasefire-talks::_,report ifelse-value ever-ceasefire-talks? [1] [0]
+1024,0,classifier,ever-ceasefire-talks,ever-ceasefire-talks::_,report ifelse-value ever-ceasefire-talks? [1] [0]
+1025,1,classifier,ever-fragile-arrangement,ever-fragile-arrangement::_,report ifelse-value ever-fragile-arrangement? [1] [0]
+1026,0,classifier,ever-fragile-arrangement,ever-fragile-arrangement::_,report ifelse-value ever-fragile-arrangement? [1] [0]
+1027,1,inert,no-talks-share,no-talks-share::_,report (ticks-in-no-talks / max (list 1 ticks))
+1028,1,inert,backchannel-share,backchannel-share::_,report (ticks-in-backchannel / max (list 1 ticks))
+1029,1,inert,ceasefire-talks-share,ceasefire-talks-share::_,report (ticks-in-ceasefire-talks / max (list 1 ticks))
+1030,1,inert,fragile-arrangement-share,fragile-arrangement-share::_,report (ticks-in-fragile-arrangement / max (list 1 ticks))
+1031,1,inert,diplomatic-activation-share,diplomatic-activation-share::_,report ((ticks-in-backchannel + ticks-in-ceasefire-talks + ticks-in-fragile-arrangement) / max (list 1 ticks))
+1032,1,classifier,outcome-ceasefire,outcome-ceasefire::_,report ifelse-value (crisis-state =  ) [1] [0]
+1033,0,classifier,outcome-ceasefire,outcome-ceasefire::_,report ifelse-value (crisis-state =  ) [1] [0]
+1034,1,classifier,outcome-ground-war,outcome-ground-war::_,report ifelse-value (crisis-state =  ) [1] [0]
+1035,0,classifier,outcome-ground-war,outcome-ground-war::_,report ifelse-value (crisis-state =  ) [1] [0]
+1036,1,classifier,outcome-accidental-war,outcome-accidental-war::_,report ifelse-value (crisis-state =  ) [1] [0]
+1037,0,classifier,outcome-accidental-war,outcome-accidental-war::_,report ifelse-value (crisis-state =  ) [1] [0]
+1038,1,classifier,outcome-severe-escalation,outcome-severe-escalation::_,report ifelse-value (member? crisis-state [     ]) [1] [0]
+1039,0,classifier,outcome-severe-escalation,outcome-severe-escalation::_,report ifelse-value (member? crisis-state [     ]) [1] [0]
+1040,1,classifier,outcome-equilibrium-of-pain,outcome-equilibrium-of-pain::_,report ifelse-value (crisis-state =  ) [1] [0]
+1041,0,classifier,outcome-equilibrium-of-pain,outcome-equilibrium-of-pain::_,report ifelse-value (crisis-state =  ) [1] [0]
+1042,1,classifier,outcome-escalation-cascade,outcome-escalation-cascade::_,report ifelse-value (crisis-state =  ) [1] [0]
+1043,0,classifier,outcome-escalation-cascade,outcome-escalation-cascade::_,report ifelse-value (crisis-state =  ) [1] [0]
+1044,1,classifier,outcome-bargaining-timeout,outcome-bargaining-timeout::_,report ifelse-value (crisis-state =  ) [1] [0]
+1045,0,classifier,outcome-bargaining-timeout,outcome-bargaining-timeout::_,report ifelse-value (crisis-state =  ) [1] [0]
+1046,1,classifier,ever-selective-passage,ever-selective-passage::_,report ifelse-value ever-selective-passage? [1] [0]
+1047,0,classifier,ever-selective-passage,ever-selective-passage::_,report ifelse-value ever-selective-passage? [1] [0]
+1048,1,classifier,ever-contested-reopening,ever-contested-reopening::_,report ifelse-value ever-contested-reopening? [1] [0]
+1049,0,classifier,ever-contested-reopening,ever-contested-reopening::_,report ifelse-value ever-contested-reopening? [1] [0]
+1050,1,classifier,ever-partial-closure,ever-partial-closure::_,report ifelse-value ever-partial-closure? [1] [0]
+1051,0,classifier,ever-partial-closure,ever-partial-closure::_,report ifelse-value ever-partial-closure? [1] [0]
+1052,1,classifier,selective-passage-share,selective-passage-share::_,report ticks-in-selective-passage / max list 1 ticks
+1053,1,classifier,contested-reopening-share,contested-reopening-share::_,report ticks-in-contested-reopening / max list 1 ticks
+1054,1,classifier,partial-closure-share,partial-closure-share::_,report ticks-in-partial-closure / max list 1 ticks
+1055,0,behavioral,tau-c-over-tau-m,tau-c-over-tau-m::_,if tau-c-rate <= 0 [ report 999 ]
+1056,999,behavioral,tau-c-over-tau-m,tau-c-over-tau-m::_,if tau-c-rate <= 0 [ report 999 ]
+1057,0,behavioral,tau-k-over-tau-m,tau-k-over-tau-m::_,if tau-k-rate <= 0 [ report 999 ]
+1058,999,behavioral,tau-k-over-tau-m,tau-k-over-tau-m::_,if tau-k-rate <= 0 [ report 999 ]
+1059,0,behavioral,tau-d-over-tau-m,tau-d-over-tau-m::_,if tau-d-rate <= 0 [ report 999 ]
+1060,999,behavioral,tau-d-over-tau-m,tau-d-over-tau-m::_,if tau-d-rate <= 0 [ report 999 ]
+1061,-1,classifier,awrp-recovery-lag,awrp-recovery-lag::_,if tick-military-pause-start = -1 [ report -1 ]
+1062,-1,classifier,awrp-recovery-lag,awrp-recovery-lag::_,if tick-military-pause-start = -1 [ report -1 ]
+1063,-1,classifier,awrp-recovery-lag,awrp-recovery-lag::_,if tick-awrp-recovery = -1 [ report -1 ]
+1064,-1,classifier,awrp-recovery-lag,awrp-recovery-lag::_,if tick-awrp-recovery = -1 [ report -1 ]
+1065,-1,classifier,price-recovery-lag,price-recovery-lag::_,if tick-military-pause-start = -1 [ report -1 ]
+1066,-1,classifier,price-recovery-lag,price-recovery-lag::_,if tick-military-pause-start = -1 [ report -1 ]
+1067,-1,classifier,price-recovery-lag,price-recovery-lag::_,if tick-price-recovery = -1 [ report -1 ]
+1068,-1,classifier,price-recovery-lag,price-recovery-lag::_,if tick-price-recovery = -1 [ report -1 ]
+1069,1,classifier,outcome-managed-stalemate,outcome-managed-stalemate::_,report ifelse-value (crisis-state =  ) [1] [0]
+1070,0,classifier,outcome-managed-stalemate,outcome-managed-stalemate::_,report ifelse-value (crisis-state =  ) [1] [0]
+1071,1,classifier,ever-managed-stalemate,ever-managed-stalemate::_,report ifelse-value ever-managed-stalemate? [1] [0]
+1072,0,classifier,ever-managed-stalemate,ever-managed-stalemate::_,report ifelse-value ever-managed-stalemate? [1] [0]
+1073,0.11,classifier,insurance-floor-hit,insurance-floor-hit::_,report ifelse-value (insurance-availability <= 0.11) [1] [0]
+1074,1,classifier,insurance-floor-hit,insurance-floor-hit::_,report ifelse-value (insurance-availability <= 0.11) [1] [0]
+1075,0,classifier,insurance-floor-hit,insurance-floor-hit::_,report ifelse-value (insurance-availability <= 0.11) [1] [0]
+1076,0.99,classifier,operator-caution-ceiling-hit,operator-caution-ceiling-hit::_,report ifelse-value (operator-caution >= 0.99) [1] [0]
+1077,1,classifier,operator-caution-ceiling-hit,operator-caution-ceiling-hit::_,report ifelse-value (operator-caution >= 0.99) [1] [0]
+1078,0,classifier,operator-caution-ceiling-hit,operator-caution-ceiling-hit::_,report ifelse-value (operator-caution >= 0.99) [1] [0]
+1079,0.95,classifier,awrp-ceiling-hit,awrp-ceiling-hit::_,report ifelse-value (awrp >= 0.95) [1] [0]
+1080,1,classifier,awrp-ceiling-hit,awrp-ceiling-hit::_,report ifelse-value (awrp >= 0.95) [1] [0]
+1081,0,classifier,awrp-ceiling-hit,awrp-ceiling-hit::_,report ifelse-value (awrp >= 0.95) [1] [0]
+1082,50,classifier,risk-premium-high-hit,risk-premium-high-hit::_,report ifelse-value (oil-risk-premium >= 50) [1] [0]
+1083,1,classifier,risk-premium-high-hit,risk-premium-high-hit::_,report ifelse-value (oil-risk-premium >= 50) [1] [0]
+1084,0,classifier,risk-premium-high-hit,risk-premium-high-hit::_,report ifelse-value (oil-risk-premium >= 50) [1] [0]
+1085,-1,classifier,tau-c-leads-tau-m?,tau-c-leads-tau-m?::_,if tick-awrp-recovery = -1 [ report false ]
+1086,-1,classifier,tau-c-leads-tau-m?,tau-c-leads-tau-m?::_,if tick-military-pause-start = -1 [ report false ]
+1087,1,classifier,outcome-tau-c-leads,outcome-tau-c-leads::_,report ifelse-value tau-c-leads-tau-m? [1] [0]
+1088,0,classifier,outcome-tau-c-leads,outcome-tau-c-leads::_,report ifelse-value tau-c-leads-tau-m? [1] [0]
+1089,1,classifier,major-action-this-tick-flag,major-action-this-tick-flag::_,report ifelse-value (major-action-this-tick? = true) [1] [0]
+1090,0,classifier,major-action-this-tick-flag,major-action-this-tick-flag::_,report ifelse-value (major-action-this-tick? = true) [1] [0]
+1091,1,classifier,low-intensity-military-flag,low-intensity-military-flag::_,report ifelse-value (low-intensity-military? = true) [1] [0]
+1092,0,classifier,low-intensity-military-flag,low-intensity-military-flag::_,report ifelse-value (low-intensity-military? = true) [1] [0]
+1093,1,classifier,military-pause-window-flag,military-pause-window-flag::_,report ifelse-value military-pause-window? [1] [0]
+1094,0,classifier,military-pause-window-flag,military-pause-window-flag::_,report ifelse-value military-pause-window? [1] [0]
+1095,0,classifier,ms-share,ms-share::_,if ticks <= 0 [ report 0 ]
+1096,0,classifier,ms-share,ms-share::_,if ticks <= 0 [ report 0 ]
+1097,2,scale-bound,ms-condition-this-tick,ms-condition-this-tick::_,and (commercial-non-normalization-score >= 2)
+1098,10,classifier,ms-condition-this-tick,ms-condition-this-tick::_,and (oil-risk-premium > 10)
+1099,1,classifier,ms-condition-this-tick,ms-condition-this-tick::_,report ifelse-value c [1] [0]
+1100,0,classifier,ms-condition-this-tick,ms-condition-this-tick::_,report ifelse-value c [1] [0]
+1101,1,classifier,military-deescalation-window-flag,military-deescalation-window-flag::_,report ifelse-value (military-deescalation-window? = true) [1] [0]
+1102,0,classifier,military-deescalation-window-flag,military-deescalation-window-flag::_,report ifelse-value (military-deescalation-window? = true) [1] [0]
+1103,-1,classifier,awrp-recovery-lag-frac,awrp-recovery-lag-frac::_,if tick-military-pause-start = -1 [ report -1 ]
+1104,-1,classifier,awrp-recovery-lag-frac,awrp-recovery-lag-frac::_,if tick-military-pause-start = -1 [ report -1 ]
+1105,-1,classifier,awrp-recovery-lag-frac,awrp-recovery-lag-frac::_,if tick-awrp-recovery-frac = -1 [ report -1 ]
+1106,-1,classifier,awrp-recovery-lag-frac,awrp-recovery-lag-frac::_,if tick-awrp-recovery-frac = -1 [ report -1 ]
+1107,-1,classifier,price-recovery-lag-frac,price-recovery-lag-frac::_,if tick-military-pause-start = -1 [ report -1 ]
+1108,-1,classifier,price-recovery-lag-frac,price-recovery-lag-frac::_,if tick-military-pause-start = -1 [ report -1 ]
+1109,-1,classifier,price-recovery-lag-frac,price-recovery-lag-frac::_,if tick-price-recovery-frac = -1 [ report -1 ]
+1110,-1,classifier,price-recovery-lag-frac,price-recovery-lag-frac::_,if tick-price-recovery-frac = -1 [ report -1 ]
+1111,-1,classifier,tau-c-leads-tau-m-frac?,tau-c-leads-tau-m-frac?::_,if tick-awrp-recovery-frac = -1 [ report false ]
+1112,-1,classifier,tau-c-leads-tau-m-frac?,tau-c-leads-tau-m-frac?::_,if tick-military-pause-start = -1 [ report false ]
+1113,1,classifier,outcome-tau-c-leads-frac,outcome-tau-c-leads-frac::_,report ifelse-value tau-c-leads-tau-m-frac? [1] [0]
+1114,0,classifier,outcome-tau-c-leads-frac,outcome-tau-c-leads-frac::_,report ifelse-value tau-c-leads-tau-m-frac? [1] [0]
+1115,-1,classifier,awrp-recovery-lag-frac-window,awrp-recovery-lag-frac-window::_,if tick-military-pause-window-start = -1 [ report -1 ]
+1116,-1,classifier,awrp-recovery-lag-frac-window,awrp-recovery-lag-frac-window::_,if tick-military-pause-window-start = -1 [ report -1 ]
+1117,-1,classifier,awrp-recovery-lag-frac-window,awrp-recovery-lag-frac-window::_,if tick-awrp-recovery-frac = -1 [ report -1 ]
+1118,-1,classifier,awrp-recovery-lag-frac-window,awrp-recovery-lag-frac-window::_,if tick-awrp-recovery-frac = -1 [ report -1 ]
+1119,-1,classifier,price-recovery-lag-frac-window,price-recovery-lag-frac-window::_,if tick-military-pause-window-start = -1 [ report -1 ]
+1120,-1,classifier,price-recovery-lag-frac-window,price-recovery-lag-frac-window::_,if tick-military-pause-window-start = -1 [ report -1 ]
+1121,-1,classifier,price-recovery-lag-frac-window,price-recovery-lag-frac-window::_,if tick-price-recovery-frac = -1 [ report -1 ]
+1122,-1,classifier,price-recovery-lag-frac-window,price-recovery-lag-frac-window::_,if tick-price-recovery-frac = -1 [ report -1 ]
+1123,-1,classifier,tau-c-leads-tau-m-frac-window?,tau-c-leads-tau-m-frac-window?::_,if tick-awrp-recovery-frac = -1 [ report false ]
+1124,-1,classifier,tau-c-leads-tau-m-frac-window?,tau-c-leads-tau-m-frac-window?::_,if tick-military-pause-window-start = -1 [ report false ]
+1125,1,classifier,outcome-tau-c-leads-frac-window,outcome-tau-c-leads-frac-window::_,report ifelse-value tau-c-leads-tau-m-frac-window? [1] [0]
+1126,0,classifier,outcome-tau-c-leads-frac-window,outcome-tau-c-leads-frac-window::_,report ifelse-value tau-c-leads-tau-m-frac-window? [1] [0]
+1127,-1,classifier,awrp-recovery-lag-frac-deescalation,awrp-recovery-lag-frac-deescalation::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1128,-1,classifier,awrp-recovery-lag-frac-deescalation,awrp-recovery-lag-frac-deescalation::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1129,-1,classifier,awrp-recovery-lag-frac-deescalation,awrp-recovery-lag-frac-deescalation::_,if tick-awrp-recovery-frac = -1 [ report -1 ]
+1130,-1,classifier,awrp-recovery-lag-frac-deescalation,awrp-recovery-lag-frac-deescalation::_,if tick-awrp-recovery-frac = -1 [ report -1 ]
+1131,-1,classifier,price-recovery-lag-frac-deescalation,price-recovery-lag-frac-deescalation::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1132,-1,classifier,price-recovery-lag-frac-deescalation,price-recovery-lag-frac-deescalation::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1133,-1,classifier,price-recovery-lag-frac-deescalation,price-recovery-lag-frac-deescalation::_,if tick-price-recovery-frac = -1 [ report -1 ]
+1134,-1,classifier,price-recovery-lag-frac-deescalation,price-recovery-lag-frac-deescalation::_,if tick-price-recovery-frac = -1 [ report -1 ]
+1135,-1,classifier,tau-c-leads-tau-m-frac-deescalation?,tau-c-leads-tau-m-frac-deescalation?::_,if tick-awrp-recovery-frac = -1 [ report false ]
+1136,-1,classifier,tau-c-leads-tau-m-frac-deescalation?,tau-c-leads-tau-m-frac-deescalation?::_,if tick-military-deescalation-window-start = -1 [ report false ]
+1137,1,classifier,outcome-tau-c-leads-frac-deescalation,outcome-tau-c-leads-frac-deescalation::_,report ifelse-value tau-c-leads-tau-m-frac-deescalation? [1] [0]
+1138,0,classifier,outcome-tau-c-leads-frac-deescalation,outcome-tau-c-leads-frac-deescalation::_,report ifelse-value tau-c-leads-tau-m-frac-deescalation? [1] [0]
+1139,0.50,classifier,awrp-frac-recovery-threshold,awrp-frac-recovery-threshold::_,report (awrp-baseline + (0.50 * (awrp-peak - awrp-baseline)))
+1140,-1,classifier,price-recovery-lag-frac-strict,price-recovery-lag-frac-strict::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1141,-1,classifier,price-recovery-lag-frac-strict,price-recovery-lag-frac-strict::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1142,-1,classifier,price-recovery-lag-frac-strict,price-recovery-lag-frac-strict::_,if tick-price-recovery-frac-strict = -1 [ report -1 ]
+1143,-1,classifier,price-recovery-lag-frac-strict,price-recovery-lag-frac-strict::_,if tick-price-recovery-frac-strict = -1 [ report -1 ]
+1144,1,classifier,price-recovery-strict-fired,price-recovery-strict-fired::_,report ifelse-value price-recovery-frac-strict-fired? [1] [0]
+1145,0,classifier,price-recovery-strict-fired,price-recovery-strict-fired::_,report ifelse-value price-recovery-frac-strict-fired? [1] [0]
+1146,1,classifier,price-recovery-fired,price-recovery-fired::_,report ifelse-value price-recovery-frac-fired? [1] [0]
+1147,0,classifier,price-recovery-fired,price-recovery-fired::_,report ifelse-value price-recovery-frac-fired? [1] [0]
+1148,1,classifier,price-recovery-20pct-fired,price-recovery-20pct-fired::_,report ifelse-value price-recovery-20pct-fired? [1] [0]
+1149,0,classifier,price-recovery-20pct-fired,price-recovery-20pct-fired::_,report ifelse-value price-recovery-20pct-fired? [1] [0]
+1150,-1,classifier,price-recovery-lag-20pct-deescalation,price-recovery-lag-20pct-deescalation::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1151,-1,classifier,price-recovery-lag-20pct-deescalation,price-recovery-lag-20pct-deescalation::_,if tick-military-deescalation-window-start = -1 [ report -1 ]
+1152,-1,classifier,price-recovery-lag-20pct-deescalation,price-recovery-lag-20pct-deescalation::_,if tick-price-recovery-20pct = -1 [ report -1 ]
+1153,-1,classifier,price-recovery-lag-20pct-deescalation,price-recovery-lag-20pct-deescalation::_,if tick-price-recovery-20pct = -1 [ report -1 ]
+1154,0,classifier,risk-premium-decay-share,risk-premium-decay-share::_,if risk-premium-post-peak-ticks <= 0 [ report 0 ]
+1155,0,classifier,risk-premium-decay-share,risk-premium-decay-share::_,if risk-premium-post-peak-ticks <= 0 [ report 0 ]
+1156,0,classifier,risk-premium-post-deescalation-decay-share,risk-premium-post-deescalation-decay-share::_,if risk-premium-post-deescalation-ticks <= 0 [ report 0 ]
+1157,0,classifier,risk-premium-post-deescalation-decay-share,risk-premium-post-deescalation-decay-share::_,if risk-premium-post-deescalation-ticks <= 0 [ report 0 ]
+1158,0,classifier,risk-premium-normalized-recovery,risk-premium-normalized-recovery::_,if risk-premium-peak <= 0 [ report 0 ]
+1159,0,classifier,risk-premium-normalized-recovery,risk-premium-normalized-recovery::_,if risk-premium-peak <= 0 [ report 0 ]
+1160,0,scale-bound,risk-premium-normalized-recovery,risk-premium-normalized-recovery::_,report (bound ((risk-premium-peak - oil-risk-premium) / risk-premium-peak) 0 1)
+1161,1,scale-bound,risk-premium-normalized-recovery,risk-premium-normalized-recovery::_,report (bound ((risk-premium-peak - oil-risk-premium) / risk-premium-peak) 0 1)
